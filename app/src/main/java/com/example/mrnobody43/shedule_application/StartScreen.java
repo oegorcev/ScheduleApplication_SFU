@@ -14,6 +14,6 @@ public class StartScreen extends AppCompatActivity {
 
         Parser parser = new Parser();
 
-        parser.execute();
+        parser.execute("КТбо4-8", "0", "1");
     }
 }

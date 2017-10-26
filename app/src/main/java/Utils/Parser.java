@@ -1,6 +1,5 @@
 package Utils;
 
-
 import android.os.AsyncTask;
 
 import org.jsoup.Jsoup;
@@ -20,7 +19,7 @@ public class Parser extends AsyncTask<String, Void, Void> {
 
         Document doc = null;
         try {
-            doc = Jsoup.connect("http://asu.tti.sfedu.ru/Raspisanie/ShowRaspisanie.aspx?Substance=%D0%9A%D0%A2%D0%B1%D0%BE4-8&isPotok=121&Semestr=1").get();
+            doc = Jsoup.connect(Constants.URL + params[0] + Constants.POTOK + Constants.getCurPot(params[1]) + Constants.SEMESTR + params[2]).get();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -32,20 +31,18 @@ public class Parser extends AsyncTask<String, Void, Void> {
         ArrayList<String> Times = new ArrayList<String>();
 
         List<List<Pair<String,String>>> schedule = new ArrayList<>();
-        for (int cnt = 0; cnt < Constants.DAYS_ON_WEEK; ++cnt) schedule.add(new ArrayList<Pair<String,String>>());
+        for (int cnt = Constants.DEFAULT_VALUE_CNT_PARSER; cnt < Constants.DAYS_ON_WEEK; ++cnt) schedule.add(new ArrayList<Pair<String,String>>());
 
-        int cntI = 0;
-        int curDay = 0;
+        int cntI = Constants.DEFAULT_VALUE_CNT_PARSER;
+        int curDay = Constants.DEFAULT_VALUE_CNT_PARSER;
 
         for (Element curTr: trs)
         {
-
             Elements tds = curTr.getElementsByTag("td");
-            int cntJ = 0;
+            int cntJ = Constants.DEFAULT_VALUE_CNT_PARSER;
 
             for (Element curTd: tds)
             {
-
                 if (cntI == Constants.DATE_INDEX)
                 {
                     if(cntJ > Constants.BEGIN_TIME)
@@ -58,9 +55,9 @@ public class Parser extends AsyncTask<String, Void, Void> {
                         Times.add(s);
                     }
                 }
-                else if(cntI > 1)
+                else if(cntI > Constants.DATE_INDEX)
                 {
-                    if(cntI % 2 == 0)
+                    if(Utilities.isEven(cntI))
                     {
                         Pair<String,String> curPair = new Pair<String,String>(Constants.SEPARATOR, Constants.SEPARATOR);
 
@@ -79,13 +76,14 @@ public class Parser extends AsyncTask<String, Void, Void> {
                     }
                     else
                     {
-                        int cntPair = 0;
+                        int cntPair = Constants.DEFAULT_VALUE_CNT_PARSER;
 
                         for (Pair<String, String> curP: schedule.get(curDay))
                         {
                             if (curP.getSecond().equals(Constants.RESERVED))
                             {
                                 schedule.get(curDay).get(cntPair).setSecond(curTd.html());
+                                break;
                             }
 
                             cntPair++;
@@ -96,7 +94,7 @@ public class Parser extends AsyncTask<String, Void, Void> {
                 cntJ++;
             }
 
-            if(cntI > 1 && cntI % 2 == 0) curDay++;
+            if(cntI > Constants.DATE_INDEX && !Utilities.isEven(cntI)) curDay++;
 
             cntI++;
         }
