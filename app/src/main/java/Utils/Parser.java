@@ -11,9 +11,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Class;
+
 public class Parser extends AsyncTask<String, Void, Void> {
 
-    String title;
+    private ArrayList<String> _times;
+    private List<List<Pair<String,String>>> _schedule;
+
     @Override
     protected Void doInBackground(String... params) {
 
@@ -24,65 +28,54 @@ public class Parser extends AsyncTask<String, Void, Void> {
             e.printStackTrace();
         }
 
-        Element table = doc.getElementById("tblRaspis");
+        Element table = doc.getElementById(Constants.WEEK_SCHEDULE);
 
         Elements trs = table.getElementsByTag("tr");
 
-        ArrayList<String> Times = new ArrayList<String>();
+        _times = new ArrayList<String>();
 
-        List<List<Pair<String,String>>> schedule = new ArrayList<>();
-        for (int cnt = Constants.DEFAULT_VALUE_CNT_PARSER; cnt < Constants.DAYS_ON_WEEK; ++cnt) schedule.add(new ArrayList<Pair<String,String>>());
+        _schedule = new ArrayList<>();
+        for (int cnt = Constants.DEFAULT_VALUE_CNT_PARSER; cnt < Constants.DAYS_ON_WEEK; ++cnt) _schedule.add(new ArrayList<Pair<String,String>>());
 
         int cntI = Constants.DEFAULT_VALUE_CNT_PARSER;
         int curDay = Constants.DEFAULT_VALUE_CNT_PARSER;
 
-        for (Element curTr: trs)
-        {
+        for (Element curTr: trs) {
             Elements tds = curTr.getElementsByTag("td");
             int cntJ = Constants.DEFAULT_VALUE_CNT_PARSER;
 
-            for (Element curTd: tds)
-            {
-                if (cntI == Constants.DATE_INDEX)
-                {
-                    if(cntJ > Constants.BEGIN_TIME)
-                    {
+            for (Element curTd: tds) {
+                if (cntI == Constants.DATE_INDEX) {
+                    if(cntJ >= Constants.BEGIN_TIME) {
                         Elements strtTime = curTd.getElementsByClass(Constants.START_TIME);
                         Elements endTime = curTd.getElementsByClass(Constants.END_TIME);
 
                         String s = strtTime.get(0).html().concat(Constants.SEPARATOR).concat(endTime.get(0).html());
 
-                        Times.add(s);
+                        _times.add(s);
                     }
                 }
-                else if(cntI > Constants.DATE_INDEX)
-                {
-                    if(Utilities.isEven(cntI))
-                    {
+                else if(cntI > Constants.DATE_INDEX) {
+                    if(Utilities.isEven(cntI)) {
                         Pair<String,String> curPair = new Pair<String,String>(Constants.SEPARATOR, Constants.SEPARATOR);
 
-                        if (curTd.attr(Constants.CLASS).equals(Constants.TOP_WEEK))
-                        {
+                        if (curTd.attr(Constants.CLASS).equals(Constants.TOP_WEEK)) {
                             curPair.setFirst(curTd.html());
                             curPair.setSecond(Constants.RESERVED);
                         }
-                        else
-                        {
+                        else {
                             curPair.setFirst(curTd.html());
                             curPair.setSecond(curTd.html());
                         }
 
-                        schedule.get(curDay).add(curPair);
+                        _schedule.get(curDay).add(curPair);
                     }
-                    else
-                    {
+                    else {
                         int cntPair = Constants.DEFAULT_VALUE_CNT_PARSER;
 
-                        for (Pair<String, String> curP: schedule.get(curDay))
-                        {
-                            if (curP.getSecond().equals(Constants.RESERVED))
-                            {
-                                schedule.get(curDay).get(cntPair).setSecond(curTd.html());
+                        for (Pair<String, String> curP: _schedule.get(curDay)) {
+                            if (curP.getSecond().equals(Constants.RESERVED)) {
+                                _schedule.get(curDay).get(cntPair).setSecond(curTd.html());
                                 break;
                             }
 
@@ -100,5 +93,147 @@ public class Parser extends AsyncTask<String, Void, Void> {
         }
 
         return null;
+    }
+
+    public ArrayList<String> get_times() {
+        return _times;
+    }
+
+    public void set_times(ArrayList<String> _times) {
+        this._times = _times;
+    }
+
+    public List<List<Pair<String, String>>> get_schedule() {
+        return _schedule;
+    }
+
+    public void set_schedule(List<List<Pair<String, String>>> _schedule) {
+        this._schedule = _schedule;
+    }
+
+    public Class parseClass(String[] data){
+        Class aClass = new Class();
+
+        ArrayList<String> teachers = new ArrayList<String>();
+        ArrayList<String> subjects = new ArrayList<String>();
+        ArrayList<String> types = new ArrayList<String>();
+        ArrayList<String> classrooms = new ArrayList<String>();
+        ArrayList<String> subgroups = new ArrayList<String>();
+        ArrayList<String> weeks = new  ArrayList<String>();
+
+        if(data.length == 1) {
+            teachers.add("free");
+            subjects.add("free");
+            types.add("free");
+            classrooms.add("free");
+            subgroups.add("free");
+            weeks.add("all");
+        }
+        else {
+            int index = 0;
+
+            while(index < data.length) {
+                index = parseData(data, teachers, subjects, types, classrooms, subgroups, weeks, index);
+            }
+        }
+
+        aClass.set_classroom(classrooms);
+        aClass.set_subgroup(subgroups);
+        aClass.set_subject(subjects);
+        aClass.set_teacher(teachers);
+        aClass.set_weeks(weeks);
+        aClass.set_type(types);
+
+        return aClass;
+    }
+
+    private int parseData( String[] data,
+                            ArrayList<String> teachers,
+                            ArrayList<String> subjects,
+                            ArrayList<String> types,
+                            ArrayList<String> classrooms,
+                            ArrayList<String> subgroups,
+                            ArrayList<String> weeks, int index){
+
+        teachers.add(data[index++] + " " + data[index++]);
+        String subject = "";
+        for (; !Utilities.CheckType(data[index]) ; ++index) {
+            subject = subject.concat(data[index] + " ");
+
+        }
+        subjects.add(subject);
+
+        String type = data[index];
+
+        types.add(data[index++]);
+        classrooms.add(data[index++]);
+
+        //Обработка случаев составления расписания
+
+        //Случай один - простейшее расписание
+        if(index == data.length)
+        {
+            weeks.add("all");
+            subgroups.add("nothing");
+            return index;
+        }
+
+        //Случай два, если расписание закнчивается на указании недели пар
+        else if(data[index].charAt(data[index].length() - 1) == ')' && data[index].charAt(0) == '(' && index == (data.length - 1))
+        {
+            weeks.add(data[index++]);
+            subgroups.add("nothing");
+        }
+        //Случай три, неделя последняя, но ещё второй предмет по другой неделе ((1-9)Пилипушко)
+        else if(data[index].charAt(0) == '(' && data[index].charAt(data[index].length() - 1) != ')'){
+            weeks.add(data[index].substring(0, data[index].indexOf(')') + 1));
+            subgroups.add("nothing");
+            data[index] = data[index].substring(data[index].indexOf(')') + 1, data[index].length());
+        }
+        //Случай четыре, корректное расписание подргуппа и неделя
+        else if(data[index].charAt(data[index].length() - 1) == ')' && data[index].charAt(0) == '(' && index == (data.length - 2)) {
+            weeks.add(data[index++]);
+
+            if (data[index++].charAt(0) == '1') {
+                subgroups.add(Constants.FIRST_SUB);
+            } else {
+                subgroups.add(Constants.SECOND_SUB);
+            }
+        }
+        //Случай пять, некорректное расписание, имеется подгруппа и неделя и номер подргуппы слит со следующим расписанием (1??.Пилипушко)
+        else if(data[index].charAt(0) == '(' && data[index].charAt(data[index].length() - 1) == ')' && data[index + 1].charAt(3) == Constants.DOT && data[index + 1].length() > 4){
+            weeks.add(data[index++]);
+
+            if (data[index].charAt(0) == '1') {
+                subgroups.add(Constants.FIRST_SUB);
+            } else {
+                subgroups.add(Constants.SECOND_SUB);
+            }
+
+            //*пг. + 1 = 4
+            data[index] = data[index].substring(4, data[index].length());
+        }
+        //Случай шесть, нет недели, подгруппа последняя в расписании
+        else if ((data[index].charAt(0) == '1' || data[index].charAt(0) == '2') && index == data.length - 1){
+            weeks.add("all");
+            if (data[index++].charAt(0) == '1') {
+                subgroups.add(Constants.FIRST_SUB);
+            } else {
+                subgroups.add(Constants.SECOND_SUB);
+            }
+        }
+        //Случай семь, нет недели, есть подргуппа, раписание некорректно (1??.Пилипушко)
+        else if(data[index].charAt(0) == '1' || data[index].charAt(0) == '2'){
+            weeks.add("all");
+            if (data[index].charAt(0) == '1') {
+                subgroups.add(Constants.FIRST_SUB);
+            } else {
+                subgroups.add(Constants.SECOND_SUB);
+            }
+
+            data[index] = data[index].substring(4, data[index].length());
+        }
+
+        return index;
     }
 }

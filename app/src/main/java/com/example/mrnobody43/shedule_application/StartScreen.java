@@ -2,8 +2,10 @@ package com.example.mrnobody43.shedule_application;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 
-import Utils.Parser;
+import Utils.Scheduler;
 
 public class StartScreen extends AppCompatActivity {
 
@@ -11,9 +13,18 @@ public class StartScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
+        setTitle("КТбо4-8");
+        Scheduler scheduler = new Scheduler();
 
-        Parser parser = new Parser();
+        scheduler.make_schedule();
 
-        parser.execute("КТбо4-8", "0", "1");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
     }
 }

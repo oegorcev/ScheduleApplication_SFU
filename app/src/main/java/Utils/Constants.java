@@ -10,6 +10,9 @@ public class Constants {
 
    static Calendar calendar = Calendar.getInstance();
 
+   public static final String WEEK_SCHEDULE = "tblRaspis";
+
+
    public static final String URL = "http://asu.tti.sfedu.ru/Raspisanie/ShowRaspisanie.aspx?Substance=";
    public static final String START_TIME = "start-time";
    public static final String END_TIME = "end-time";
@@ -23,6 +26,13 @@ public class Constants {
    public static final String POTOK = "&isPotok=";
    public static final String SEMESTR = "&Semestr=";
 
+   public static final String LECTION = "(лек.)";
+   public static final String PRACTIC = "(прак.)";
+   public static final String LAB = "(лаб.)";
+
+   public static final String FIRST_SUB = "1пг";
+   public static final String SECOND_SUB = "2пг";
+
    public static final int DAYS_ON_WEEK = 7;
    public static final int DATE_INDEX = 1;
    public static final int BEGIN_TIME = 1;
@@ -30,6 +40,8 @@ public class Constants {
    public static final int FIRST_YEAR = 2017;
    public static final int FIRST_POTOK = 121;
    public static final int START_NEXT_SEMESTR = 7;
+
+   public static final char DOT = '.';
 
    public static String getCurPot(String year)
    {

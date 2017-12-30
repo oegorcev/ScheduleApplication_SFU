@@ -15,4 +15,9 @@ public class Utilities {
     {
         return ((value & 1) == 0);
     }
+
+    public static boolean CheckType(String s)
+    {
+        return s.equals(Constants.LECTION) || s.equals(Constants.PRACTIC) || s.equals(Constants.LAB);
+    }
 }
