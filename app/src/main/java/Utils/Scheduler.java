@@ -1,5 +1,7 @@
 package Utils;
 
+import android.os.AsyncTask;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,16 +9,28 @@ import model.Class;
 import model.Day;
 import model.Week;
 
+public class Scheduler extends AsyncTask<String, Void, Week> {
 
-public class Scheduler {
+    private String _group;
+    private Parser _parser;
 
-    public void make_schedule() {
-        Parser parser = new Parser();
+    public Scheduler(String group) {
+        super();
 
-        parser.execute("КТбо4-8", "0", "1");
+        _group = group;
+    }
 
-        ArrayList<String> times = parser.get_times();
-        List<List<Pair<String,String>>> schedule = parser.get_schedule();
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        _parser = new Parser();
+        _parser.execute(_group, "0", "1");
+    }
+
+    protected Week doInBackground(String... params) {
+
+        ArrayList<String> times = _parser.get_times();
+        List<List<Pair<String,String>>> schedule = _parser.get_schedule();
 
         Week week = new Week();
         ArrayList<Day> days = new ArrayList<Day>();
@@ -33,8 +47,8 @@ public class Scheduler {
                 Class _classTop = new Class();
                 Class _classBot = new Class();
 
-                _classTop = parser.parseClass(schedule.get(i).get(j).getFirst().split(" "));
-                _classBot = parser.parseClass(schedule.get(i).get(j).getSecond().split(" "));
+                _classTop = _parser.parseClass(schedule.get(i).get(j).getFirst().split(" "));
+                _classBot = _parser.parseClass(schedule.get(i).get(j).getSecond().split(" "));
 
                 _classTop.set_time(times.get(j - 1));
                 _classBot.set_time(times.get(j - 1));
@@ -51,6 +65,6 @@ public class Scheduler {
 
         week.setWeek(days);
 
-        return;
+        return week;
     }
 }

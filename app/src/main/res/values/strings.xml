@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Shedule_application</string>
+    <string name="app_name">Расписание занятий ИТА ЮФУ</string>
+    <string name="tab1">Понедельник</string>
+    <string name="tab2">Вторник</string>
+    <string name="tab3">Среда</string>
+    <string name="tab4">Четверг</string>
+    <string name="tab5">Пятница</string>
+    <string name="tab6">Суббота</string>
+    <string name="tab7">Воскресенье</string>
 </resources>

@@ -10,8 +10,15 @@ public class Constants {
 
    static Calendar calendar = Calendar.getInstance();
 
-   public static final String WEEK_SCHEDULE = "tblRaspis";
+   public static final String MONDAY = "Понедельник";
+   public static final String TUESDAY = "Вторник";
+   public static final String WEDNESDAY = "Среда";
+   public static final String THURSDAY = "Четверг";
+   public static final String FRIDAY = "Пятница";
+   public static final String SATURDAY = "Суббота";
+   public static final String SUNDAY = "Воскресенье";
 
+   public static final String WEEK_SCHEDULE = "tblRaspis";
 
    public static final String URL = "http://asu.tti.sfedu.ru/Raspisanie/ShowRaspisanie.aspx?Substance=";
    public static final String START_TIME = "start-time";
