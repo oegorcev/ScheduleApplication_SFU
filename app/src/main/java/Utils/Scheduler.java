@@ -9,7 +9,7 @@ import model.Class;
 import model.Day;
 import model.Week;
 
-public class Scheduler extends AsyncTask<String, Void, Week> {
+public class Scheduler extends AsyncTask<Week, Void, Week> {
 
     private String _group;
     private Parser _parser;
@@ -27,7 +27,7 @@ public class Scheduler extends AsyncTask<String, Void, Week> {
         _parser.execute(_group, "0", "1");
     }
 
-    protected Week doInBackground(String... params) {
+    protected Week doInBackground(Week... params) {
 
         ArrayList<String> times = _parser.get_times();
         List<List<Pair<String,String>>> schedule = _parser.get_schedule();
@@ -65,6 +65,8 @@ public class Scheduler extends AsyncTask<String, Void, Week> {
 
         week.setWeek(days);
 
-        return week;
+        params[0] = week;
+
+        return null ;
     }
 }
