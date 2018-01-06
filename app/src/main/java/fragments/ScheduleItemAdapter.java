@@ -9,21 +9,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.example.mrnobody43.shedule_application.R;
 
 import java.util.ArrayList;
 
-import model.Day;
+import model.Class;
 
 public class ScheduleItemAdapter extends BaseAdapter {
     Context ctx;
     LayoutInflater lInflater;
-    ArrayList<Day> objects;
+    ArrayList<Class> objects;
 
-    ScheduleItemAdapter(Context context, ArrayList<Day> days) {
+    public ScheduleItemAdapter(Context context, ArrayList<Class> classes) {
         ctx = context;
-        objects = days;
+        objects = classes;
         lInflater = (LayoutInflater) ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -46,8 +47,8 @@ public class ScheduleItemAdapter extends BaseAdapter {
         return position;
     }
 
-    Day getDay(int position) {
-        return ((Day) getItem(position));
+    Class getClass(int position) {
+        return ((Class) getItem(position));
     }
 
     // пункт списка
@@ -59,13 +60,17 @@ public class ScheduleItemAdapter extends BaseAdapter {
             view = lInflater.inflate(R.layout.schedule_list_item, parent, false);
         }
 
-        Day p = getDay(position);
+        Class p = getClass(position);
 
-        // заполняем View в пункте списка данными из товаров: наименование, цена
-        // и картинка
-       // ((TextView) view.findViewById(R.id.tvDescr)).setText(p.name);
-       // ((TextView) view.findViewById(R.id.tvPrice)).setText(p.price + "");
+        String cnt = Integer.toString(position + 1);
 
+        ((TextView) view.findViewById(R.id.id_pair)).setText(cnt);
+        ((TextView) view.findViewById(R.id.time)).setText(p.get_time());
+        ((TextView) view.findViewById(R.id.subject)).setText(p.get_subject().get(0));
+        ((TextView) view.findViewById(R.id.teacher)).setText(p.get_teacher().get(0));
+        ((TextView) view.findViewById(R.id.type)).setText(p.get_type().get(0));
+        ((TextView) view.findViewById(R.id.subgroup)).setText(p.get_subgroup().get(0));
+        ((TextView) view.findViewById(R.id.classroom)).setText(p.get_classroom().get(0));
 
         return view;
     }

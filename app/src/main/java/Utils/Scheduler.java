@@ -2,6 +2,8 @@ package Utils;
 
 import android.os.AsyncTask;
 
+import com.example.mrnobody43.shedule_application.StartScreen;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,15 +11,16 @@ import model.Class;
 import model.Day;
 import model.Week;
 
-public class Scheduler extends AsyncTask<Week, Void, Week> {
+public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
 
     private String _group;
     private Parser _parser;
+    private StartScreen _startScreen;
 
-    public Scheduler(String group) {
+    public Scheduler(StartScreen startScreen, String group) {
         super();
-
         _group = group;
+        _startScreen = startScreen;
     }
 
     @Override
@@ -27,7 +30,7 @@ public class Scheduler extends AsyncTask<Week, Void, Week> {
         _parser.execute(_group, "0", "1");
     }
 
-    protected Week doInBackground(Week... params) {
+    protected Void doInBackground(StartScreen... params) {
 
         ArrayList<String> times = _parser.get_times();
         List<List<Pair<String,String>>> schedule = _parser.get_schedule();
@@ -64,9 +67,8 @@ public class Scheduler extends AsyncTask<Week, Void, Week> {
         }
 
         week.setWeek(days);
+        _startScreen.set_currentSchedule(week);
 
-        params[0] = week;
-
-        return null ;
+        return null;
     }
 }
