@@ -13,7 +13,7 @@ import android.widget.TabHost;
 
 import Utils.Constants;
 import Utils.Scheduler;
-import fragments.ScheduleItemAdapter;
+import adapters.ScheduleItemAdapter;
 import model.Week;
 
 public class StartScreen extends AppCompatActivity {
@@ -31,12 +31,6 @@ public class StartScreen extends AppCompatActivity {
 
     private Week _currentSchedule;
     private ListView listView1;
-    private ListView listView2;
-    private ListView listView3;
-    private ListView listView4;
-    private ListView listView5;
-    private ListView listView6;
-    private ListView listView7;
     ScheduleItemAdapter scheduleItemAdapter;
 
     private TabHost tabHost;
@@ -99,40 +93,40 @@ public class StartScreen extends AppCompatActivity {
             tabHost.addTab(tabSpec);
 
             tabSpec = tabHost.newTabSpec("tag2");
-            tabSpec.setContent(R.id.list2);
+            tabSpec.setContent(R.id.list1);
             tabSpec.setIndicator(Constants.TUESDAY);
             tabHost.addTab(tabSpec);
 
             tabSpec = tabHost.newTabSpec("tag3");
-            tabSpec.setContent(R.id.list3);
+            tabSpec.setContent(R.id.list1);
             tabSpec.setIndicator(Constants.WEDNESDAY);
             tabHost.addTab(tabSpec);
 
             tabSpec = tabHost.newTabSpec("tag4");
-            tabSpec.setContent(R.id.list4);
+            tabSpec.setContent(R.id.list1);
             tabSpec.setIndicator(Constants.THURSDAY);
             tabHost.addTab(tabSpec);
 
             tabSpec = tabHost.newTabSpec("tag5");
-            tabSpec.setContent(R.id.list5);
+            tabSpec.setContent(R.id.list1);
             tabSpec.setIndicator(Constants.FRIDAY);
             tabHost.addTab(tabSpec);
 
             tabSpec = tabHost.newTabSpec("tag6");
-            tabSpec.setContent(R.id.list6);
+            tabSpec.setContent(R.id.list1);
             tabSpec.setIndicator(Constants.SATURDAY);
             tabHost.addTab(tabSpec);
 
             tabSpec = tabHost.newTabSpec("tag7");
-            tabSpec.setContent(R.id.list7);
+            tabSpec.setContent(R.id.list1);
             tabSpec.setIndicator(Constants.SUNDAY);
             tabHost.addTab(tabSpec);
 
             tabHost.setCurrentTab(0);
-            
+
             listView1 = (ListView) findViewById(R.id.list1);
 
-            scheduleItemAdapter = new ScheduleItemAdapter(StartScreen.this, _currentSchedule.getWeek().get(0).get_classesBotWeek());
+            scheduleItemAdapter = new ScheduleItemAdapter(StartScreen.this, _currentSchedule.getWeek().get(2).get_classesBotWeek());
 
             // создаем адаптер
             //ArrayAdapter<String> adapter = new ArrayAdapter<String>(StartScreen.this, android.R.layout.simple_list_item_1, names);

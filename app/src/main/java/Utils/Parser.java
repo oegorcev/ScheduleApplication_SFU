@@ -122,12 +122,12 @@ public class Parser extends AsyncTask<String, Void, Void> {
         ArrayList<String> weeks = new  ArrayList<String>();
 
         if(data.length == 1) {
-            teachers.add("free");
-            subjects.add("free");
-            types.add("free");
-            classrooms.add("free");
-            subgroups.add("free");
-            weeks.add("all");
+            teachers.add(Constants.FREE);
+            subjects.add(Constants.FREE);
+            types.add(Constants.FREE);
+            classrooms.add(Constants.FREE);
+            subgroups.add(Constants.FREE);
+            weeks.add(Constants.ALL_WEEKS);
         }
         else {
             int index = 0;
@@ -173,8 +173,8 @@ public class Parser extends AsyncTask<String, Void, Void> {
         //Случай один - простейшее расписание
         if(index == data.length)
         {
-            weeks.add("all");
-            subgroups.add("nothing");
+            weeks.add(Constants.ALL_WEEKS);
+            subgroups.add(Constants.WITHOUT_SUBGROUB);
             return index;
         }
 
@@ -182,12 +182,12 @@ public class Parser extends AsyncTask<String, Void, Void> {
         else if(data[index].charAt(data[index].length() - 1) == ')' && data[index].charAt(0) == '(' && index == (data.length - 1))
         {
             weeks.add(data[index++]);
-            subgroups.add("nothing");
+            subgroups.add(Constants.WITHOUT_SUBGROUB);
         }
         //Случай три, неделя последняя, но ещё второй предмет по другой неделе ((1-9)Пилипушко)
         else if(data[index].charAt(0) == '(' && data[index].charAt(data[index].length() - 1) != ')'){
             weeks.add(data[index].substring(0, data[index].indexOf(')') + 1));
-            subgroups.add("nothing");
+            subgroups.add(Constants.WITHOUT_SUBGROUB);
             data[index] = data[index].substring(data[index].indexOf(')') + 1, data[index].length());
         }
         //Случай четыре, корректное расписание подргуппа и неделя
@@ -215,7 +215,7 @@ public class Parser extends AsyncTask<String, Void, Void> {
         }
         //Случай шесть, нет недели, подгруппа последняя в расписании
         else if ((data[index].charAt(0) == '1' || data[index].charAt(0) == '2') && index == data.length - 1){
-            weeks.add("all");
+            weeks.add(Constants.ALL_WEEKS);
             if (data[index++].charAt(0) == '1') {
                 subgroups.add(Constants.FIRST_SUB);
             } else {
@@ -224,7 +224,7 @@ public class Parser extends AsyncTask<String, Void, Void> {
         }
         //Случай семь, нет недели, есть подргуппа, раписание некорректно (1??.Пилипушко)
         else if(data[index].charAt(0) == '1' || data[index].charAt(0) == '2'){
-            weeks.add("all");
+            weeks.add(Constants.ALL_WEEKS);
             if (data[index].charAt(0) == '1') {
                 subgroups.add(Constants.FIRST_SUB);
             } else {

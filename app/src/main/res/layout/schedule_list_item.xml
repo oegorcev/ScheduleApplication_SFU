@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="1"
-        android:textSize="45sp"></TextView>
+        android:textSize="45sp"/>
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="11:55 - 13:30"
-                android:textSize="13sp"></TextView>
+                android:textSize="13sp" />
 
         </LinearLayout>
         <LinearLayout
@@ -53,14 +53,14 @@
                 android:layout_gravity="left"
                 android:layout_marginRight="10dp"
                 android:text="Корпоротивное ПО"
-                android:textSize="15sp"></TextView>
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/teacher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Скороход С.В."
-                android:textSize="15sp"></TextView>
+                android:textSize="15sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Лекция"
-                android:textSize="13sp"></TextView>
+                android:textSize="13sp"/>
 
             <TextView
                 android:id="@+id/subgroup"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="1 пг."
-                android:textSize="15sp"></TextView>
+                android:textSize="15sp"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -93,8 +93,8 @@
         android:id="@+id/classroom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:text="Г-415"
-        android:textSize="20sp"></TextView>
+        android:textSize="20sp"/>
 
 </LinearLayout>

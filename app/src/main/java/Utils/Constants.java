@@ -23,7 +23,6 @@ public class Constants {
    public static final String URL = "http://asu.tti.sfedu.ru/Raspisanie/ShowRaspisanie.aspx?Substance=";
    public static final String START_TIME = "start-time";
    public static final String END_TIME = "end-time";
-   public static final String SEPARATOR = " ";
    public static final String BOTH = "row_rowspan";
    public static final String TOP_WEEK = "row top-week";
    public static final String BOTTOM_WEEK = "row bottom-week";
@@ -40,6 +39,11 @@ public class Constants {
    public static final String FIRST_SUB = "1пг";
    public static final String SECOND_SUB = "2пг";
 
+   public static final String FREE = "free";
+   public static final String ALL_WEEKS = "all";
+   public static final String WITHOUT_SUBGROUB = "nothing";
+   public static final String FREE_TIME = "Свободное время!";
+
    public static final int DAYS_ON_WEEK = 7;
    public static final int DATE_INDEX = 1;
    public static final int BEGIN_TIME = 1;
@@ -48,6 +52,8 @@ public class Constants {
    public static final int FIRST_POTOK = 121;
    public static final int START_NEXT_SEMESTR = 7;
 
+   public static final String SEPARATOR = " ";
+   public static final String EMPTY_STRING = "";
    public static final char DOT = '.';
 
    public static String getCurPot(String year)
