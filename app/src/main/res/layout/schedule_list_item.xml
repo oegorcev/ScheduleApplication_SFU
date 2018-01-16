@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="1"
+        android:background="#5882FA"
         android:textSize="45sp"/>
 
     <LinearLayout
@@ -27,6 +28,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
+
             android:orientation="horizontal">
 
             <TextView
@@ -36,14 +38,15 @@
                 android:layout_marginTop="5dp"
                 android:text="11:55 - 13:30"
                 android:textSize="13sp" />
-
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
+
             android:orientation="horizontal">
 
             <TextView
@@ -53,14 +56,14 @@
                 android:layout_gravity="left"
                 android:layout_marginRight="10dp"
                 android:text="Корпоротивное ПО"
-                android:textSize="15sp"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/teacher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Скороход С.В."
-                android:textSize="15sp"/>
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -75,7 +78,7 @@
                 android:id="@+id/type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Лекция"
+                android:text="(лек)"
                 android:textSize="13sp"/>
 
             <TextView
@@ -90,11 +93,13 @@
     </LinearLayout>
 
     <TextView
+
         android:id="@+id/classroom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:text="Г-415"
+        android:background="#FFFF00"
         android:textSize="20sp"/>
 
 </LinearLayout>

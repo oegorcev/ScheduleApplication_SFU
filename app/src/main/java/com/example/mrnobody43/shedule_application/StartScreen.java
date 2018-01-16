@@ -11,7 +11,13 @@ import android.view.MenuInflater;
 import android.widget.ListView;
 import android.widget.TabHost;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
+
 import Utils.Constants;
+import Utils.Parsers.GroupParser;
 import Utils.Scheduler;
 import adapters.ScheduleItemAdapter;
 import model.Week;
@@ -32,6 +38,7 @@ public class StartScreen extends AppCompatActivity {
     private Week _currentSchedule;
     private ListView listView1;
     ScheduleItemAdapter scheduleItemAdapter;
+    Map<String, Integer> day_of_a_weak;
 
     private TabHost tabHost;
 
@@ -41,10 +48,32 @@ public class StartScreen extends AppCompatActivity {
         setContentView(R.layout.activity_start_screen);
         setTitle("КТбо4-8");
 
+        listView1 = (ListView) findViewById(R.id.list1);
         tabHost = (TabHost)findViewById(R.id.tabHost);
         tabHost.setup();
 
-        renderScheduleData("КТбо4-8");
+        GroupParser groupParser = new GroupParser(this);
+        groupParser.execute("КТбо4-8", "1");
+
+        day_of_a_weak = new HashMap<>();
+        day_of_a_weak.put(Constants.MONDAY, 0);
+        day_of_a_weak.put(Constants.TUESDAY, 1);
+        day_of_a_weak.put(Constants.WEDNESDAY, 2);
+        day_of_a_weak.put(Constants.THURSDAY, 3);
+        day_of_a_weak.put(Constants.FRIDAY, 4);
+        day_of_a_weak.put(Constants.SATURDAY, 5);
+        day_of_a_weak.put(Constants.SUNDAY, 6);
+
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener(){
+            @Override
+            public void onTabChanged(String tabId) {
+                int pickedDay = day_of_a_weak.get(tabId);
+                scheduleItemAdapter = new ScheduleItemAdapter(StartScreen.this, _currentSchedule.getWeek().get(pickedDay).get_classesBotWeek());
+                listView1.setAdapter(scheduleItemAdapter);
+                scheduleItemAdapter.notifyDataSetChanged();
+            }});
+
+       // renderScheduleData("КТбо4-8");
     }
 
     public void renderScheduleData(String name) {
@@ -87,54 +116,52 @@ public class StartScreen extends AppCompatActivity {
 
             super.onPostExecute(week);
 
-            TabHost.TabSpec tabSpec = tabHost.newTabSpec("tag1");
+            TabHost.TabSpec tabSpec = tabHost.newTabSpec(Constants.MONDAY);
             tabSpec.setContent(R.id.list1);
             tabSpec.setIndicator(Constants.MONDAY);
             tabHost.addTab(tabSpec);
 
-            tabSpec = tabHost.newTabSpec("tag2");
+            tabSpec = tabHost.newTabSpec(Constants.TUESDAY);
             tabSpec.setContent(R.id.list1);
             tabSpec.setIndicator(Constants.TUESDAY);
             tabHost.addTab(tabSpec);
 
-            tabSpec = tabHost.newTabSpec("tag3");
+            tabSpec = tabHost.newTabSpec(Constants.WEDNESDAY);
             tabSpec.setContent(R.id.list1);
             tabSpec.setIndicator(Constants.WEDNESDAY);
             tabHost.addTab(tabSpec);
 
-            tabSpec = tabHost.newTabSpec("tag4");
+            tabSpec = tabHost.newTabSpec(Constants.THURSDAY);
             tabSpec.setContent(R.id.list1);
             tabSpec.setIndicator(Constants.THURSDAY);
             tabHost.addTab(tabSpec);
 
-            tabSpec = tabHost.newTabSpec("tag5");
+            tabSpec = tabHost.newTabSpec(Constants.FRIDAY);
             tabSpec.setContent(R.id.list1);
             tabSpec.setIndicator(Constants.FRIDAY);
             tabHost.addTab(tabSpec);
 
-            tabSpec = tabHost.newTabSpec("tag6");
+            tabSpec = tabHost.newTabSpec(Constants.SATURDAY);
             tabSpec.setContent(R.id.list1);
             tabSpec.setIndicator(Constants.SATURDAY);
             tabHost.addTab(tabSpec);
 
-            tabSpec = tabHost.newTabSpec("tag7");
+            tabSpec = tabHost.newTabSpec(Constants.SUNDAY);
             tabSpec.setContent(R.id.list1);
             tabSpec.setIndicator(Constants.SUNDAY);
             tabHost.addTab(tabSpec);
 
-            tabHost.setCurrentTab(0);
-
+            Calendar newCal = new GregorianCalendar();
+            newCal.set(1997, 2, 1, 0, 0, 0);
+            newCal.setTime(newCal.getTime());
+            int day = newCal.get(Calendar.DAY_OF_WEEK) - 1;
             listView1 = (ListView) findViewById(R.id.list1);
 
-            scheduleItemAdapter = new ScheduleItemAdapter(StartScreen.this, _currentSchedule.getWeek().get(2).get_classesBotWeek());
+            scheduleItemAdapter = new ScheduleItemAdapter(StartScreen.this, _currentSchedule.getWeek().get(day).get_classesBotWeek());
 
-            // создаем адаптер
-            //ArrayAdapter<String> adapter = new ArrayAdapter<String>(StartScreen.this, android.R.layout.simple_list_item_1, names);
             listView1.setAdapter(scheduleItemAdapter);
-
+            tabHost.setCurrentTab(day);
         }
-
-
     }
 
     @Override
@@ -144,4 +171,14 @@ public class StartScreen extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
+
 }
+//listView.setOnItemClickListener(new OnItemClickListener() {
+//@Override
+//public void onItemClick(AdapterView<?> parent, View view,
+//        int position, long id) {
+//        Toast.makeText(getApplicationContext(),
+//        "Click ListItem Number " + position, Toast.LENGTH_LONG)
+//        .show();
+//        }
+//        })

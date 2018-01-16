@@ -140,7 +140,6 @@ public class ScheduleItemAdapter extends BaseAdapter {
                 ((TextView) view.findViewById(R.id.type_second)).setText(p.get_type().get(1));
             }
 
-
             if (p.get_subgroup().get(1).equals(Constants.WITHOUT_SUBGROUB)) {
                 ((TextView) view.findViewById(R.id.subgroup_second)).setText(Constants.EMPTY_STRING);
             } else {

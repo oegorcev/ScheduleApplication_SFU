@@ -23,7 +23,7 @@ public class Parser extends AsyncTask<String, Void, Void> {
 
         Document doc = null;
         try {
-            doc = Jsoup.connect(Constants.URL + params[0] + Constants.POTOK + Constants.getCurPot(params[1]) + Constants.SEMESTR + params[2]).get();
+            doc = Jsoup.connect(Constants.URL + params[0] + Constants.POTOK + Constants.getCurPot() + Constants.SEMESTR + params[1]).get();
         } catch (IOException e) {
             e.printStackTrace();
         }

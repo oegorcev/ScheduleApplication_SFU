@@ -13,13 +13,13 @@ import model.Week;
 
 public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
 
-    private String _group;
+    private String _query;
     private Parser _parser;
     private StartScreen _startScreen;
 
-    public Scheduler(StartScreen startScreen, String group) {
+    public Scheduler(StartScreen startScreen, String query) {
         super();
-        _group = group;
+        _query = query;
         _startScreen = startScreen;
     }
 
@@ -27,7 +27,7 @@ public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
     protected void onPreExecute() {
         super.onPreExecute();
         _parser = new Parser();
-        _parser.execute(_group, "0", "1");
+        _parser.execute(_query, "1");
     }
 
     protected Void doInBackground(StartScreen... params) {
@@ -38,6 +38,7 @@ public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
         Week week = new Week();
         ArrayList<Day> days = new ArrayList<Day>();
 
+        //7 -
         for (int i = 0; i < 7; ++i) {
             Day curDay = new Day();
 

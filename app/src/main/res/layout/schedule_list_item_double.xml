@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:background="#BDBDBD"
                 android:text="1"
                 android:textSize="45sp" />
 
@@ -110,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="Г-415"
+                android:background="#FFFF00"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -144,8 +146,6 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-
-
                     <LinearLayout
                         android:id="@+id/First_inf_second"
                         android:layout_width="match_parent"
@@ -176,6 +176,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginTop="1dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
@@ -203,6 +204,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="Г-415"
+                    android:background="#FFFF00"
                     android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>

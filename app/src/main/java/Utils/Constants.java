@@ -19,10 +19,13 @@ public class Constants {
    public static final String SUNDAY = "Воскресенье";
 
    public static final String WEEK_SCHEDULE = "tblRaspis";
+   public static final String EXAMS_SCHEDULE  = "tblRaspisZaoch";
 
    public static final String URL = "http://asu.tti.sfedu.ru/Raspisanie/ShowRaspisanie.aspx?Substance=";
    public static final String START_TIME = "start-time";
    public static final String END_TIME = "end-time";
+   public static final String PARSE_TAG_DAYS = "tr";
+   public static final String PARSE_TAG_ELEMENTS = "td";
    public static final String BOTH = "row_rowspan";
    public static final String TOP_WEEK = "row top-week";
    public static final String BOTTOM_WEEK = "row bottom-week";
@@ -56,7 +59,7 @@ public class Constants {
    public static final String EMPTY_STRING = "";
    public static final char DOT = '.';
 
-   public static String getCurPot(String year)
+   public static String getCurPot()
    {
       int curYear = calendar.get(Calendar.YEAR);
       int curMonth = calendar.get(Calendar.MONTH);
@@ -68,6 +71,6 @@ public class Constants {
          if(curMonth < START_NEXT_SEMESTR) --pot;
       }
 
-      return  Integer.toString(pot - Integer.parseInt(year));
+      return  Integer.toString(pot);
    }
 }
