@@ -63,15 +63,16 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
                     int idIndex = c.getColumnIndex(DataBaseHelper.ID);
                     int htmlIndex = c.getColumnIndex(DataBaseHelper.HTML_CODE);
 
-                    String offlinedata = c.getString(htmlIndex);
+                    String offlineData = c.getString(htmlIndex);
                     String bdId = c.getString(idIndex);
                     if (params[0].equals(bdId)) {
-                        doc = Jsoup.parse(offlinedata);
+                        doc = Jsoup.parse(offlineData);
                         flag = false;
                         break;
                     } else c.moveToNext();
                 }
             }
+            myDb.close();
         }
 
         if(doc != null) {
@@ -90,9 +91,13 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
 
             ContentValues cv = new ContentValues();
             cv.put(DataBaseHelper.ID, queury);
-            cv.put(DataBaseHelper.HTML_CODE, doc.html());
+            cv.put(DataBaseHelper.HTML_CODE, doc.toString());
 
-            db.insert(DataBaseHelper.TABLE_NAME, null, cv);
+            int was = db.update(DataBaseHelper.TABLE_NAME, cv, DataBaseHelper.ID + " = ?", new String[] { queury });
+            if(was == 0)
+            {
+                db.insert(DataBaseHelper.TABLE_NAME, null, cv);
+            }
 
             myDb.close();
 

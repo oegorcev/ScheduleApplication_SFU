@@ -1,4 +1,4 @@
-package model;
+package model.Group;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Mr.Nobody43 on 28.10.2017.
  */
 
-public class Class {
+public class ClassGroup {
 
     private String _time;
     private ArrayList<String> _subject;

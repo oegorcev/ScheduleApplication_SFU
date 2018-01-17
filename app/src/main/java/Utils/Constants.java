@@ -39,8 +39,12 @@ public class Constants {
    public static final String PRACTIC = "(прак.)";
    public static final String LAB = "(лаб.)";
 
+   public static final String FIRST_SUB_BAD = "1??.";
+   public static final String SECOND_SUB_BAD = "2??.";
+   public static final String THIRD_SUB_BAD = "3??.";
    public static final String FIRST_SUB = "1пг";
    public static final String SECOND_SUB = "2пг";
+   public static final String THIRD_SUB = "3пг";
 
    public static final String FREE = "free";
    public static final String ALL_WEEKS = "all";

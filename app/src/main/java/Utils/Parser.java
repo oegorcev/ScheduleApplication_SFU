@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Class;
+import model.Group.ClassGroup;
 
 public class Parser extends AsyncTask<String, Void, Void> {
 
@@ -111,8 +111,8 @@ public class Parser extends AsyncTask<String, Void, Void> {
         this._schedule = _schedule;
     }
 
-    public Class parseClass(String[] data){
-        Class aClass = new Class();
+    public ClassGroup parseClass(String[] data){
+        ClassGroup aClassGroup = new ClassGroup();
 
         ArrayList<String> teachers = new ArrayList<String>();
         ArrayList<String> subjects = new ArrayList<String>();
@@ -137,14 +137,14 @@ public class Parser extends AsyncTask<String, Void, Void> {
             }
         }
 
-        aClass.set_classroom(classrooms);
-        aClass.set_subgroup(subgroups);
-        aClass.set_subject(subjects);
-        aClass.set_teacher(teachers);
-        aClass.set_weeks(weeks);
-        aClass.set_type(types);
+        aClassGroup.set_classroom(classrooms);
+        aClassGroup.set_subgroup(subgroups);
+        aClassGroup.set_subject(subjects);
+        aClassGroup.set_teacher(teachers);
+        aClassGroup.set_weeks(weeks);
+        aClassGroup.set_type(types);
 
-        return aClass;
+        return aClassGroup;
     }
 
     private int parseData( String[] data,

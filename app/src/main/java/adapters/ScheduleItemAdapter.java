@@ -16,16 +16,16 @@ import com.example.mrnobody43.shedule_application.R;
 import java.util.ArrayList;
 
 import Utils.Constants;
-import model.Class;
+import model.Group.ClassGroup;
 
 public class ScheduleItemAdapter extends BaseAdapter {
     Context ctx;
     LayoutInflater lInflater;
-    ArrayList<Class> objects;
+    ArrayList<ClassGroup> objects;
 
-    public ScheduleItemAdapter(Context context, ArrayList<Class> classes) {
+    public ScheduleItemAdapter(Context context, ArrayList<ClassGroup> classGroups) {
         ctx = context;
-        objects = classes;
+        objects = classGroups;
         lInflater = (LayoutInflater) ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -48,8 +48,8 @@ public class ScheduleItemAdapter extends BaseAdapter {
         return position;
     }
 
-    Class getClass(int position) {
-        return ((Class) getItem(position));
+    ClassGroup getClass(int position) {
+        return ((ClassGroup) getItem(position));
     }
 
     // пункт списка
@@ -57,7 +57,7 @@ public class ScheduleItemAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         // используем созданные, но не используемые view
         View view = convertView;
-        Class p = getClass(position);
+        ClassGroup p = getClass(position);
 
         if(p.get_classroom().size() == 1) {
             view = lInflater.inflate(R.layout.schedule_list_item, parent, false);

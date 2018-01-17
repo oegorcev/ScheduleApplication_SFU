@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document;
 
 public interface IParser {
 
-    public Document DownloadSchedule(String queury, String semestr);
+    public Document DownloadSchedule(String query, String semestr);
     public void ParseDocument(Document document);
 
 }

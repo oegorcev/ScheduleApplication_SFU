@@ -20,4 +20,15 @@ public class Utilities {
     {
         return s.equals(Constants.LECTION) || s.equals(Constants.PRACTIC) || s.equals(Constants.LAB);
     }
+
+    public static boolean IsGroup (String s)
+    {
+        //Если перед тире стоит буква, то это точно не группа или группы нет
+        return (s.indexOf('-') != -1) && ((s.equals('-')) || !Character.isLetter(s.charAt(s.indexOf('-') - 1)));
+    }
+
+    public static boolean IsSubgroup (String s)
+    {
+        return s.equals(Constants.FIRST_SUB_BAD) || s.equals(Constants.SECOND_SUB_BAD) || s.equals(Constants.THIRD_SUB_BAD);
+    }
 }

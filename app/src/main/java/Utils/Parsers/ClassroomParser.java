@@ -10,6 +10,6 @@ public class ClassroomParser extends AbstractParser {
 
     public ClassroomParser(Context mContext)
     {
-        this.mContext = mContext;
+        super(mContext);
     }
 }
