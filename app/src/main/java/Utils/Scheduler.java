@@ -7,10 +7,13 @@ import com.example.mrnobody43.shedule_application.StartScreen;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utils.Parsers.AbstractParser;
-import Utils.Parsers.ClassroomParser;
-import Utils.Parsers.GroupParser;
-import Utils.Parsers.TeacherParser;
+import data.Parsers.AbstractParser;
+import data.Parsers.ClassroomParser;
+import data.Parsers.GroupParser;
+import data.Parsers.TeacherParser;
+import model.ClassRoom.ClassClassRoom;
+import model.ClassRoom.DayClassRoom;
+import model.ClassRoom.WeekClassRoom;
 import model.Group.ClassGroup;
 import model.Group.DayGroup;
 import model.Group.WeekGroup;
@@ -43,23 +46,21 @@ public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
 
     protected Void doInBackground(StartScreen... params) {
 
-        ClassroomParser classroomParser = new ClassroomParser(_startScreen);
-
         if (_parser.get_schedule_main() != null) {
             _times = _parser.get_times();
             _schedule = _parser.get_schedule_main();
 
             switch (CURRENT_STATE) {
-                case 0: {
+                case Constants.GROUP: {
                     MakeGroupSchedule();
                     break;
                 }
-                case 1: {
+                case Constants.TEACHER: {
                     MakeTeacherSchedule();
                     break;
                 }
-                case 2: {
-                    //MakeClassRoomSchedule()
+                case Constants.CLASSROOM: {
+                    MakeClassRoomSchedule();
                     break;
                 }
                 default: {
@@ -150,16 +151,58 @@ public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
         return;
     }
 
-    private Integer SetState()
-    {
-        if(_query.equals("КТбо4-8")){
-            return 0;
-        } else if(_query.equals("Пирская Л.В.")){
-            return 1;
-        } else if(_query.equals("Г-441")){
-            return 2;
+    private void MakeClassRoomSchedule(){
+        ClassroomParser classroomParser = new ClassroomParser(_startScreen);
+
+        WeekClassRoom weekClassRoom = new WeekClassRoom();
+        ArrayList<DayClassRoom> dayClassRoom = new ArrayList<DayClassRoom>();
+
+        for (int i = 0; i < 7; ++i) {
+            DayClassRoom curDayClassRoom = new DayClassRoom();
+
+            curDayClassRoom.set_day_of_the_week(_schedule.get(i).get(0).getFirst());
+
+            ArrayList<ClassClassRoom> classesTop = new ArrayList<ClassClassRoom>();
+            ArrayList<ClassClassRoom> classesBot = new ArrayList<ClassClassRoom>();
+
+            for (int j = 1; j < 8; ++j) {
+                ClassClassRoom _classClassRoomTop = new ClassClassRoom();
+                ClassClassRoom _classClassRoomBot = new ClassClassRoom();
+
+                _classClassRoomTop = classroomParser.parseClass(_schedule.get(i).get(j).getFirst().split(" "));
+                _classClassRoomBot = classroomParser.parseClass(_schedule.get(i).get(j).getSecond().split(" "));
+
+                _classClassRoomTop.set_time(_times.get(j - 1));
+                _classClassRoomBot.set_time(_times.get(j - 1));
+
+                classesTop.add(_classClassRoomTop);
+                classesBot.add(_classClassRoomBot);
+            }
+
+            curDayClassRoom.set_classesTopWeek(classesTop);
+            curDayClassRoom.set_classesBotWeek(classesBot);
+
+            dayClassRoom.add(curDayClassRoom);
         }
 
-        return  0;
+        weekClassRoom.setWeek(dayClassRoom);
+        _startScreen.set_currentSchedule(weekClassRoom);
+
+        return;
+    }
+
+    private Integer SetState()
+    {
+        String[] mas = _query.split(" ");
+
+        if(Utilities.IsGroup(_query)){
+            return Constants.GROUP;
+        } else if(mas.length > 1){
+            return Constants.TEACHER;
+        } else if(Utilities.IsClassRoom(_query)){
+            return Constants.CLASSROOM;
+        }
+
+        return  Constants.GROUP;
     }
 }

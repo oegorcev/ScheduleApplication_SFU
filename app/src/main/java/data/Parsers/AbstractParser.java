@@ -1,4 +1,4 @@
-package Utils.Parsers;
+package data.Parsers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -114,8 +114,12 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
 
         _times = new ArrayList<String>();
 
-        _schedule_main = ParseTable(tableWeek);
-        _schedule_exams = ParseTable(tableExams);
+        if(tableWeek != null){
+            _schedule_main = ParseTable(tableWeek);
+        }
+        if(tableExams != null) {
+            _schedule_exams = ParseTable(tableExams);
+        }
 
         return;
     }

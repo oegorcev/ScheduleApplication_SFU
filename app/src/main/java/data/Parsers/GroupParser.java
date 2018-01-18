@@ -1,4 +1,4 @@
-package Utils.Parsers;
+package data.Parsers;
 
 import android.content.Context;
 

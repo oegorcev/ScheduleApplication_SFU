@@ -1,4 +1,4 @@
-package Utils.Parsers;
+package data.Parsers;
 
 import android.content.Context;
 
@@ -28,7 +28,6 @@ public class TeacherParser extends AbstractParser {
         ArrayList<String> types = new ArrayList<String>();
         ArrayList<ArrayList<String>> groups  = new ArrayList<ArrayList<String>>();
         groups.add(new ArrayList<String>());
-        ArrayList<String> subgroups = new ArrayList<String>();
         ArrayList<String> classrooms = new ArrayList<String>();
         ArrayList<String> weeks = new ArrayList<String>();
 
@@ -38,7 +37,6 @@ public class TeacherParser extends AbstractParser {
             subjects.add(Constants.FREE);
             types.add(Constants.FREE);
             classrooms.add(Constants.FREE);
-            subgroups.add(Constants.FREE);
             weeks.add(Constants.ALL_WEEKS);
         }
         else {
@@ -46,13 +44,12 @@ public class TeacherParser extends AbstractParser {
 
             while(index < data.length) {
                 if(_counter != 0) groups.add(new ArrayList<String>());
-                index = parseData(data, groups, subjects, types, classrooms, subgroups, weeks, index);
+                index = parseData(data, groups, subjects, types, classrooms, weeks, index);
                 _counter++;
             }
         }
 
         aClassTeacher.set_classroom(classrooms);
-        aClassTeacher.set_subgroup(subgroups);
         aClassTeacher.set_subject(subjects);
         aClassTeacher.set_groups(groups);
         aClassTeacher.set_weeks(weeks);
@@ -66,7 +63,6 @@ public class TeacherParser extends AbstractParser {
                            ArrayList<String> subjects,
                            ArrayList<String> types,
                            ArrayList<String> classrooms,
-                           ArrayList<String> subgroups,
                            ArrayList<String> weeks, int index){
 
 
@@ -81,14 +77,27 @@ public class TeacherParser extends AbstractParser {
 
         types.add(data[index++]);
 
-        for (; Utilities.IsGroup(data[index]) ; ++index) {
-            groups.get(_counter).add(data[index]);
-        }
+        String gr = "";
+        int cntGroups = 0;
 
-        if (types.get(types.size()- 1).equals(Constants.LAB) && Utilities.IsSubgroup(data[index])){
-            subgroups.add(data[index++]);
-        } else {
-            subgroups.add(Constants.WITHOUT_SUBGROUB);
+        for (; ; ++index) {
+            if(Utilities.IsClassRoom(data[index])){
+                groups.get(_counter).add(gr);
+                break;
+            }
+
+            if(Utilities.IsGroup(data[index]) && cntGroups > 0){
+                groups.get(_counter).add(gr);
+                gr = "";
+            }
+            else if(Utilities.IsGroup(data[index]) && cntGroups == 0) {
+                cntGroups++;
+            }
+
+            if(!gr.equals(Constants.EMPTY_STRING)){
+                gr += " ";
+            }
+            gr += data[index];
         }
 
         classrooms.add(data[index++]);
@@ -115,7 +124,6 @@ public class TeacherParser extends AbstractParser {
         //Случай четыре-, нет недели, расписание корректно, несколько предметов
         else {
             weeks.add(Constants.ALL_WEEKS);
-            subgroups.add(Constants.WITHOUT_SUBGROUB);
         }
 
         return index;

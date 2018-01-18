@@ -19,6 +19,7 @@ import java.util.Map;
 import Utils.Constants;
 import Utils.Scheduler;
 import adapters.ScheduleItemAdapter;
+import model.ClassRoom.WeekClassRoom;
 import model.Group.WeekGroup;
 import model.Teacher.WeekTeacher;
 
@@ -32,7 +33,7 @@ public class StartScreen extends AppCompatActivity {
 
         InitTabHost();
 
-        renderScheduleData("Пирская Л.В.");
+        renderScheduleData("Проскуряков А.В.");
     }
 
     private class  ScheduleTask extends AsyncTask<String, Void, WeekGroup> {
@@ -173,9 +174,13 @@ public class StartScreen extends AppCompatActivity {
         this._currentScheduleTeacher = _currentSchedule;
     }
 
+    public void set_currentSchedule(WeekClassRoom _currentSchedule) {
+        this._currentScheduleClassRoom = _currentSchedule;
+    }
 
     private WeekGroup _currentScheduleGroup;
     private WeekTeacher _currentScheduleTeacher;
+    private WeekClassRoom _currentScheduleClassRoom;
     private ListView listView1;
     private TabHost tabHost;
     ScheduleItemAdapter scheduleItemAdapter;

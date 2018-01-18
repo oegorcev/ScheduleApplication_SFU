@@ -24,7 +24,13 @@ public class Utilities {
     public static boolean IsGroup (String s)
     {
         //Если перед тире стоит буква, то это точно не группа или группы нет
-        return (s.indexOf('-') != -1) && ((s.equals('-')) || !Character.isLetter(s.charAt(s.indexOf('-') - 1)));
+        return (s.indexOf('-') != -1) && ((s.equals("-")) || !Character.isLetter(s.charAt(s.indexOf('-') - 1)));
+    }
+
+    public static boolean IsClassRoom (String s)
+    {
+        //Если перед тире стоит буква, то это аудитория
+        return !s.equals("-") && (s.indexOf('-') != -1) && Character.isLetter(s.charAt(s.indexOf('-') - 1));
     }
 
     public static boolean IsSubgroup (String s)

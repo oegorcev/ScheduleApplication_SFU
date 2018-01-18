@@ -59,9 +59,18 @@ public class Constants {
    public static final int FIRST_POTOK = 121;
    public static final int START_NEXT_SEMESTR = 7;
 
+   public static final int GROUP = 0;
+   public static final int TEACHER = 1;
+   public static final int CLASSROOM = 2;
+
+
+
    public static final String SEPARATOR = " ";
    public static final String EMPTY_STRING = "";
    public static final char DOT = '.';
+
+
+
 
    public static String getCurPot()
    {

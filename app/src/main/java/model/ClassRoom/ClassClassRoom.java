@@ -1,18 +1,19 @@
-package model.Teacher;
+package model.ClassRoom;
 
 import java.util.ArrayList;
 
 /**
- * Created by Mr.Nobody43 on 17.01.2018.
+ * Created by Mr.Nobody43 on 18.01.2018.
  */
 
-public class ClassTeacher {
+public class ClassClassRoom {
 
     private String _time;
+    private ArrayList<String> _teacher;
     private ArrayList<String> _subject;
     private ArrayList<String> _type;
     private ArrayList<ArrayList<String>> _groups;
-    private ArrayList<String> _classroom;
+    private ArrayList<String> _subgroup;
     private ArrayList<String> _weeks;
 
     public String get_time() {
@@ -21,6 +22,14 @@ public class ClassTeacher {
 
     public void set_time(String _time) {
         this._time = _time;
+    }
+
+    public ArrayList<String> get_teacher() {
+        return _teacher;
+    }
+
+    public void set_teacher(ArrayList<String> _teacher) {
+        this._teacher = _teacher;
     }
 
     public ArrayList<String> get_subject() {
@@ -47,12 +56,12 @@ public class ClassTeacher {
         this._groups = _groups;
     }
 
-    public ArrayList<String> get_classroom() {
-        return _classroom;
+    public ArrayList<String> get_subgroup() {
+        return _subgroup;
     }
 
-    public void set_classroom(ArrayList<String> _classroom) {
-        this._classroom = _classroom;
+    public void set_subgroup(ArrayList<String> _subgroup) {
+        this._subgroup = _subgroup;
     }
 
     public ArrayList<String> get_weeks() {
