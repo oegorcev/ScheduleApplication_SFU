@@ -146,7 +146,7 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
 
             for (Element curTd : tds) {
                 if (cntI == Constants.DATE_INDEX) {
-                    if (cntJ >= Constants.BEGIN_TIME && _times.size() <= Constants.DAYS_ON_WEEK) {
+                    if (cntJ >= Constants.BEGIN_TIME && _times.size() < Constants.DAYS_ON_WEEK) {
                         Elements strtTime = curTd.getElementsByClass(Constants.START_TIME);
                         Elements endTime = curTd.getElementsByClass(Constants.END_TIME);
 

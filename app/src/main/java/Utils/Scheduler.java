@@ -46,7 +46,7 @@ public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
 
     protected Void doInBackground(StartScreen... params) {
 
-        if (_parser.get_schedule_main() != null) {
+        if (_parser.get_schedule_main() != null && !(_parser.get_schedule_main().isEmpty())) {
             _times = _parser.get_times();
             _schedule = _parser.get_schedule_main();
 

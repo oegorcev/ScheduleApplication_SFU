@@ -13,7 +13,6 @@ public class ClassClassRoom {
     private ArrayList<String> _subject;
     private ArrayList<String> _type;
     private ArrayList<ArrayList<String>> _groups;
-    private ArrayList<String> _subgroup;
     private ArrayList<String> _weeks;
 
     public String get_time() {
@@ -54,14 +53,6 @@ public class ClassClassRoom {
 
     public void set_groups(ArrayList<ArrayList<String>> _groups) {
         this._groups = _groups;
-    }
-
-    public ArrayList<String> get_subgroup() {
-        return _subgroup;
-    }
-
-    public void set_subgroup(ArrayList<String> _subgroup) {
-        this._subgroup = _subgroup;
     }
 
     public ArrayList<String> get_weeks() {

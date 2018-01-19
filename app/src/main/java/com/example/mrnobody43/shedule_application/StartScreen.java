@@ -33,7 +33,7 @@ public class StartScreen extends AppCompatActivity {
 
         InitTabHost();
 
-        renderScheduleData("Проскуряков А.В.");
+        renderScheduleData("Седова Т.В.");
     }
 
     private class  ScheduleTask extends AsyncTask<String, Void, WeekGroup> {
