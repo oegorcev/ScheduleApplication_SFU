@@ -49,30 +49,12 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
 
         if(isNetworkAvailable()){
             doc = DownloadSchedule(params[0], params[1]);
+            if(doc == null){
+                doc = GetDbSchedule(params[0]);
+            }
         }
         else {
-            db = myDb.getReadableDatabase();
-
-            Cursor c = db.query(DataBaseHelper.TABLE_NAME, null, null, null, null, null, null);
-
-            if (c.moveToFirst()) {
-                boolean flag = true;
-                while (true) {
-                    if (c.isAfterLast()) break;
-
-                    int idIndex = c.getColumnIndex(DataBaseHelper.ID);
-                    int htmlIndex = c.getColumnIndex(DataBaseHelper.HTML_CODE);
-
-                    String offlineData = c.getString(htmlIndex);
-                    String bdId = c.getString(idIndex);
-                    if (params[0].equals(bdId)) {
-                        doc = Jsoup.parse(offlineData);
-                        flag = false;
-                        break;
-                    } else c.moveToNext();
-                }
-            }
-            myDb.close();
+            doc = GetDbSchedule(params[0]);
         }
 
         if(doc != null) {
@@ -80,6 +62,35 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         }
 
         return null;
+    }
+
+    public Document GetDbSchedule(String query){
+        Document doc = null;
+
+        db = myDb.getReadableDatabase();
+
+        Cursor c = db.query(DataBaseHelper.TABLE_NAME, null, null, null, null, null, null);
+
+        if (c.moveToFirst()) {
+            boolean flag = true;
+            while (true) {
+                if (c.isAfterLast()) break;
+
+                int idIndex = c.getColumnIndex(DataBaseHelper.ID);
+                int htmlIndex = c.getColumnIndex(DataBaseHelper.HTML_CODE);
+
+                String offlineData = c.getString(htmlIndex);
+                String bdId = c.getString(idIndex);
+                if (query.equals(bdId)) {
+                    doc = Jsoup.parse(offlineData);
+                    flag = false;
+                    break;
+                } else c.moveToNext();
+            }
+        }
+        myDb.close();
+
+        return doc;
     }
 
     public Document DownloadSchedule(String queury, String semestr) {

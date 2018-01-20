@@ -20,6 +20,21 @@ public class Utilities {
         return s.equals(Constants.LECTION) || s.equals(Constants.PRACTIC) || s.equals(Constants.LAB);
     }
 
+    public static Integer SetState(String query)
+    {
+        String[] mas = query.split(" ");
+
+        if(Utilities.IsGroup(query)){
+            return Constants.GROUP;
+        } else if(mas.length > 1){
+            return Constants.TEACHER;
+        } else if(Utilities.IsClassRoom(query)){
+            return Constants.CLASSROOM;
+        }
+
+        return  Constants.GROUP;
+    }
+
     public static boolean IsGroup (String s) {
         //Если перед тире стоит буква, то это точно не группа или группы нет
         return (s.indexOf('-') != -1) && ((s.equals("-")) || !Character.isLetter(s.charAt(s.indexOf('-') - 1))) && (s.indexOf('(') == -1);

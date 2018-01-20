@@ -63,14 +63,9 @@ public class Constants {
    public static final int TEACHER = 1;
    public static final int CLASSROOM = 2;
 
-
-
    public static final String SEPARATOR = " ";
    public static final String EMPTY_STRING = "";
    public static final char DOT = '.';
-
-
-
 
    public static String getCurPot()
    {

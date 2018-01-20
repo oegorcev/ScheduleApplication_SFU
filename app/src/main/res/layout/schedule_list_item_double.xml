@@ -7,8 +7,8 @@
 
     <LinearLayout
         android:id="@+id/All_pairs"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -30,16 +30,16 @@
 
             <LinearLayout
                 android:id="@+id/Main_Infomation"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/Time_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
@@ -56,8 +56,8 @@
 
                 <LinearLayout
                     android:id="@+id/First_inf_first"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
@@ -81,8 +81,8 @@
 
                 <LinearLayout
                     android:id="@+id/Second_inf_first"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
@@ -139,8 +139,8 @@
 
                 <LinearLayout
                     android:id="@+id/Main_Infomation_second"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
@@ -148,8 +148,8 @@
 
                     <LinearLayout
                         android:id="@+id/First_inf_second"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
@@ -173,8 +173,8 @@
 
                     <LinearLayout
                         android:id="@+id/Second_inf_second"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="1dp"
                         android:layout_weight="1"

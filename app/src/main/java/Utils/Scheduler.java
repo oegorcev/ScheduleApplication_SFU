@@ -26,7 +26,7 @@ public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
     private String _query;
     private AbstractParser _parser;
     private StartScreen _startScreen;
-    private Integer CURRENT_STATE;
+    private Integer _CURRENT_STATE;
     private List<List<Pair<String, String>>> _schedule;
     private ArrayList<String> _times;
 
@@ -39,7 +39,7 @@ public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        CURRENT_STATE = SetState();
+        _CURRENT_STATE = Utilities.SetState(_query);
         _parser = new GroupParser(_startScreen);
         _parser.execute(_query, "1");
     }
@@ -50,7 +50,7 @@ public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
             _times = _parser.get_times();
             _schedule = _parser.get_schedule_main();
 
-            switch (CURRENT_STATE) {
+            switch (_CURRENT_STATE) {
                 case Constants.GROUP: {
                     MakeGroupSchedule();
                     break;
@@ -191,18 +191,4 @@ public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
         return;
     }
 
-    private Integer SetState()
-    {
-        String[] mas = _query.split(" ");
-
-        if(Utilities.IsGroup(_query)){
-            return Constants.GROUP;
-        } else if(mas.length > 1){
-            return Constants.TEACHER;
-        } else if(Utilities.IsClassRoom(_query)){
-            return Constants.CLASSROOM;
-        }
-
-        return  Constants.GROUP;
-    }
 }

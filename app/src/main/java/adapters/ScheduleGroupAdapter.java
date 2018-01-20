@@ -18,12 +18,12 @@ import java.util.ArrayList;
 import Utils.Constants;
 import model.Group.ClassGroup;
 
-public class ScheduleItemAdapter extends BaseAdapter {
+public class ScheduleGroupAdapter extends BaseAdapter {
     Context ctx;
     LayoutInflater lInflater;
     ArrayList<ClassGroup> objects;
 
-    public ScheduleItemAdapter(Context context, ArrayList<ClassGroup> classGroups) {
+    public ScheduleGroupAdapter(Context context, ArrayList<ClassGroup> classGroups) {
         ctx = context;
         objects = classGroups;
         lInflater = (LayoutInflater) ctx
