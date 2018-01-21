@@ -54,6 +54,9 @@ public class ScheduleClassRoomAdapter extends BaseAdapter {
         // используем созданные, но не используемые view
         View view = convertView;
 
+
+
+
         return view;
     }
 }

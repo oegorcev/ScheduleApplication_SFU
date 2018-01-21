@@ -40,7 +40,7 @@ public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
     protected void onPreExecute() {
         super.onPreExecute();
         _CURRENT_STATE = Utilities.SetState(_query);
-        _parser = new GroupParser(_startScreen);
+        _parser = new AbstractParser(_startScreen);
         _parser.execute(_query, "1");
     }
 

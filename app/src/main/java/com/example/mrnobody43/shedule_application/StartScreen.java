@@ -41,15 +41,17 @@ public class StartScreen extends AppCompatActivity {
 
         InitTabHost();
 
+
         renderScheduleData(_query);
+
     }
 
     public void renderScheduleData(String name) {
-        setTitle(_query);
+        setTitle(name);
+        _CURRENT_STATE = Utilities.SetState(name);
         ScheduleTask scheduleTask = new ScheduleTask(name);
         scheduleTask.execute();
     }
-
 
     private class  ScheduleTask extends AsyncTask<String, Void, Void> {
 
@@ -57,6 +59,7 @@ public class StartScreen extends AppCompatActivity {
 
         public ScheduleTask(String current_query) {
             super();
+            _query = current_query;
             _current_query = current_query;
         }
 
@@ -153,7 +156,7 @@ public class StartScreen extends AppCompatActivity {
                         if(_currentScheduleTeacher!= null) {
                             scheduleTeacherAdapter = new ScheduleTeacherAdapter(StartScreen.this, _currentScheduleTeacher.getWeek().get(pickedDay).get_classesBotWeek());
                             listView1.setAdapter(scheduleTeacherAdapter);
-                            scheduleGroupAdapter.notifyDataSetChanged();
+                            scheduleTeacherAdapter.notifyDataSetChanged();
                         }
                         break;
                     }
@@ -161,7 +164,7 @@ public class StartScreen extends AppCompatActivity {
                         if(_currentScheduleClassRoom!= null){
                             scheduleClassRoomAdapter  = new ScheduleClassRoomAdapter(StartScreen.this, _currentScheduleClassRoom.getWeek().get(pickedDay).get_classesBotWeek());
                             listView1.setAdapter(scheduleClassRoomAdapter);
-                            scheduleGroupAdapter.notifyDataSetChanged();
+                            scheduleClassRoomAdapter.notifyDataSetChanged();
                         }
                         break;
                     }
@@ -175,52 +178,53 @@ public class StartScreen extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
-                TextView textView = (TextView) view.findViewById(R.id.teacher);
-                renderScheduleData(textView.getText().toString());
+                if(_CURRENT_STATE == Constants.GROUP) {
+                    _prev_query = _query;
+                    TextView textView = (TextView) view.findViewById(R.id.teacher);
+                    renderScheduleData(textView.getText().toString());
+                }
             }
         });
     }
 
     private void FillTabHost()
     {
-        if(tabHost.getTabWidget().getTabCount() == Constants.DAYS_ON_WEEK){
-            tabHost.clearAllTabs();
+        if(tabHost.getTabWidget().getTabCount() != Constants.DAYS_ON_WEEK){
+            TabHost.TabSpec tabSpec = tabHost.newTabSpec(Constants.MONDAY);
+            tabSpec.setContent(R.id.list1);
+            tabSpec.setIndicator(Constants.MONDAY);
+            tabHost.addTab(tabSpec);
+
+            tabSpec = tabHost.newTabSpec(Constants.TUESDAY);
+            tabSpec.setContent(R.id.list1);
+            tabSpec.setIndicator(Constants.TUESDAY);
+            tabHost.addTab(tabSpec);
+
+            tabSpec = tabHost.newTabSpec(Constants.WEDNESDAY);
+            tabSpec.setContent(R.id.list1);
+            tabSpec.setIndicator(Constants.WEDNESDAY);
+            tabHost.addTab(tabSpec);
+
+            tabSpec = tabHost.newTabSpec(Constants.THURSDAY);
+            tabSpec.setContent(R.id.list1);
+            tabSpec.setIndicator(Constants.THURSDAY);
+            tabHost.addTab(tabSpec);
+
+            tabSpec = tabHost.newTabSpec(Constants.FRIDAY);
+            tabSpec.setContent(R.id.list1);
+            tabSpec.setIndicator(Constants.FRIDAY);
+            tabHost.addTab(tabSpec);
+
+            tabSpec = tabHost.newTabSpec(Constants.SATURDAY);
+            tabSpec.setContent(R.id.list1);
+            tabSpec.setIndicator(Constants.SATURDAY);
+            tabHost.addTab(tabSpec);
+
+            tabSpec = tabHost.newTabSpec(Constants.SUNDAY);
+            tabSpec.setContent(R.id.list1);
+            tabSpec.setIndicator(Constants.SUNDAY);
+            tabHost.addTab(tabSpec);
         }
-        TabHost.TabSpec tabSpec = tabHost.newTabSpec(Constants.MONDAY);
-        tabSpec.setContent(R.id.list1);
-        tabSpec.setIndicator(Constants.MONDAY);
-        tabHost.addTab(tabSpec);
-
-        tabSpec = tabHost.newTabSpec(Constants.TUESDAY);
-        tabSpec.setContent(R.id.list1);
-        tabSpec.setIndicator(Constants.TUESDAY);
-        tabHost.addTab(tabSpec);
-
-        tabSpec = tabHost.newTabSpec(Constants.WEDNESDAY);
-        tabSpec.setContent(R.id.list1);
-        tabSpec.setIndicator(Constants.WEDNESDAY);
-        tabHost.addTab(tabSpec);
-
-        tabSpec = tabHost.newTabSpec(Constants.THURSDAY);
-        tabSpec.setContent(R.id.list1);
-        tabSpec.setIndicator(Constants.THURSDAY);
-        tabHost.addTab(tabSpec);
-
-        tabSpec = tabHost.newTabSpec(Constants.FRIDAY);
-        tabSpec.setContent(R.id.list1);
-        tabSpec.setIndicator(Constants.FRIDAY);
-        tabHost.addTab(tabSpec);
-
-        tabSpec = tabHost.newTabSpec(Constants.SATURDAY);
-        tabSpec.setContent(R.id.list1);
-        tabSpec.setIndicator(Constants.SATURDAY);
-        tabHost.addTab(tabSpec);
-
-        tabSpec = tabHost.newTabSpec(Constants.SUNDAY);
-        tabSpec.setContent(R.id.list1);
-        tabSpec.setIndicator(Constants.SUNDAY);
-        tabHost.addTab(tabSpec);
     }
 
     private boolean isNetworkAvailable() {
@@ -246,6 +250,7 @@ public class StartScreen extends AppCompatActivity {
     private WeekTeacher _currentScheduleTeacher;
     private WeekClassRoom _currentScheduleClassRoom;
     private ListView listView1;
+    private String _prev_query;
     private String _query;
     private TabHost tabHost;
     private Integer _CURRENT_STATE;
