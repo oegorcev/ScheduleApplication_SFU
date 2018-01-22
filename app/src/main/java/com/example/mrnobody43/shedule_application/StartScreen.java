@@ -35,7 +35,7 @@ public class StartScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
-        _query = "КТбо4-8";
+        _query = "Г-418";
 
         _CURRENT_STATE = Utilities.SetState(_query);
 
@@ -174,13 +174,15 @@ public class StartScreen extends AppCompatActivity {
                 }
             }});
 
+
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
+
                 if(_CURRENT_STATE == Constants.GROUP) {
                     _prev_query = _query;
-                    TextView textView = (TextView) view.findViewById(R.id.teacher);
+                    TextView textView = (TextView) view.findViewById(R.id.teacher1);
                     renderScheduleData(textView.getText().toString());
                 }
             }

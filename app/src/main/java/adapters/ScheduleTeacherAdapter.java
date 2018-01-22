@@ -82,6 +82,9 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
                 String groups = "";
 
                 for (String cur: p.get_groups().get(iCnt - 1) ){
+
+                    cur = cur.replace("??", "пг");
+
                     groups += cur + "\n";
                 }
 
@@ -91,7 +94,7 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
             }
         }
 
-        for (Integer iCnt = p.get_classroom().size() + 1; iCnt <= 4; ++iCnt)
+        for (Integer iCnt = p.get_classroom().size() + 1; iCnt <= 11; ++iCnt)
         {
             ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(1, 1));
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.mrnobody43.shedule_application.StartScreen">
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+
 
     <TabHost
         android:id="@+id/tabHost"

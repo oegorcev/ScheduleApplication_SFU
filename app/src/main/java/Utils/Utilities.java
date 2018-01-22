@@ -42,7 +42,7 @@ public class Utilities {
 
     public static boolean IsClassRoom (String s) {
         //Если перед тире стоит буква, то это аудитория
-        return !s.equals("-") && (s.indexOf('-') != -1) && Character.isLetter(s.charAt(s.indexOf('-') - 1));
+        return s.equals("---") || (!s.equals("-") && (s.indexOf('-') != -1) && Character.isLetter(s.charAt(s.indexOf('-') - 1)));
     }
 
     public static boolean IsSubgroup (String s) {
