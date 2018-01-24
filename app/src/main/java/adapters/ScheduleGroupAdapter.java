@@ -92,12 +92,11 @@ public class ScheduleGroupAdapter extends BaseAdapter {
             }
         }
 
-        for (Integer iCnt = p.get_classroom().size() + 1; iCnt <= 4; ++iCnt)
+        for (Integer iCnt = p.get_classroom().size() + 1; iCnt <= 11; ++iCnt)
         {
             ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(1, 1));
 
         }
-
 
         return view;
     }

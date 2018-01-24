@@ -7,4 +7,8 @@
     <string name="tab5">Пятница</string>
     <string name="tab6">Суббота</string>
     <string name="tab7">Воскресенье</string>
+    <string name="changeSchedule">Сменить</string>
+    <string name="menuChangeSchedule">Сменить расписание</string>
+    <string name="menuExams">Расписание экзаменов</string>
+    <string name="menuUpdateSchedule">Обновить расписание</string>
 </resources>

@@ -35,14 +35,24 @@ public class Utilities {
         return  Constants.GROUP;
     }
 
+    public static String CheckSpecialsCases(String s)
+    {
+        if(s.indexOf("Вакансия") != -1 && s.indexOf("....") == -1)
+        {
+            return s + " ....";
+        }
+        else return s;
+    }
+
+
     public static boolean IsGroup (String s) {
         //Если перед тире стоит буква, то это точно не группа или группы нет
-        return (s.indexOf('-') != -1) && ((s.equals("-")) || !Character.isLetter(s.charAt(s.indexOf('-') - 1))) && (s.indexOf('(') == -1);
+        return s.equals("----") || (s.indexOf('-') != -1) && ((s.equals("-")) || !Character.isLetter(s.charAt(s.indexOf('-') - 1))) && (s.indexOf('(') == -1);
     }
 
     public static boolean IsClassRoom (String s) {
         //Если перед тире стоит буква, то это аудитория
-        return s.equals("---") || (!s.equals("-") && (s.indexOf('-') != -1) && Character.isLetter(s.charAt(s.indexOf('-') - 1)));
+        return s.equals("---") || (!s.equals("-") && (s.indexOf('-') != -1) &&  (s.indexOf('-') - 1 != -1) && Character.isLetter(s.charAt(s.indexOf('-') - 1)));
     }
 
     public static boolean IsSubgroup (String s) {
