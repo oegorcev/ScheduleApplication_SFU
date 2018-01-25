@@ -1,12 +1,15 @@
-package Utils;
+package data;
 
 import android.os.AsyncTask;
 
-import com.example.mrnobody43.shedule_application.StartScreen;
+import com.example.mrnobody43.shedule_application.MainSchedule;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import Utils.Constants;
+import Utils.Pair;
+import Utils.Utilities;
 import data.Parsers.AbstractParser;
 import data.Parsers.ClassroomParser;
 import data.Parsers.GroupParser;
@@ -21,30 +24,30 @@ import model.Teacher.ClassTeacher;
 import model.Teacher.DayTeacher;
 import model.Teacher.WeekTeacher;
 
-public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
+public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
 
     private String _query;
     private AbstractParser _parser;
-    private StartScreen _startScreen;
+    private MainSchedule _mainSchedule;
     private Integer _CURRENT_STATE;
     private List<List<Pair<String, String>>> _schedule;
     private ArrayList<String> _times;
 
-    public Scheduler(StartScreen startScreen, String query) {
+    public Scheduler(MainSchedule mainSchedule, String query) {
         super();
         _query = query;
-        _startScreen = startScreen;
+        _mainSchedule = mainSchedule;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         _CURRENT_STATE = Utilities.SetState(_query);
-        _parser = new AbstractParser(_startScreen);
+        _parser = new AbstractParser(_mainSchedule);
         _parser.execute(_query, "1");
     }
 
-    protected Void doInBackground(StartScreen... params) {
+    protected Void doInBackground(MainSchedule... params) {
 
         if (_parser.get_schedule_main() != null && !(_parser.get_schedule_main().isEmpty())) {
             _times = _parser.get_times();
@@ -73,7 +76,7 @@ public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
     }
 
     private void MakeGroupSchedule() {
-        GroupParser groupParser = new GroupParser(_startScreen);
+        GroupParser groupParser = new GroupParser(_mainSchedule);
         WeekGroup weekGroup = new WeekGroup();
         ArrayList<DayGroup> dayGroups = new ArrayList<DayGroup>();
 
@@ -106,14 +109,14 @@ public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
         }
 
         weekGroup.setWeek(dayGroups);
-        _startScreen.set_currentSchedule(weekGroup);
+        _mainSchedule.set_currentSchedule(weekGroup);
 
         return;
     }
 
     private void MakeTeacherSchedule() {
 
-        TeacherParser teacherParser = new TeacherParser(_startScreen);
+        TeacherParser teacherParser = new TeacherParser(_mainSchedule);
         WeekTeacher weekTeacher = new WeekTeacher();
         ArrayList<DayTeacher> dayTeachers = new ArrayList<DayTeacher>();
 
@@ -146,13 +149,13 @@ public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
         }
 
         weekTeacher.setWeek(dayTeachers);
-        _startScreen.set_currentSchedule(weekTeacher);
+        _mainSchedule.set_currentSchedule(weekTeacher);
 
         return;
     }
 
     private void MakeClassRoomSchedule(){
-        ClassroomParser classroomParser = new ClassroomParser(_startScreen);
+        ClassroomParser classroomParser = new ClassroomParser(_mainSchedule);
 
         WeekClassRoom weekClassRoom = new WeekClassRoom();
         ArrayList<DayClassRoom> dayClassRoom = new ArrayList<DayClassRoom>();
@@ -186,7 +189,7 @@ public class Scheduler extends AsyncTask<StartScreen, Void, Void> {
         }
 
         weekClassRoom.setWeek(dayClassRoom);
-        _startScreen.set_currentSchedule(weekClassRoom);
+        _mainSchedule.set_currentSchedule(weekClassRoom);
 
         return;
     }

@@ -63,7 +63,7 @@ public class ScheduleEmptyAdapter extends BaseAdapter {
         ((TextView)view.findViewById(R.id.subgroup1)).setText(Constants.EMPTY_STRING);
         ((TextView)view.findViewById(R.id.classroom1)).setText(Constants.EMPTY_STRING);
 
-        for (Integer iCnt = 2; iCnt <= 4; ++iCnt)
+        for (Integer iCnt = 2; iCnt <= Constants.LINEAR_LAYOUT_COUNT; ++iCnt)
         {
             ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(1, 1));
         }

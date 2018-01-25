@@ -59,6 +59,7 @@ public class Constants {
    public static final int FIRST_YEAR = 2017;
    public static final int FIRST_POTOK = 121;
    public static final int START_NEXT_SEMESTR = 7;
+   public static final int LINEAR_LAYOUT_COUNT = 20;
 
    public static final int GROUP = 0;
    public static final int TEACHER = 1;

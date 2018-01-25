@@ -11,7 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Utils.Constants;
-import Utils.Scheduler;
+import data.Scheduler;
 import Utils.Utilities;
 import adapters.ScheduleClassRoomAdapter;
 import adapters.ScheduleEmptyAdapter;
@@ -32,13 +32,13 @@ import model.ClassRoom.WeekClassRoom;
 import model.Group.WeekGroup;
 import model.Teacher.WeekTeacher;
 
-public class StartScreen extends AppCompatActivity {
+public class MainSchedule extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
-        if(_query.equals(Constants.EMPTY_STRING)) _query= "Сапунцов Н.Е.";
+        if(_query.equals(Constants.EMPTY_STRING)) _query= "КТбо2-7";
 
         _CURRENT_STATE = Utilities.SetState(_query);
 
@@ -57,8 +57,13 @@ public class StartScreen extends AppCompatActivity {
 
     public void renderScheduleData(String name) {
         _CURRENT_STATE = Utilities.SetState(name);
-        _query = Utilities.CheckSpecialsCases(name);
+        _query = name;
         setTitle(_query);
+
+        _currentScheduleClassRoom = null;
+        _currentScheduleGroup = null;
+        _currentScheduleTeacher = null;
+
         ScheduleTask scheduleTask = new ScheduleTask(_query);
         scheduleTask.execute();
     }
@@ -75,7 +80,7 @@ public class StartScreen extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            Scheduler scheduler = new Scheduler(StartScreen.this,_current_query);
+            Scheduler scheduler = new Scheduler(MainSchedule.this,_current_query);
             scheduler.execute();
         }
 
@@ -100,31 +105,31 @@ public class StartScreen extends AppCompatActivity {
             switch (_CURRENT_STATE) {
                 case Constants.GROUP: {
                     if(_currentScheduleGroup!= null){
-                        scheduleGroupAdapter  = new ScheduleGroupAdapter(StartScreen.this, _currentScheduleGroup.getWeek().get(day).get_classesBotWeek());
+                        scheduleGroupAdapter  = new ScheduleGroupAdapter(MainSchedule.this, _currentScheduleGroup.getWeek().get(day).get_classesBotWeek());
                         listView1.setAdapter(scheduleGroupAdapter);
                     }
                     else {
-                        listView1.setAdapter(new ScheduleEmptyAdapter(StartScreen.this));
+                        listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
                     }
                     break;
                 }
                 case Constants.TEACHER: {
                     if(_currentScheduleTeacher!= null) {
-                        scheduleTeacherAdapter = new ScheduleTeacherAdapter(StartScreen.this, _currentScheduleTeacher.getWeek().get(day).get_classesBotWeek());
+                        scheduleTeacherAdapter = new ScheduleTeacherAdapter(MainSchedule.this, _currentScheduleTeacher.getWeek().get(day).get_classesBotWeek());
                         listView1.setAdapter(scheduleTeacherAdapter);
                     }
                     else {
-                        listView1.setAdapter(new ScheduleEmptyAdapter(StartScreen.this));
+                        listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
                     }
                     break;
                 }
                 case Constants.CLASSROOM: {
                     if(_currentScheduleClassRoom!= null){
-                        scheduleClassRoomAdapter  = new ScheduleClassRoomAdapter(StartScreen.this, _currentScheduleClassRoom.getWeek().get(day).get_classesBotWeek());
+                        scheduleClassRoomAdapter  = new ScheduleClassRoomAdapter(MainSchedule.this, _currentScheduleClassRoom.getWeek().get(day).get_classesBotWeek());
                         listView1.setAdapter(scheduleClassRoomAdapter);
                     }
                     else {
-                        listView1.setAdapter(new ScheduleEmptyAdapter(StartScreen.this));
+                        listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
                     }
                     break;
                 }
@@ -160,34 +165,34 @@ public class StartScreen extends AppCompatActivity {
                 switch (_CURRENT_STATE) {
                     case Constants.GROUP: {
                         if(_currentScheduleGroup!= null){
-                            scheduleGroupAdapter  = new ScheduleGroupAdapter(StartScreen.this, _currentScheduleGroup.getWeek().get(pickedDay).get_classesBotWeek());
+                            scheduleGroupAdapter  = new ScheduleGroupAdapter(MainSchedule.this, _currentScheduleGroup.getWeek().get(pickedDay).get_classesBotWeek());
                             listView1.setAdapter(scheduleGroupAdapter);
                             scheduleGroupAdapter.notifyDataSetChanged();
                         }
                         else {
-                            listView1.setAdapter(new ScheduleEmptyAdapter(StartScreen.this));
+                            listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
                         }
                         break;
                     }
                     case Constants.TEACHER: {
                         if(_currentScheduleTeacher!= null) {
-                            scheduleTeacherAdapter = new ScheduleTeacherAdapter(StartScreen.this, _currentScheduleTeacher.getWeek().get(pickedDay).get_classesBotWeek());
+                            scheduleTeacherAdapter = new ScheduleTeacherAdapter(MainSchedule.this, _currentScheduleTeacher.getWeek().get(pickedDay).get_classesBotWeek());
                             listView1.setAdapter(scheduleTeacherAdapter);
                             scheduleTeacherAdapter.notifyDataSetChanged();
                         }
                         else {
-                            listView1.setAdapter(new ScheduleEmptyAdapter(StartScreen.this));
+                            listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
                         }
                         break;
                     }
                     case Constants.CLASSROOM: {
                         if(_currentScheduleClassRoom!= null){
-                            scheduleClassRoomAdapter  = new ScheduleClassRoomAdapter(StartScreen.this, _currentScheduleClassRoom.getWeek().get(pickedDay).get_classesBotWeek());
+                            scheduleClassRoomAdapter  = new ScheduleClassRoomAdapter(MainSchedule.this, _currentScheduleClassRoom.getWeek().get(pickedDay).get_classesBotWeek());
                             listView1.setAdapter(scheduleClassRoomAdapter);
                             scheduleClassRoomAdapter.notifyDataSetChanged();
                         }
                         else {
-                            listView1.setAdapter(new ScheduleEmptyAdapter(StartScreen.this));
+                            listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
                         }
                         break;
                     }
@@ -198,22 +203,49 @@ public class StartScreen extends AppCompatActivity {
             }});
 
 
-        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                if(_CURRENT_STATE == Constants.GROUP) {
-                    _prev_query = _query;
-                    TextView textView = (TextView) view.findViewById(R.id.teacher1);
-                    _query = textView.getText().toString();
-
-                    renderScheduleData(textView.getText().toString());
-                }
-
-            }
-        });
+//        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+//
+//                if(_CURRENT_STATE == Constants.GROUP) {
+//                    _prev_query = _query;
+//                    TextView textView = (TextView) view.findViewById(R.id.teacher1);
+//                    _query = textView.getText().toString();
+//
+//                    renderScheduleData(textView.getText().toString());
+//                }
+//
+//            }
+//        });
     }
+
+    public void onTeacherClick(View V) {
+
+        LinearLayout vwParentRow = (LinearLayout)V.getParent();
+
+        _prev_query = _query;
+
+        TextView child = (TextView)vwParentRow.getChildAt(1);
+        String new_query = child.getText().toString();
+
+        renderScheduleData(new_query);
+    }
+
+
+    public void onClassroomClick(View V) {
+
+        LinearLayout vwParentRow = (LinearLayout)V.getParent();
+
+        _prev_query = _query;
+
+        TextView child = (TextView)vwParentRow.getChildAt(2);
+        String new_query = child.getText().toString();
+
+        renderScheduleData(new_query);
+    }
+
+
 
     private void FillTabHost()
     {
@@ -286,7 +318,7 @@ public class StartScreen extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.changeSchedule:
-                Intent intent = new Intent(StartScreen.this, ChangeSchedule.class);
+                Intent intent = new Intent(MainSchedule.this, ChangeSchedule.class);
                 startActivityForResult(intent, 1);
                 break;
             case R.id.updateSchedule:

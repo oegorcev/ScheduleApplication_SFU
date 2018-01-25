@@ -63,7 +63,7 @@ public class ClassroomParser extends AbstractParser {
                            ArrayList<ArrayList<String>> groups,
                            int index){
 
-        teachers.add(data[index++] + " " + data[index++]);
+        teachers.add(data[index++] + " " + data[index++] + (data[index].equals("....") ? " "  + data[index++] : (data[index].equals("-.-.")) ? " "  + data[index++]  :""));
         String subject = "";
         for (; !Utilities.CheckType(data[index]) ; ++index) {
             subject = subject.concat(data[index] + " ");

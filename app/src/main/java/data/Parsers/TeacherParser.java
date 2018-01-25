@@ -100,7 +100,12 @@ public class TeacherParser extends AbstractParser {
             gr += data[index];
         }
 
-        classrooms.add(data[index++]);
+        String cr = "";
+
+        for (;index < data.length && Utilities.IsClassRoom(data[index]); ++index) {
+            cr += data[index];
+        }
+        classrooms.add(cr);
 
         //Обработка случаев составления расписания
 

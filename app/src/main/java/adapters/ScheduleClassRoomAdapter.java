@@ -94,7 +94,7 @@ public class ScheduleClassRoomAdapter extends BaseAdapter {
             }
         }
 
-        for (Integer iCnt = p.get_subject().size() + 1; iCnt <= 11; ++iCnt)
+        for (Integer iCnt = p.get_subject().size() + 1; iCnt <= Constants.LINEAR_LAYOUT_COUNT; ++iCnt)
         {
             ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(1, 1));
 
