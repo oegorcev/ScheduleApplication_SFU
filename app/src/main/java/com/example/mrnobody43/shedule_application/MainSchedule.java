@@ -1,7 +1,10 @@
 package com.example.mrnobody43.shedule_application;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -22,12 +25,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Utils.Constants;
-import data.Scheduler;
 import Utils.Utilities;
 import adapters.ScheduleClassRoomAdapter;
 import adapters.ScheduleEmptyAdapter;
 import adapters.ScheduleGroupAdapter;
 import adapters.ScheduleTeacherAdapter;
+import data.DataBaseHelper;
+import data.Scheduler;
 import model.ClassRoom.WeekClassRoom;
 import model.Group.WeekGroup;
 import model.Teacher.WeekTeacher;
@@ -38,7 +42,10 @@ public class MainSchedule extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
-        if(_query.equals(Constants.EMPTY_STRING)) _query= "КТбо2-7";
+
+        _myDb = new DataBaseHelper(this);
+
+         _query= GetCurruntQuery();
 
         _CURRENT_STATE = Utilities.SetState(_query);
 
@@ -64,23 +71,15 @@ public class MainSchedule extends AppCompatActivity {
         _currentScheduleGroup = null;
         _currentScheduleTeacher = null;
 
-        ScheduleTask scheduleTask = new ScheduleTask(_query);
+        ScheduleTask scheduleTask = new ScheduleTask();
         scheduleTask.execute();
     }
 
     private class  ScheduleTask extends AsyncTask<String, Void, Void> {
 
-        private String _current_query;
-
-        public ScheduleTask(String current_query) {
-            super();
-            _query = current_query;
-            _current_query = current_query;
-        }
-
         @Override
         protected void onPreExecute() {
-            Scheduler scheduler = new Scheduler(MainSchedule.this,_current_query);
+            Scheduler scheduler = new Scheduler(MainSchedule.this,_query);
             scheduler.execute();
         }
 
@@ -139,6 +138,20 @@ public class MainSchedule extends AppCompatActivity {
             }
 
             tabHost.setCurrentTab(day);
+
+            _db = _myDb.getWritableDatabase();
+
+            ContentValues cv = new ContentValues();
+            cv.put(DataBaseHelper.ID, Constants.CUR_QUERY_DB_ID);
+            cv.put(DataBaseHelper.OPTION, _query);
+
+            int was = _db.update(DataBaseHelper.TABLE_NAME2, cv, DataBaseHelper.ID + " = ?", new String[] { Constants.CUR_QUERY_DB_ID });
+            if(was == 0)
+            {
+                _db.insert(DataBaseHelper.TABLE_NAME2, null, cv);
+            }
+
+            _myDb.close();
         }
     }
 
@@ -201,23 +214,6 @@ public class MainSchedule extends AppCompatActivity {
                     }
                 }
             }});
-
-
-//        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//
-//                if(_CURRENT_STATE == Constants.GROUP) {
-//                    _prev_query = _query;
-//                    TextView textView = (TextView) view.findViewById(R.id.teacher1);
-//                    _query = textView.getText().toString();
-//
-//                    renderScheduleData(textView.getText().toString());
-//                }
-//
-//            }
-//        });
     }
 
     public void onTeacherClick(View V) {
@@ -246,6 +242,35 @@ public class MainSchedule extends AppCompatActivity {
     }
 
 
+    private String GetCurruntQuery()
+    {
+        String s = "Расписание занятий ИТА ЮФУ";
+
+        _db = _myDb.getReadableDatabase();
+
+        Cursor c = _db.query(DataBaseHelper.TABLE_NAME2, null, null, null, null, null, null);
+
+        if (c.moveToFirst()) {
+            boolean flag = true;
+            while (true) {
+                if (c.isAfterLast()) break;
+
+                int idIndex = c.getColumnIndex(DataBaseHelper.ID);
+                int optionIndex = c.getColumnIndex(DataBaseHelper.OPTION);
+
+                String offlineData = c.getString(optionIndex);
+                String bdId = c.getString(idIndex);
+                if (Constants.CUR_QUERY_DB_ID.equals(bdId)) {
+                    s = offlineData;
+                    flag = false;
+                    break;
+                } else c.moveToNext();
+            }
+        }
+        _myDb.close();
+
+        return s;
+    }
 
     private void FillTabHost()
     {
@@ -316,9 +341,10 @@ public class MainSchedule extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch(item.getItemId()) {
             case R.id.changeSchedule:
-                Intent intent = new Intent(MainSchedule.this, ChangeSchedule.class);
+                intent = new Intent(MainSchedule.this, ChangeSchedule.class);
                 startActivityForResult(intent, 1);
                 break;
             case R.id.updateSchedule:
@@ -326,6 +352,10 @@ public class MainSchedule extends AppCompatActivity {
                 break;
             case R.id.examsSchedule:
 
+                break;
+            case R.id.options:
+                intent = new Intent(MainSchedule.this, Options.class);
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -346,4 +376,6 @@ public class MainSchedule extends AppCompatActivity {
     ScheduleClassRoomAdapter scheduleClassRoomAdapter;
     ScheduleTeacherAdapter scheduleTeacherAdapter;
     private Map<String, Integer> _day_of_a_weak;
+    private DataBaseHelper _myDb;
+    private SQLiteDatabase _db;
 }

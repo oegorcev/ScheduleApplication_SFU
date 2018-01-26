@@ -57,13 +57,17 @@ public class Constants {
    public static final int BEGIN_TIME = 1;
    public static final int DEFAULT_VALUE_CNT_PARSER = 0;
    public static final int FIRST_YEAR = 2017;
-   public static final int FIRST_POTOK = 121;
+   public static final Integer FIRST_POTOK = 121;
    public static final int START_NEXT_SEMESTR = 7;
    public static final int LINEAR_LAYOUT_COUNT = 20;
 
    public static final int GROUP = 0;
    public static final int TEACHER = 1;
    public static final int CLASSROOM = 2;
+
+   public static final String SEMESTR_DB_ID = "semestr";
+   public static final String YEARS_DB_ID = "year";
+   public static final String CUR_QUERY_DB_ID = "query";
 
    public static final String SEPARATOR = " ";
    public static final String EMPTY_STRING = "";

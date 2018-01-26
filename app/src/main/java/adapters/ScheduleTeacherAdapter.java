@@ -61,7 +61,10 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
 
         ClassTeacher p = getClass(position);
 
-        view = lInflater.inflate(R.layout.schedule_list_teacher_item, parent, false);
+        if (view == null){
+            view = lInflater.inflate(R.layout.schedule_list_teacher_item, parent, false);
+
+        }
 
         String cnt = Integer.toString(position + 1);
         ((TextView) view.findViewById(R.id.id_pair)).setText(cnt);
@@ -96,7 +99,7 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
 
         for (Integer iCnt = p.get_classroom().size() + 1; iCnt <= Constants.LINEAR_LAYOUT_COUNT; ++iCnt)
         {
-            ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(1, 1));
+            ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
         }
 

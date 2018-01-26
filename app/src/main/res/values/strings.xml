@@ -11,4 +11,28 @@
     <string name="menuChangeSchedule">Сменить расписание</string>
     <string name="menuExams">Расписание экзаменов</string>
     <string name="menuUpdateSchedule">Обновить расписание</string>
+    <string name="menuOptions">Настройки</string>
+
+    <string-array name="years">
+        <item>2017—2018 учебный год</item>
+        <item>2018—2019 учебный год</item>
+        <item>2019—2020 учебный год</item>
+        <item>2020—2021 учебный год</item>
+        <item>2021—2022 учебный год</item>
+        <item>2022—2023 учебный год</item>
+        <item>2023—2024 учебный год</item>
+        <item>2024—2025 учебный год</item>
+        <item>2025—2026 учебный год</item>
+        <item>2026—2027 учебный год</item>
+        <item>2027—2028 учебный год</item>
+    </string-array>
+
+    <string-array name="semestrs">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string name="semestr">Семестр:</string>
+    <string name="years">Учебный год:</string>
+
 </resources>

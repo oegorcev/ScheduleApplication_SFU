@@ -1,5 +1,7 @@
 package data;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
 import com.example.mrnobody43.shedule_application.MainSchedule;
@@ -26,16 +28,10 @@ import model.Teacher.WeekTeacher;
 
 public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
 
-    private String _query;
-    private AbstractParser _parser;
-    private MainSchedule _mainSchedule;
-    private Integer _CURRENT_STATE;
-    private List<List<Pair<String, String>>> _schedule;
-    private ArrayList<String> _times;
-
     public Scheduler(MainSchedule mainSchedule, String query) {
         super();
         _query = query;
+        _myDb = new DataBaseHelper(mainSchedule);
         _mainSchedule = mainSchedule;
     }
 
@@ -44,7 +40,39 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         super.onPreExecute();
         _CURRENT_STATE = Utilities.SetState(_query);
         _parser = new AbstractParser(_mainSchedule);
-        _parser.execute(_query, "1");
+
+        String semestr = "1";
+        String potok = Constants.FIRST_POTOK.toString();
+
+        _db = _myDb.getReadableDatabase();
+
+        Cursor c = _db.query(DataBaseHelper.TABLE_NAME2, null, null, null, null, null, null);
+
+        if (c.moveToFirst()) {
+
+            while (true) {
+                if (c.isAfterLast()) break;
+
+                int idIndex = c.getColumnIndex(DataBaseHelper.ID);
+                int optionIndex = c.getColumnIndex(DataBaseHelper.OPTION);
+
+                String offlineData = c.getString(optionIndex);
+                String bdId = c.getString(idIndex);
+
+                if (Constants.SEMESTR_DB_ID.equals(bdId)) {
+                    semestr = offlineData;
+                } else if (Constants.YEARS_DB_ID.equals(bdId)) {
+                    potok = offlineData;
+                }
+
+                c.moveToNext();
+
+            }
+        }
+        _myDb.close();
+
+
+        _parser.execute(_query, semestr, potok);
     }
 
     protected Void doInBackground(MainSchedule... params) {
@@ -194,4 +222,12 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         return;
     }
 
+    private String _query;
+    private AbstractParser _parser;
+    private MainSchedule _mainSchedule;
+    private Integer _CURRENT_STATE;
+    private List<List<Pair<String, String>>> _schedule;
+    private ArrayList<String> _times;
+    private DataBaseHelper _myDb;
+    private SQLiteDatabase _db;
 }

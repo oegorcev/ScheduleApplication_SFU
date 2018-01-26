@@ -48,7 +48,7 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         Document doc = null;
 
         if(isNetworkAvailable()){
-            doc = DownloadSchedule(params[0], params[1]);
+            doc = DownloadSchedule(params[0], params[1], params[2]);
             if(doc == null){
                 doc = GetDbSchedule(params[0]);
             }
@@ -69,7 +69,7 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
 
         db = myDb.getReadableDatabase();
 
-        Cursor c = db.query(DataBaseHelper.TABLE_NAME, null, null, null, null, null, null);
+        Cursor c = db.query(DataBaseHelper.TABLE_NAME1, null, null, null, null, null, null);
 
         if (c.moveToFirst()) {
             boolean flag = true;
@@ -93,10 +93,12 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         return doc;
     }
 
-    public Document DownloadSchedule(String queury, String semestr) {
+    public Document DownloadSchedule(String queury, String semestr, String potok) {
         Document doc = null;
         try {
-            doc = Jsoup.connect(Constants.URL + queury + Constants.POTOK + Constants.getCurPot() + Constants.SEMESTR + semestr).get();
+            queury = queury.replace(" ", "%20");
+            //queury = queury.substring(0, queury.indexOf(' ')) + "%20" + queury.substring(queury.indexOf(' ') + 1);
+            doc = Jsoup.connect(Constants.URL + queury + Constants.POTOK + potok + Constants.SEMESTR + semestr).get();
 
             db = myDb.getWritableDatabase();
 
@@ -104,10 +106,10 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
             cv.put(DataBaseHelper.ID, queury);
             cv.put(DataBaseHelper.HTML_CODE, doc.toString());
 
-            int was = db.update(DataBaseHelper.TABLE_NAME, cv, DataBaseHelper.ID + " = ?", new String[] { queury });
+            int was = db.update(DataBaseHelper.TABLE_NAME1, cv, DataBaseHelper.ID + " = ?", new String[] { queury });
             if(was == 0)
             {
-                db.insert(DataBaseHelper.TABLE_NAME, null, cv);
+                db.insert(DataBaseHelper.TABLE_NAME1, null, cv);
             }
 
             myDb.close();
@@ -131,8 +133,6 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         if(tableExams != null) {
             _schedule_exams = ParseTable(tableExams);
         }
-
-        return;
     }
 
     private List<List<Pair<String, String>>> ParseTable(Element table)
@@ -203,13 +203,6 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         return schedule;
     }
 
-    private ArrayList<String> _times;
-    private List<List<Pair<String, String>>> _schedule_main;
-    private List<List<Pair<String, String>>> _schedule_exams;
-    DataBaseHelper myDb;
-    SQLiteDatabase db;
-    Context mContext;
-
     public ArrayList<String> get_times() {
         return _times;
     }
@@ -233,4 +226,12 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
     public void set_schedule_exams(List<List<Pair<String, String>>> _schedule_exams) {
         this._schedule_exams = _schedule_exams;
     }
+
+
+    private ArrayList<String> _times;
+    private List<List<Pair<String, String>>> _schedule_main;
+    private List<List<Pair<String, String>>> _schedule_exams;
+    private DataBaseHelper myDb;
+    private SQLiteDatabase db;
+    private Context mContext;
 }

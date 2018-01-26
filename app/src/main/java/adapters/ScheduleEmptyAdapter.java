@@ -52,7 +52,9 @@ public class ScheduleEmptyAdapter extends BaseAdapter {
         // используем созданные, но не используемые view
         View view = convertView;
 
-        view = lInflater.inflate(R.layout.schedule_list_group_item, parent, false);
+        if (view == null){
+            view = lInflater.inflate(R.layout.schedule_list_group_item, parent, false);
+        }
 
         String cnt = Integer.toString(position + 1);
         ((TextView) view.findViewById(R.id.id_pair)).setText(Constants.EMPTY_STRING);
@@ -65,7 +67,7 @@ public class ScheduleEmptyAdapter extends BaseAdapter {
 
         for (Integer iCnt = 2; iCnt <= Constants.LINEAR_LAYOUT_COUNT; ++iCnt)
         {
-            ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(1, 1));
+            ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         }
 
         return view;

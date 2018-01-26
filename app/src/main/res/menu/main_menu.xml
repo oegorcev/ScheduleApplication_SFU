@@ -12,5 +12,8 @@
     <item
         android:id="@+id/changeSchedule"
         android:title="@string/menuChangeSchedule"/>
+    <item
+        android:id="@+id/options"
+        android:title="@string/menuOptions"/>
 </menu>
 
