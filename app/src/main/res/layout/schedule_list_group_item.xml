@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:id="@+id/All_pairs"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
@@ -15,7 +15,6 @@
             android:id="@+id/pair1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -24,12 +23,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:background="#5882FA"
-                android:text="1"
                 android:textSize="45sp" />
 
             <LinearLayout
                 android:id="@+id/Main_Infomation1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -40,7 +38,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -48,7 +45,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="11:55 - 13:30"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -67,14 +63,13 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
+                        android:text="Свободное время!"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -92,7 +87,6 @@
                         android:id="@+id/type1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -100,7 +94,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -111,10 +104,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
                 android:textColor="#5882FA"
                 android:onClick="onClassroomClick"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -124,12 +115,11 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="5dp"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -140,7 +130,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -149,14 +138,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -167,14 +154,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -182,7 +167,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -193,23 +177,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -220,7 +202,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -229,14 +210,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -247,14 +226,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -262,7 +239,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -273,23 +249,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation4"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -300,7 +274,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -309,14 +282,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -327,14 +298,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -342,7 +311,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -353,23 +321,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair5"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation5"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -380,7 +346,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -389,14 +354,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -407,14 +370,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -422,7 +383,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -433,23 +393,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
-        
+
         <LinearLayout
             android:id="@+id/pair6"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation6"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -460,7 +418,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -469,14 +426,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -487,14 +442,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -502,7 +455,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -513,23 +465,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
-        
+
         <LinearLayout
             android:id="@+id/pair7"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation7"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -540,7 +490,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -549,14 +498,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -567,14 +514,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -582,7 +527,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -593,23 +537,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
-        
+
         <LinearLayout
             android:id="@+id/pair8"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation8"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -620,7 +562,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -629,14 +570,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -647,14 +586,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -662,7 +599,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -673,23 +609,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair9"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation9"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -700,7 +634,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -709,14 +642,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -727,14 +658,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -742,7 +671,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -753,23 +681,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
-        
+
         <LinearLayout
             android:id="@+id/pair10"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation10"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -780,7 +706,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -789,14 +714,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -807,14 +730,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -822,7 +743,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -833,23 +753,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair11"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation11"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -860,7 +778,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -869,14 +786,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -887,14 +802,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -902,7 +815,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -913,23 +825,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair12"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation12"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -940,7 +850,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -949,14 +858,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -967,14 +874,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -982,7 +887,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -993,23 +897,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair13"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation13"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -1020,7 +922,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1029,14 +930,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -1047,14 +946,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -1062,7 +959,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -1073,23 +969,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
-                android:textSize="20sp" />
+                android:textColor="#5882FA"
+                android:textSize="20sp"/>
         </LinearLayout>
-        
+
         <LinearLayout
             android:id="@+id/pair14"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation14"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -1100,7 +994,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1109,14 +1002,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -1127,14 +1018,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -1142,7 +1031,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -1153,23 +1041,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair15"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation15"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -1180,7 +1066,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1189,14 +1074,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -1207,14 +1090,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -1222,7 +1103,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -1233,23 +1113,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair16"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation16"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -1260,7 +1138,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1269,14 +1146,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -1287,14 +1162,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -1302,7 +1175,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -1313,23 +1185,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair17"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation17"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -1340,7 +1210,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1349,14 +1218,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -1367,14 +1234,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -1382,7 +1247,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -1393,23 +1257,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair18"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation18"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -1420,7 +1282,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1429,14 +1290,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -1447,14 +1306,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -1462,7 +1319,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -1473,23 +1329,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair19"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation19"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -1500,7 +1354,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1509,14 +1362,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher19"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -1527,14 +1378,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type19"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -1542,7 +1391,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -1553,23 +1401,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair20"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation20"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -1580,7 +1425,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1589,14 +1433,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/teacher20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Скороход С.В."
                         android:textColor="#5882FA"
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
@@ -1607,14 +1449,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/type20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Лекция"
                         android:textSize="13sp" />
 
                     <TextView
@@ -1622,7 +1462,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="1 пг."
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -1633,8 +1472,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 

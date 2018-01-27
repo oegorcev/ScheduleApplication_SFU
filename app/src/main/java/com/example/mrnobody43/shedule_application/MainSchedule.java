@@ -36,7 +36,8 @@ import model.ClassRoom.WeekClassRoom;
 import model.Group.WeekGroup;
 import model.Teacher.WeekTeacher;
 
-public class MainSchedule extends AppCompatActivity {
+public class MainSchedule extends AppCompatActivity  {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,6 @@ public class MainSchedule extends AppCompatActivity {
         _CURRENT_STATE = Utilities.SetState(_query);
 
         InitTabHost();
-
         renderScheduleData(_query);
     }
 

@@ -34,5 +34,6 @@
 
     <string name="semestr">Семестр:</string>
     <string name="years">Учебный год:</string>
+    <string name="freeTime">Свободное время!</string>
 
 </resources>
