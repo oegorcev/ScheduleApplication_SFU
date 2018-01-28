@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/All_pairs"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
@@ -16,7 +15,6 @@
             android:id="@+id/pair1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -25,12 +23,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:background="#5882FA"
-                android:text="1"
                 android:textSize="45sp" />
 
             <LinearLayout
                 android:id="@+id/Main_Infomation1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -41,7 +38,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -49,7 +45,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="11:55 - 13:30"
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -58,8 +53,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -68,14 +61,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -85,17 +76,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
-
-
                 </LinearLayout>
 
             </LinearLayout>
@@ -105,8 +92,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -116,12 +101,11 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="5dp"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -132,8 +116,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -142,14 +124,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -159,17 +139,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
-
-
                 </LinearLayout>
 
             </LinearLayout>
@@ -179,23 +155,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/Main_Infomation3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
@@ -206,8 +179,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -216,14 +187,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -233,14 +202,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -251,46 +218,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout4"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation4"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -299,14 +250,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -316,16 +265,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -333,46 +281,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair5"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout5"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation5"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -381,14 +313,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -398,16 +328,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -415,46 +344,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair6"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout6"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation6"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -463,14 +376,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -480,16 +391,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -497,46 +407,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair7"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout7"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation7"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -545,14 +439,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -562,16 +454,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -579,128 +470,93 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
-        android:id="@+id/pair8"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/linearLayout8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/Main_Infomation8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-
-                android:orientation="horizontal">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/mainlayout8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/subject8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginRight="10dp"
-                    android:text="Корпоротивное ПО"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/type8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="(лек)"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/groupslayout8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/groups8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
-                    android:textSize="14sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/classroom8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:background="#FFFF00"
-            android:text="Г-415"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/pair9"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:id="@+id/pair8"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout9"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation8"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation9"
+                    android:id="@+id/mainlayout8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/subject8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_marginRight="10dp"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/type8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp" />
+
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/groupslayout8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/groups8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/classroom8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pair9"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/Main_Infomation9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/mainlayout9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -709,14 +565,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -726,16 +580,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -743,46 +596,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair10"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout10"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation10"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -791,14 +628,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -808,16 +643,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -825,46 +659,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair11"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout11"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation11"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -873,14 +691,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -890,16 +706,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -907,46 +722,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair12"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout12"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation12"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -955,14 +754,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -972,16 +769,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -989,46 +785,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair13"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout13"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation13"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -1037,14 +817,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -1054,16 +832,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -1071,46 +848,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair14"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout14"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation14"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -1119,14 +880,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -1136,16 +895,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -1153,46 +911,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair15"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout15"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation15"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -1201,14 +943,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -1218,16 +958,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -1235,46 +974,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair16"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout16"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation16"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -1283,14 +1006,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -1300,16 +1021,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -1317,46 +1037,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
-
+        
         <LinearLayout
             android:id="@+id/pair17"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout17"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation17"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -1365,14 +1069,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -1382,16 +1084,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -1399,46 +1100,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair18"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout18"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation18"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -1447,14 +1132,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -1464,16 +1147,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -1481,46 +1163,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair19"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout19"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation19"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -1529,14 +1195,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type19"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -1546,16 +1210,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups19"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -1563,46 +1226,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pair20"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayout20"
-                android:layout_width="wrap_content"
+                android:id="@+id/Main_Infomation20"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/Main_Infomation20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/mainlayout20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -1611,14 +1258,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_marginRight="10dp"
-                        android:text="Корпоротивное ПО"
                         android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/type20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(лек)"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -1628,16 +1273,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/groups20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="КТбо4-8 1 пг\nКТбо3-2\nКТбо4-9"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
@@ -1645,10 +1289,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="#FFFF00"
-                android:text="Г-415"
                 android:textSize="20sp" />
         </LinearLayout>
-
+        
     </LinearLayout>
 </LinearLayout>

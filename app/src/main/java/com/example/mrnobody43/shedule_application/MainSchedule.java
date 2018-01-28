@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -43,14 +44,12 @@ public class MainSchedule extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
-
         _myDb = new DataBaseHelper(this);
 
-         _query= GetCurruntQuery();
+        _query= GetCurruntQuery();
 
         _CURRENT_STATE = Utilities.SetState(_query);
 
-        InitTabHost();
         renderScheduleData(_query);
     }
 
@@ -93,51 +92,26 @@ public class MainSchedule extends AppCompatActivity  {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            FillTabHost();
-
             Calendar newCal = new GregorianCalendar();
             int day = newCal.get(Calendar.DAY_OF_WEEK) - 2;
             if(day < 0){
                 day = Constants.DAYS_ON_WEEK - 1;
             }
 
-            switch (_CURRENT_STATE) {
-                case Constants.GROUP: {
-                    if(_currentScheduleGroup!= null){
-                        scheduleGroupAdapter  = new ScheduleGroupAdapter(MainSchedule.this, _currentScheduleGroup.getWeek().get(day).get_classesBotWeek());
-                        listView1.setAdapter(scheduleGroupAdapter);
-                    }
-                    else {
-                        listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
-                    }
-                    break;
-                }
-                case Constants.TEACHER: {
-                    if(_currentScheduleTeacher!= null) {
-                        scheduleTeacherAdapter = new ScheduleTeacherAdapter(MainSchedule.this, _currentScheduleTeacher.getWeek().get(day).get_classesBotWeek());
-                        listView1.setAdapter(scheduleTeacherAdapter);
-                    }
-                    else {
-                        listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
-                    }
-                    break;
-                }
-                case Constants.CLASSROOM: {
-                    if(_currentScheduleClassRoom!= null){
-                        scheduleClassRoomAdapter  = new ScheduleClassRoomAdapter(MainSchedule.this, _currentScheduleClassRoom.getWeek().get(day).get_classesBotWeek());
-                        listView1.setAdapter(scheduleClassRoomAdapter);
-                    }
-                    else {
-                        listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
-                    }
-                    break;
-                }
-                default: {
-                    break;
-                }
+            InitTabHost();
+            FillTabHost();
+
+            if (_currentScheduleGroup != null) {
+                scheduleGroupAdapter = new ScheduleGroupAdapter(MainSchedule.this, _currentScheduleGroup);
             }
 
-            tabHost.setCurrentTab(day);
+            if(tabHost.getCurrentTab() == day)
+            {
+                tabHost.setCurrentTab(day - 1);
+                tabHost.setCurrentTab(day);
+            } else {
+                tabHost.setCurrentTab(day);
+            }
 
             _db = _myDb.getWritableDatabase();
 
@@ -173,46 +147,41 @@ public class MainSchedule extends AppCompatActivity  {
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener(){
             @Override
             public void onTabChanged(String tabId) {
-                int pickedDay = _day_of_a_weak.get(tabId);
 
-                switch (_CURRENT_STATE) {
-                    case Constants.GROUP: {
-                        if(_currentScheduleGroup!= null){
-                            scheduleGroupAdapter  = new ScheduleGroupAdapter(MainSchedule.this, _currentScheduleGroup.getWeek().get(pickedDay).get_classesBotWeek());
-                            listView1.setAdapter(scheduleGroupAdapter);
-                            scheduleGroupAdapter.notifyDataSetChanged();
+                    int pickedDay = _day_of_a_weak.get(tabId);
+
+                    switch (_CURRENT_STATE) {
+                        case Constants.GROUP: {
+                            if (_currentScheduleGroup != null && scheduleGroupAdapter != null) {
+                                    scheduleGroupAdapter.refreshData(pickedDay, 0);
+                                    listView1.setAdapter(scheduleGroupAdapter);
+                            } else {
+                                listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
+                            }
+                            break;
                         }
-                        else {
-                            listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
+                        case Constants.TEACHER: {
+                            if (_currentScheduleTeacher != null) {
+                                scheduleTeacherAdapter = new ScheduleTeacherAdapter(MainSchedule.this, _currentScheduleTeacher.getWeek().get(pickedDay).get_classesBotWeek());
+                                listView1.setAdapter(scheduleTeacherAdapter);
+                            } else {
+                                listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
+                            }
+                            break;
                         }
-                        break;
+                        case Constants.CLASSROOM: {
+                            if (_currentScheduleClassRoom != null) {
+                                scheduleClassRoomAdapter = new ScheduleClassRoomAdapter(MainSchedule.this, _currentScheduleClassRoom.getWeek().get(pickedDay).get_classesBotWeek());
+                                listView1.setAdapter(scheduleClassRoomAdapter);
+                            } else {
+                                listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
+                            }
+                            break;
+                        }
+                        default: {
+                            break;
+                        }
                     }
-                    case Constants.TEACHER: {
-                        if(_currentScheduleTeacher!= null) {
-                            scheduleTeacherAdapter = new ScheduleTeacherAdapter(MainSchedule.this, _currentScheduleTeacher.getWeek().get(pickedDay).get_classesBotWeek());
-                            listView1.setAdapter(scheduleTeacherAdapter);
-                            scheduleTeacherAdapter.notifyDataSetChanged();
-                        }
-                        else {
-                            listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
-                        }
-                        break;
-                    }
-                    case Constants.CLASSROOM: {
-                        if(_currentScheduleClassRoom!= null){
-                            scheduleClassRoomAdapter  = new ScheduleClassRoomAdapter(MainSchedule.this, _currentScheduleClassRoom.getWeek().get(pickedDay).get_classesBotWeek());
-                            listView1.setAdapter(scheduleClassRoomAdapter);
-                            scheduleClassRoomAdapter.notifyDataSetChanged();
-                        }
-                        else {
-                            listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
-                        }
-                        break;
-                    }
-                    default: {
-                        break;
-                    }
-                }
             }});
     }
 
@@ -367,14 +336,15 @@ public class MainSchedule extends AppCompatActivity  {
     private WeekGroup _currentScheduleGroup;
     private WeekTeacher _currentScheduleTeacher;
     private WeekClassRoom _currentScheduleClassRoom;
+    ScheduleClassRoomAdapter scheduleClassRoomAdapter;
+    ScheduleTeacherAdapter scheduleTeacherAdapter;
+    ScheduleGroupAdapter scheduleGroupAdapter;
+    ArrayList<ScheduleGroupAdapter> array;
     private ListView listView1;
     private String _prev_query;
     private String _query = "";
     private TabHost tabHost;
     private Integer _CURRENT_STATE;
-    ScheduleGroupAdapter scheduleGroupAdapter;
-    ScheduleClassRoomAdapter scheduleClassRoomAdapter;
-    ScheduleTeacherAdapter scheduleTeacherAdapter;
     private Map<String, Integer> _day_of_a_weak;
     private DataBaseHelper _myDb;
     private SQLiteDatabase _db;

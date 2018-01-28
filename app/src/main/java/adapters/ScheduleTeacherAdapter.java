@@ -57,21 +57,27 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // используем созданные, но не используемые view
-        View view = convertView;
+        View view = null;
 
         ClassTeacher p = getClass(position);
 
         if (view == null){
             view = lInflater.inflate(R.layout.schedule_list_teacher_item, parent, false);
-
         }
 
         String cnt = Integer.toString(position + 1);
         ((TextView) view.findViewById(R.id.id_pair)).setText(cnt);
         ((TextView) view.findViewById(R.id.time)).setText(p.get_time());
 
+        LinearLayout.LayoutParams lParams1 = (LinearLayout.LayoutParams) ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair2", "id", ctx.getPackageName())))).getLayoutParams();
+        ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair2", "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+
         for (Integer iCnt = 1; iCnt <= p.get_subject().size(); ++iCnt)
         {
+
+            if(iCnt > 1){
+                ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(lParams1);
+            }
 
             if (p.get_subject().get(0).equals(Constants.FREE)) {
                 ((TextView) view.findViewById((ctx.getResources().getIdentifier("subject" + iCnt.toString(), "id", ctx.getPackageName())))).setText(Constants.FREE_TIME);
@@ -97,11 +103,6 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
             }
         }
 
-        for (Integer iCnt = p.get_classroom().size() + 1; iCnt <= Constants.LINEAR_LAYOUT_COUNT; ++iCnt)
-        {
-            ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
-
-        }
 
         return view;
     }

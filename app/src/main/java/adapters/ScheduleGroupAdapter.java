@@ -14,19 +14,20 @@ import android.widget.TextView;
 
 import com.example.mrnobody43.shedule_application.R;
 
-import java.util.ArrayList;
-
 import Utils.Constants;
 import model.Group.ClassGroup;
+import model.Group.WeekGroup;
 
 public class ScheduleGroupAdapter extends BaseAdapter {
-    Context ctx;
-    LayoutInflater lInflater;
-    ArrayList<ClassGroup> objects;
+    private Context ctx;
+    private LayoutInflater lInflater;
+    private WeekGroup _weekGroup;
+    private int indexTab;
+    private int indexWeek;
 
-    public ScheduleGroupAdapter(Context context, ArrayList<ClassGroup> classGroups) {
+    public ScheduleGroupAdapter(Context context, WeekGroup weekGroup) {
         ctx = context;
-        objects = classGroups;
+        _weekGroup = weekGroup;
         lInflater = (LayoutInflater) ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -34,72 +35,79 @@ public class ScheduleGroupAdapter extends BaseAdapter {
     // кол-во элементов
     @Override
     public int getCount() {
-        return objects.size();
+        return _weekGroup.getWeek().get(indexTab).get_classesBotWeek().size();
     }
 
     // элемент по позиции
     @Override
     public Object getItem(int position) {
-        return objects.get(position);
+        switch (indexWeek){
+            case 0:
+                return _weekGroup.getWeek().get(indexTab).get_classesBotWeek().get(position);
+            case 1:
+                return _weekGroup.getWeek().get(indexTab).get_classesTopWeek().get(position);
+            default:
+                return _weekGroup.getWeek().get(indexTab).get_classesBotWeek().get(position);
+        }
+
     }
 
-    // id по позиции
     @Override
     public long getItemId(int position) {
         return position;
     }
 
-    ClassGroup getClass(int position) {
+    private ClassGroup getClass(int position) {
         return ((ClassGroup) getItem(position));
     }
 
-    // пункт списка
+    public void refreshData(int idTab, int idWeek){
+
+        //наполняем измененными данными
+        indexTab= idTab;
+        indexWeek = idWeek;
+        //передергиваем адаптер
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // используем созданные, но не используемые view
-        View view = convertView;
 
         ClassGroup p = getClass(position);
 
-        if (view == null) {
-            view = lInflater.inflate(R.layout.schedule_list_group_item, parent, false);
-        }
+        convertView = lInflater.inflate(R.layout.schedule_list_group_item, parent, false);
 
-        ((TextView) view.findViewById(R.id.id_pair)).setText(Integer.toString(position + 1));
-        ((TextView) view.findViewById(R.id.time)).setText(p.get_time());
+        ((TextView) convertView.findViewById(R.id.id_pair)).setText(Integer.toString(position + 1));
+        ((TextView) convertView.findViewById(R.id.time)).setText(p.get_time());
 
-        LinearLayout.LayoutParams lParams1 = (LinearLayout.LayoutParams) ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair2", "id", ctx.getPackageName())))).getLayoutParams();
-        ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair2", "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        LinearLayout.LayoutParams lParams1 = (LinearLayout.LayoutParams) ((LinearLayout) convertView.findViewById(R.id.pair2)).getLayoutParams();
+        ((LinearLayout) convertView.findViewById(R.id.pair2)).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
-        for (Integer iCnt = 1; iCnt <= p.get_subject().size(); ++iCnt)
-        {
+        for (int iCnt = 0; iCnt < p.get_subject().size(); ++iCnt) {
+            Integer i = iCnt + 1;
+            String cnt = i.toString();
+            String packageName = ctx.getPackageName();
 
-            if(iCnt > 1){
-                ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(lParams1);
+            if (iCnt > 0) {
+                ((LinearLayout) convertView.findViewById((ctx.getResources().getIdentifier("pair" + cnt, "id", packageName)))).setLayoutParams(lParams1);
             }
 
-            if (p.get_subject().get(0).equals(Constants.FREE)) {
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("subject" + iCnt.toString(), "id", ctx.getPackageName())))).setText(Constants.FREE_TIME);
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("teacher" + iCnt.toString(), "id", ctx.getPackageName())))).setText(Constants.EMPTY_STRING);
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("type" + iCnt.toString(), "id", ctx.getPackageName())))).setText(Constants.EMPTY_STRING);
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("subgroup" + iCnt.toString(), "id", ctx.getPackageName())))).setText(Constants.EMPTY_STRING);
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("classroom" + iCnt.toString(), "id", ctx.getPackageName())))).setText(Constants.EMPTY_STRING);
+            if (p.get_subject().get(iCnt).equals(Constants.FREE)) {
+                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("subject" + cnt, "id", packageName)))).setText(Constants.FREE_TIME);
             } else {
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("subject" + iCnt.toString(), "id", ctx.getPackageName())))).setText(p.get_subject().get(iCnt - 1));
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("teacher" + iCnt.toString(), "id", ctx.getPackageName())))).setText(p.get_teacher().get(iCnt - 1));
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("type" + iCnt.toString(), "id", ctx.getPackageName())))).setText(p.get_type().get(iCnt - 1));
+                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("subject" + cnt, "id", packageName)))).setText(p.get_subject().get(iCnt));
+                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("teacher" + cnt, "id", packageName)))).setText(p.get_teacher().get(iCnt));
+                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("type" + cnt, "id", packageName)))).setText(p.get_type().get(iCnt));
 
-                if (p.get_subgroup().get(iCnt - 1).equals(Constants.WITHOUT_SUBGROUB)) {
-                    ((TextView) view.findViewById((ctx.getResources().getIdentifier("subgroup" + iCnt.toString(), "id", ctx.getPackageName())))).setText(Constants.EMPTY_STRING);
-                } else {
-                    ((TextView) view.findViewById((ctx.getResources().getIdentifier("subgroup" + iCnt.toString(), "id", ctx.getPackageName())))).setText(p.get_subgroup().get(iCnt - 1));
+                if (!(p.get_subgroup().get(iCnt).equals(Constants.WITHOUT_SUBGROUB))) {
+                    ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("subgroup" + cnt, "id", packageName)))).setText(p.get_subgroup().get(iCnt));
                 }
 
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("classroom" + iCnt.toString(), "id", ctx.getPackageName())))).setText(p.get_classroom().get(iCnt - 1));
+                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("classroom" + cnt, "id", packageName)))).setText(p.get_classroom().get(iCnt));
             }
         }
 
-        return view;
+        return convertView;
     }
 
 }

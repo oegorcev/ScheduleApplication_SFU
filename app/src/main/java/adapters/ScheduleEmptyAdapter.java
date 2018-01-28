@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.mrnobody43.shedule_application.R;
@@ -56,19 +55,8 @@ public class ScheduleEmptyAdapter extends BaseAdapter {
             view = lInflater.inflate(R.layout.schedule_list_group_item, parent, false);
         }
 
-        String cnt = Integer.toString(position + 1);
-        ((TextView) view.findViewById(R.id.id_pair)).setText(Constants.EMPTY_STRING);
-        ((TextView) view.findViewById(R.id.time)).setText(Constants.EMPTY_STRING);
         ((TextView) view.findViewById(R.id.subject1)).setText(Constants.EMPTY_SCHEDULE);
-        ((TextView) view.findViewById(R.id.teacher1)).setText(Constants.EMPTY_STRING);
-        ((TextView) view.findViewById(R.id.type1)).setText(Constants.EMPTY_STRING);
-        ((TextView)view.findViewById(R.id.subgroup1)).setText(Constants.EMPTY_STRING);
-        ((TextView)view.findViewById(R.id.classroom1)).setText(Constants.EMPTY_STRING);
 
-        for (Integer iCnt = 2; iCnt <= Constants.LINEAR_LAYOUT_COUNT; ++iCnt)
-        {
-            ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
-        }
 
         return view;
     }
