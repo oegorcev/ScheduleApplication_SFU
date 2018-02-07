@@ -10,19 +10,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "Scheduledb";
-    public static final String TABLE_NAME1 = "schedule";
-    public static final String TABLE_NAME2 = "options";
-    public static final String ID = "id";
-    public static final String HTML_CODE = "html";
-    public static final String OPTION = "option";
-
-    private static final String CREATE_TABLE1 = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME1 + " (" + ID + " TEXT PRIMARY KEY," +
-            HTML_CODE + " TEXT)";
-
-    private static final String CREATE_TABLE2 = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME2 + " (" + ID + " TEXT PRIMARY KEY," +
-            OPTION + " TEXT)";
-
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
@@ -39,5 +26,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS" + TABLE_NAME2);
         onCreate(db);
     }
+
+    public static final String DATABASE_NAME = "Scheduledb";
+    public static final String TABLE_NAME1 = "schedule";
+    public static final String TABLE_NAME2 = "options";
+    public static final String ID = "id";
+    public static final String HTML_CODE = "html";
+    public static final String OPTION = "option";
+
+    private static final String CREATE_TABLE1 = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME1 + " (" + ID + " TEXT PRIMARY KEY," +
+            HTML_CODE + " TEXT)";
+
+    private static final String CREATE_TABLE2 = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME2 + " (" + ID + " TEXT PRIMARY KEY," +
+            OPTION + " TEXT)";
 }
 

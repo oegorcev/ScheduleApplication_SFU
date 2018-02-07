@@ -19,7 +19,6 @@ public class GroupParser extends AbstractParser {
         super(mContext);
     }
 
-
     public ClassGroup parseClass(String[] data){
         ClassGroup aClassGroup = new ClassGroup();
 

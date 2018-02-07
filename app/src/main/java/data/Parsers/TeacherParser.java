@@ -18,7 +18,6 @@ public class TeacherParser extends AbstractParser {
     {
         super(mContext);
     }
-    private int _counter;
 
     public ClassTeacher parseClass(String[] data){
         ClassTeacher aClassTeacher = new ClassTeacher();
@@ -134,5 +133,5 @@ public class TeacherParser extends AbstractParser {
         return index;
     }
 
-
+    private int _counter;
 }

@@ -43,7 +43,7 @@ public class MainSchedule extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start_screen);
+        setContentView(R.layout.activity_main_schedule);
         _myDb = new DataBaseHelper(this);
 
         _query= GetCurruntQuery();
@@ -305,6 +305,11 @@ public class MainSchedule extends AppCompatActivity  {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
 
+        MenuItem item = menu.findItem(R.id.examsSchedule);
+        item.setVisible(true);
+        item = menu.findItem(R.id.mainSchedule);
+        item.setVisible(false);
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -320,7 +325,8 @@ public class MainSchedule extends AppCompatActivity  {
                 renderScheduleData(_query);
                 break;
             case R.id.examsSchedule:
-
+                intent = new Intent(MainSchedule.this, ExamsSchedule.class);
+                startActivity(intent);
                 break;
             case R.id.options:
                 intent = new Intent(MainSchedule.this, Options.class);

@@ -15,7 +15,6 @@ import model.ClassRoom.ClassClassRoom;
 public class ClassroomParser extends AbstractParser {
 
     public ClassroomParser(Context mContext) {super(mContext);}
-    private int _counter;
 
     public ClassClassRoom parseClass(String[] data){
         ClassClassRoom aClassClassRoom = new ClassClassRoom();
@@ -126,4 +125,5 @@ public class ClassroomParser extends AbstractParser {
         return index;
     }
 
+    private int _counter;
 }

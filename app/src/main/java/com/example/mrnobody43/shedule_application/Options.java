@@ -1,6 +1,7 @@
 package com.example.mrnobody43.shedule_application;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,9 +23,13 @@ public class Options extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
 
-        myDb = new DataBaseHelper(this);
-        spinnerSemestr = (Spinner)findViewById(R.id.spinnerSemestr);
-        spinnerYear = (Spinner)findViewById(R.id.spinnerYears);
+        if(getSupportActionBar()!= null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        _myDb = new DataBaseHelper(this);
+        _spinnerSemestr = (Spinner)findViewById(R.id.spinnerSemestr);
+        _spinnerYear = (Spinner)findViewById(R.id.spinnerYears);
 
         ArrayAdapter<?> adapterYear =
                 ArrayAdapter.createFromResource(this, R.array.years, android.R.layout.simple_spinner_item);
@@ -35,37 +40,38 @@ public class Options extends AppCompatActivity {
         adapterSemestr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
-        spinnerYear.setAdapter(adapterYear);
-        spinnerSemestr.setAdapter(adapterSemestr);
+        _spinnerYear.setAdapter(adapterYear);
+        _spinnerSemestr.setAdapter(adapterSemestr);
 
-        spinnerYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        setSpinnerValue();
+
+        _spinnerYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent,
                                        View itemSelected, int selectedItemPosition, long selectedId) {
 
-                String[] choose = getResources().getStringArray(R.array.years);
                 Integer potok = Constants.FIRST_POTOK + selectedItemPosition;
                 String s = potok.toString();
 
-                db = myDb.getWritableDatabase();
+                _db = _myDb.getWritableDatabase();
 
                 ContentValues cv = new ContentValues();
                 cv.put(DataBaseHelper.ID, Constants.YEARS_DB_ID);
                 cv.put(DataBaseHelper.OPTION, s);
 
-                int was = db.update(DataBaseHelper.TABLE_NAME2, cv, DataBaseHelper.ID + " = ?", new String[] { Constants.YEARS_DB_ID });
+                int was = _db.update(DataBaseHelper.TABLE_NAME2, cv, DataBaseHelper.ID + " = ?", new String[] { Constants.YEARS_DB_ID });
                 if(was == 0)
                 {
-                    db.insert(DataBaseHelper.TABLE_NAME2, null, cv);
+                    _db.insert(DataBaseHelper.TABLE_NAME2, null, cv);
                 }
 
-                myDb.close();
+                _myDb.close();
 
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
-        spinnerSemestr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        _spinnerSemestr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent,
                                        View itemSelected, int selectedItemPosition, long selectedId) {
 
@@ -73,19 +79,19 @@ public class Options extends AppCompatActivity {
 
                 String s = choose[selectedItemPosition];
 
-                db = myDb.getWritableDatabase();
+                _db = _myDb.getWritableDatabase();
 
                 ContentValues cv = new ContentValues();
                 cv.put(DataBaseHelper.ID, Constants.SEMESTR_DB_ID);
                 cv.put(DataBaseHelper.OPTION, s);
 
-                int was = db.update(DataBaseHelper.TABLE_NAME2, cv, DataBaseHelper.ID + " = ?", new String[] { Constants.SEMESTR_DB_ID });
+                int was = _db.update(DataBaseHelper.TABLE_NAME2, cv, DataBaseHelper.ID + " = ?", new String[] { Constants.SEMESTR_DB_ID });
                 if(was == 0)
                 {
-                    db.insert(DataBaseHelper.TABLE_NAME2, null, cv);
+                    _db.insert(DataBaseHelper.TABLE_NAME2, null, cv);
                 }
 
-                myDb.close();
+                _myDb.close();
 
             }
             public void onNothingSelected(AdapterView<?> parent) {
@@ -93,9 +99,56 @@ public class Options extends AppCompatActivity {
         });
     }
 
+    private void setSpinnerValue(){
+        String compareValue = "some value";
 
-    Spinner spinnerSemestr;
-    Spinner spinnerYear;
-    private DataBaseHelper myDb;
-    private SQLiteDatabase db;
+        String semestr = "1";
+        String potok = Constants.FIRST_POTOK.toString();
+
+        _db = _myDb.getReadableDatabase();
+
+        Cursor c = _db.query(DataBaseHelper.TABLE_NAME2, null, null, null, null, null, null);
+
+        if (c.moveToFirst()) {
+
+            while (true) {
+                if (c.isAfterLast()) break;
+
+                int idIndex = c.getColumnIndex(DataBaseHelper.ID);
+                int optionIndex = c.getColumnIndex(DataBaseHelper.OPTION);
+
+                String offlineData = c.getString(optionIndex);
+                String bdId = c.getString(idIndex);
+
+                if (Constants.SEMESTR_DB_ID.equals(bdId)) {
+                    semestr = offlineData;
+                } else if (Constants.YEARS_DB_ID.equals(bdId)) {
+                    potok = offlineData;
+                }
+
+                c.moveToNext();
+
+            }
+        }
+        _myDb.close();
+
+        Integer semestrPos = Integer.parseInt(semestr) - 1;
+        Integer yearPos = Integer.parseInt(potok) - Constants.FIRST_POTOK;
+
+        _spinnerSemestr.setSelection(semestrPos);
+        _spinnerYear.setSelection(yearPos);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
+
+    private String _curSem;
+    private String _curYear;
+    private Spinner _spinnerSemestr;
+    private Spinner _spinnerYear;
+    private DataBaseHelper _myDb;
+    private SQLiteDatabase _db;
 }

@@ -7,6 +7,9 @@
         android:checkable="false"
         android:title="@string/menuUpdateSchedule" />
     <item
+        android:id="@+id/mainSchedule"
+        android:title="@string/menuMain"/>
+    <item
         android:id="@+id/examsSchedule"
         android:title="@string/menuExams"/>
     <item

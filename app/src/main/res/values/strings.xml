@@ -10,6 +10,7 @@
     <string name="changeSchedule">Сменить</string>
     <string name="menuChangeSchedule">Сменить расписание</string>
     <string name="menuExams">Расписание экзаменов</string>
+    <string name="menuMain">Расписание занятий</string>
     <string name="menuUpdateSchedule">Обновить расписание</string>
     <string name="menuOptions">Настройки</string>
 
