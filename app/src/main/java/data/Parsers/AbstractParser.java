@@ -46,9 +46,11 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
     @Override
     protected Void doInBackground(String... params) {
         Document doc = null;
+        String s = "1";
 
         if(isNetworkAvailable()){
             doc = DownloadSchedule(params[0], params[1], params[2]);
+            s = getCurrentWeek(params[1], params[2]);
             if(doc == null){
                 doc = GetDbSchedule(params[0]);
             }
@@ -60,6 +62,8 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         if(doc != null) {
             ParseDocument(doc);
         }
+
+        setCurrentWeek(s);
 
         return null;
     }
@@ -97,7 +101,7 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         Document doc = null;
         try {
             queury = queury.replace(" ", "%20");
-            //queury = queury.substring(0, queury.indexOf(' ')) + "%20" + queury.substring(queury.indexOf(' ') + 1);
+
             doc = Jsoup.connect(Constants.URL + queury + Constants.POTOK + potok + Constants.SEMESTR + semestr).get();
 
             _db = _myDb.getWritableDatabase();
@@ -121,6 +125,25 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         return doc;
     }
 
+    public String getCurrentWeek(String semestr, String potok)
+    {
+        Document doc = null;
+        String infoString = "";
+
+        try {
+            doc = Jsoup.connect(Constants.WEEK_URL + potok + Constants.SEMESTR + semestr).get();
+            Element info = doc.getElementById(Constants.WEEK_INFO);
+            infoString = info.text();
+            String[] mas = infoString.split(" ");
+            infoString = mas[1];
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return infoString;
+    }
+
     public void ParseDocument(Document doc) {
         Element tableWeek = doc.getElementById(Constants.WEEK_SCHEDULE);
         Element tableExams = doc.getElementById(Constants.EXAMS_SCHEDULE);
@@ -128,10 +151,10 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         _times = new ArrayList<String>();
 
         if(tableWeek != null){
-            _schedule_main = ParseTable(tableWeek);
+            _scheduleMain = ParseTable(tableWeek);
         }
         if(tableExams != null) {
-            _schedule_exams = ParseTable(tableExams);
+            _scheduleExams = ParseTable(tableExams);
         }
     }
 
@@ -207,29 +230,38 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         return _times;
     }
 
-    public void set_times(ArrayList<String> _times) {
+    public void setTimes(ArrayList<String> _times) {
         this._times = _times;
     }
 
-    public List<List<Pair<String, String>>> get_schedule_main() {
-        return _schedule_main;
+    public List<List<Pair<String, String>>> getScheduleMain() {
+        return _scheduleMain;
     }
 
-    public void set_schedule_main(List<List<Pair<String, String>>> _schedule_main) {
-        this._schedule_main = _schedule_main;
+    public void setScheduleMain(List<List<Pair<String, String>>> _scheduleMain) {
+        this._scheduleMain = _scheduleMain;
     }
 
-    public List<List<Pair<String, String>>> get_schedule_exams() {
-        return _schedule_exams;
+    public List<List<Pair<String, String>>> getScheduleExams() {
+        return _scheduleExams;
     }
 
-    public void set_schedule_exams(List<List<Pair<String, String>>> _schedule_exams) {
-        this._schedule_exams = _schedule_exams;
+    public void setScheduleExams(List<List<Pair<String, String>>> _scheduleExams) {
+        this._scheduleExams = _scheduleExams;
+    }
+
+    public String getCurrentWeek() {
+        return _currentWeek;
+    }
+
+    public void setCurrentWeek(String _currentWeek) {
+        this._currentWeek = _currentWeek;
     }
 
     private ArrayList<String> _times;
-    private List<List<Pair<String, String>>> _schedule_main;
-    private List<List<Pair<String, String>>> _schedule_exams;
+    private List<List<Pair<String, String>>> _scheduleMain;
+    private String _currentWeek;
+    private List<List<Pair<String, String>>> _scheduleExams;
     private DataBaseHelper _myDb;
     private SQLiteDatabase _db;
     private Context _mContext;

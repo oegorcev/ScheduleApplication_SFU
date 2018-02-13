@@ -46,7 +46,7 @@ public class Utilities {
         if(someCases) {
             return true;
         } else {
-            if ((s.indexOf('-') != -1) && !s.equals("---") && s.indexOf("Вакансия") == -1) {
+            if (!s.equals("-.-.") && (s.indexOf('-') != -1) && !s.equals("---") && s.indexOf("Вакансия") == -1) {
                 return !Character.isLetter(s.charAt(s.indexOf('-') - 1)) && (s.indexOf('(') == -1);
             } else {
                 return false;

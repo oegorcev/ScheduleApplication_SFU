@@ -19,11 +19,6 @@ import model.Group.ClassGroup;
 import model.Group.WeekGroup;
 
 public class ScheduleGroupAdapter extends BaseAdapter {
-    private Context ctx;
-    private LayoutInflater lInflater;
-    private WeekGroup _weekGroup;
-    private int indexTab;
-    private int indexWeek;
 
     public ScheduleGroupAdapter(Context context, WeekGroup weekGroup) {
         ctx = context;
@@ -49,7 +44,6 @@ public class ScheduleGroupAdapter extends BaseAdapter {
             default:
                 return _weekGroup.getWeek().get(indexTab).get_classesBotWeek().get(position);
         }
-
     }
 
     @Override
@@ -75,7 +69,9 @@ public class ScheduleGroupAdapter extends BaseAdapter {
 
         ClassGroup p = getClass(position);
 
+
         convertView = lInflater.inflate(R.layout.schedule_list_group_item, parent, false);
+
 
         ((TextView) convertView.findViewById(R.id.id_pair)).setText(Integer.toString(position + 1));
         ((TextView) convertView.findViewById(R.id.time)).setText(p.get_time());
@@ -97,12 +93,14 @@ public class ScheduleGroupAdapter extends BaseAdapter {
             } else {
                 ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("subject" + cnt, "id", packageName)))).setText(p.get_subject().get(iCnt));
                 ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("teacher" + cnt, "id", packageName)))).setText(p.get_teacher().get(iCnt));
-                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("type" + cnt, "id", packageName)))).setText(p.get_type().get(iCnt));
+
+                String other_information = p.get_type().get(iCnt);
 
                 if (!(p.get_subgroup().get(iCnt).equals(Constants.WITHOUT_SUBGROUB))) {
-                    ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("subgroup" + cnt, "id", packageName)))).setText(p.get_subgroup().get(iCnt));
+                    other_information += " " + p.get_subgroup().get(iCnt);
                 }
 
+                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("other_information" + cnt, "id", packageName)))).setText(other_information);
                 ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("classroom" + cnt, "id", packageName)))).setText(p.get_classroom().get(iCnt));
             }
         }
@@ -110,4 +108,9 @@ public class ScheduleGroupAdapter extends BaseAdapter {
         return convertView;
     }
 
+    private Context ctx;
+    private LayoutInflater lInflater;
+    private WeekGroup _weekGroup;
+    private int indexTab;
+    private int indexWeek;
 }

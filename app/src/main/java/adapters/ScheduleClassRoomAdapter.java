@@ -69,7 +69,7 @@ public class ScheduleClassRoomAdapter extends BaseAdapter {
         ((TextView) view.findViewById(R.id.id_pair)).setText(cnt);
         ((TextView) view.findViewById(R.id.time)).setText(p.get_time());
 
-        for (Integer iCnt = 1; iCnt <= p.get_subject().size(); ++iCnt)
+        for (Integer iCnt = 1; iCnt <= Math.min(20, p.get_subject().size()); ++iCnt)
         {
 
             if (p.get_subject().get(0).equals(Constants.FREE)) {

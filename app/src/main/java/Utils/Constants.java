@@ -22,6 +22,8 @@ public class Constants {
    public static final String EXAMS_SCHEDULE  = "tblRaspisZaoch";
 
    public static final String URL = "http://asu.tti.sfedu.ru/Raspisanie/ShowRaspisanie.aspx?Substance=";
+   public static final String WEEK_URL = "http://asu.tti.sfedu.ru/Raspisanie/Default.aspx?isPotok=";
+   public static final String WEEK_INFO = "ctl00_Main_lbCurrentWeek";
    public static final String START_TIME = "start-time";
    public static final String END_TIME = "end-time";
    public static final String PARSE_TAG_DAYS = "tr";

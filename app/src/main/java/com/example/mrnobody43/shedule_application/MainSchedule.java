@@ -1,36 +1,26 @@
 package com.example.mrnobody43.shedule_application;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TabHost;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
 
 import Utils.Constants;
 import Utils.Utilities;
-import adapters.ScheduleClassRoomAdapter;
-import adapters.ScheduleEmptyAdapter;
-import adapters.ScheduleGroupAdapter;
-import adapters.ScheduleTeacherAdapter;
+import adapters.MainScheduleFragmentAdapter;
 import data.DataBaseHelper;
 import data.Scheduler;
 import model.ClassRoom.WeekClassRoom;
@@ -39,30 +29,22 @@ import model.Teacher.WeekTeacher;
 
 public class MainSchedule extends AppCompatActivity  {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_schedule);
+
+        pager = (ViewPager) findViewById(R.id.pager);
+
         _myDb = new DataBaseHelper(this);
 
-        _query= GetCurruntQuery();
-
-        _CURRENT_STATE = Utilities.SetState(_query);
+        _query= getCurruntQuery();
 
         renderScheduleData(_query);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data != null) {
-            _query = data.getStringExtra(Constants.CHANGED_SCHEDULE);
-            renderScheduleData(_query);
-        }
-    }
 
     public void renderScheduleData(String name) {
-        _CURRENT_STATE = Utilities.SetState(name);
         _query = name;
         setTitle(_query);
 
@@ -74,116 +56,6 @@ public class MainSchedule extends AppCompatActivity  {
         scheduleTask.execute();
     }
 
-    private class  ScheduleTask extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            Scheduler scheduler = new Scheduler(MainSchedule.this,_query);
-            scheduler.execute();
-        }
-
-        @Override
-        protected Void doInBackground(String... params) {
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-            Calendar newCal = new GregorianCalendar();
-            int day = newCal.get(Calendar.DAY_OF_WEEK) - 2;
-            if(day < 0){
-                day = Constants.DAYS_ON_WEEK - 1;
-            }
-
-            InitTabHost();
-            FillTabHost();
-
-            if (_currentScheduleGroup != null) {
-                scheduleGroupAdapter = new ScheduleGroupAdapter(MainSchedule.this, _currentScheduleGroup);
-            }
-
-            if(tabHost.getCurrentTab() == day)
-            {
-                tabHost.setCurrentTab(day - 1);
-                tabHost.setCurrentTab(day);
-            } else {
-                tabHost.setCurrentTab(day);
-            }
-
-            _db = _myDb.getWritableDatabase();
-
-            ContentValues cv = new ContentValues();
-            cv.put(DataBaseHelper.ID, Constants.CUR_QUERY_DB_ID);
-            cv.put(DataBaseHelper.OPTION, _query);
-
-            int was = _db.update(DataBaseHelper.TABLE_NAME2, cv, DataBaseHelper.ID + " = ?", new String[] { Constants.CUR_QUERY_DB_ID });
-            if(was == 0)
-            {
-                _db.insert(DataBaseHelper.TABLE_NAME2, null, cv);
-            }
-
-            _myDb.close();
-        }
-    }
-
-    private void InitTabHost()
-    {
-        listView1 = (ListView) findViewById(R.id.list1);
-        tabHost = (TabHost)findViewById(R.id.tabHost);
-        tabHost.setup();
-
-        _day_of_a_weak = new HashMap<>();
-        _day_of_a_weak.put(Constants.MONDAY, 0);
-        _day_of_a_weak.put(Constants.TUESDAY, 1);
-        _day_of_a_weak.put(Constants.WEDNESDAY, 2);
-        _day_of_a_weak.put(Constants.THURSDAY, 3);
-        _day_of_a_weak.put(Constants.FRIDAY, 4);
-        _day_of_a_weak.put(Constants.SATURDAY, 5);
-        _day_of_a_weak.put(Constants.SUNDAY, 6);
-
-        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener(){
-            @Override
-            public void onTabChanged(String tabId) {
-
-                    int pickedDay = _day_of_a_weak.get(tabId);
-
-                    switch (_CURRENT_STATE) {
-                        case Constants.GROUP: {
-                            if (_currentScheduleGroup != null && scheduleGroupAdapter != null) {
-                                    scheduleGroupAdapter.refreshData(pickedDay, 0);
-                                    listView1.setAdapter(scheduleGroupAdapter);
-                            } else {
-                                listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
-                            }
-                            break;
-                        }
-                        case Constants.TEACHER: {
-                            if (_currentScheduleTeacher != null) {
-                                scheduleTeacherAdapter = new ScheduleTeacherAdapter(MainSchedule.this, _currentScheduleTeacher.getWeek().get(pickedDay).get_classesBotWeek());
-                                listView1.setAdapter(scheduleTeacherAdapter);
-                            } else {
-                                listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
-                            }
-                            break;
-                        }
-                        case Constants.CLASSROOM: {
-                            if (_currentScheduleClassRoom != null) {
-                                scheduleClassRoomAdapter = new ScheduleClassRoomAdapter(MainSchedule.this, _currentScheduleClassRoom.getWeek().get(pickedDay).get_classesBotWeek());
-                                listView1.setAdapter(scheduleClassRoomAdapter);
-                            } else {
-                                listView1.setAdapter(new ScheduleEmptyAdapter(MainSchedule.this));
-                            }
-                            break;
-                        }
-                        default: {
-                            break;
-                        }
-                    }
-            }});
-    }
 
     public void onTeacherClick(View V) {
 
@@ -210,8 +82,80 @@ public class MainSchedule extends AppCompatActivity  {
         renderScheduleData(new_query);
     }
 
+    private class  ScheduleTask extends AsyncTask<String, Void, Void> {
 
-    private String GetCurruntQuery()
+        @Override
+        protected void onPreExecute() {
+            Scheduler scheduler = new Scheduler(MainSchedule.this,_query);
+            scheduler.execute();
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            Calendar newCal = new GregorianCalendar();
+            int day = newCal.get(Calendar.DAY_OF_WEEK) - 2;
+            if(day < 0){
+                day = Constants.DAYS_ON_WEEK - 1;
+            }
+
+            if(pagerAdapter == null){
+                pagerAdapter = new MainScheduleFragmentAdapter(getSupportFragmentManager());
+            }
+            pagerAdapter.notifyDataSetChanged();
+            pagerAdapter.set_CURRENT_STATE(Utilities.SetState(_query));
+
+            pagerAdapter.setCtx(MainSchedule.this);
+
+            switch (Utilities.SetState(_query))
+            {
+                case Constants.GROUP: {
+                    pagerAdapter.set_currentSchedule(_currentScheduleGroup);
+                    break;
+                }
+                case Constants.TEACHER: {
+                    pagerAdapter.set_currentSchedule(_currentScheduleTeacher);
+                    break;
+                }
+                case Constants.CLASSROOM: {
+                    pagerAdapter.set_currentSchedule(_currentScheduleClassRoom);
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+
+            pager.setAdapter(pagerAdapter);
+
+            pager.setCurrentItem(day);
+
+
+
+            _db = _myDb.getWritableDatabase();
+
+            ContentValues cv = new ContentValues();
+            cv.put(DataBaseHelper.ID, Constants.CUR_QUERY_DB_ID);
+            cv.put(DataBaseHelper.OPTION, _query);
+
+            int was = _db.update(DataBaseHelper.TABLE_NAME2, cv, DataBaseHelper.ID + " = ?", new String[] { Constants.CUR_QUERY_DB_ID });
+            if(was == 0)
+            {
+                _db.insert(DataBaseHelper.TABLE_NAME2, null, cv);
+            }
+
+            _myDb.close();
+        }
+    }
+
+    private String getCurruntQuery()
     {
         String s = "Расписание занятий ИТА ЮФУ";
 
@@ -239,65 +183,6 @@ public class MainSchedule extends AppCompatActivity  {
         _myDb.close();
 
         return s;
-    }
-
-    private void FillTabHost()
-    {
-        if(tabHost.getTabWidget().getTabCount() != Constants.DAYS_ON_WEEK){
-            TabHost.TabSpec tabSpec = tabHost.newTabSpec(Constants.MONDAY);
-            tabSpec.setContent(R.id.list1);
-            tabSpec.setIndicator(Constants.MONDAY);
-            tabHost.addTab(tabSpec);
-
-            tabSpec = tabHost.newTabSpec(Constants.TUESDAY);
-            tabSpec.setContent(R.id.list1);
-            tabSpec.setIndicator(Constants.TUESDAY);
-            tabHost.addTab(tabSpec);
-
-            tabSpec = tabHost.newTabSpec(Constants.WEDNESDAY);
-            tabSpec.setContent(R.id.list1);
-            tabSpec.setIndicator(Constants.WEDNESDAY);
-            tabHost.addTab(tabSpec);
-
-            tabSpec = tabHost.newTabSpec(Constants.THURSDAY);
-            tabSpec.setContent(R.id.list1);
-            tabSpec.setIndicator(Constants.THURSDAY);
-            tabHost.addTab(tabSpec);
-
-            tabSpec = tabHost.newTabSpec(Constants.FRIDAY);
-            tabSpec.setContent(R.id.list1);
-            tabSpec.setIndicator(Constants.FRIDAY);
-            tabHost.addTab(tabSpec);
-
-            tabSpec = tabHost.newTabSpec(Constants.SATURDAY);
-            tabSpec.setContent(R.id.list1);
-            tabSpec.setIndicator(Constants.SATURDAY);
-            tabHost.addTab(tabSpec);
-
-            tabSpec = tabHost.newTabSpec(Constants.SUNDAY);
-            tabSpec.setContent(R.id.list1);
-            tabSpec.setIndicator(Constants.SUNDAY);
-            tabHost.addTab(tabSpec);
-        }
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-    public void set_currentSchedule(WeekGroup _currentSchedule) {
-        this._currentScheduleGroup = _currentSchedule;
-    }
-
-    public void set_currentSchedule(WeekTeacher _currentSchedule) {
-        this._currentScheduleTeacher = _currentSchedule;
-    }
-
-    public void set_currentSchedule(WeekClassRoom _currentSchedule) {
-        this._currentScheduleClassRoom = _currentSchedule;
     }
 
     @Override
@@ -339,19 +224,38 @@ public class MainSchedule extends AppCompatActivity  {
         return true;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            _query = data.getStringExtra(Constants.CHANGED_SCHEDULE);
+            renderScheduleData(_query);
+        }
+    }
+
+    public void set_currentSchedule(WeekGroup _currentSchedule) {
+        this._currentScheduleGroup = _currentSchedule;
+    }
+
+    public void set_currentSchedule(WeekTeacher _currentSchedule) {
+        this._currentScheduleTeacher = _currentSchedule;
+    }
+
+    public void set_currentSchedule(WeekClassRoom _currentSchedule) {
+        this._currentScheduleClassRoom = _currentSchedule;
+    }
+
+    public void set_currentWeek(String _currentWeek) {
+        this._currentWeek = _currentWeek;
+    }
+
+    ViewPager pager;
+    MainScheduleFragmentAdapter pagerAdapter;
     private WeekGroup _currentScheduleGroup;
     private WeekTeacher _currentScheduleTeacher;
     private WeekClassRoom _currentScheduleClassRoom;
-    ScheduleClassRoomAdapter scheduleClassRoomAdapter;
-    ScheduleTeacherAdapter scheduleTeacherAdapter;
-    ScheduleGroupAdapter scheduleGroupAdapter;
-    ArrayList<ScheduleGroupAdapter> array;
-    private ListView listView1;
     private String _prev_query;
     private String _query = "";
-    private TabHost tabHost;
-    private Integer _CURRENT_STATE;
-    private Map<String, Integer> _day_of_a_weak;
+    private String _currentWeek;
     private DataBaseHelper _myDb;
     private SQLiteDatabase _db;
 }

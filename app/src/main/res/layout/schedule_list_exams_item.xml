@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/All_pairs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <LinearLayout
@@ -291,134 +293,5 @@
                 android:textSize="20sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/pair5"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/Main_Infomation5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/mainlayout5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/subject5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginRight="10dp"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/teacher5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#5882FA"
-                        android:onClick="onTeacherClick"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Inlayout5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/other_information5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/classroom5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textColor="#5882FA"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/pair6"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/Main_Infomation6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/mainlayout6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/subject6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginRight="10dp"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/teacher6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#5882FA"
-                        android:onClick="onTeacherClick"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Inlayout6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/other_information6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/classroom6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textColor="#5882FA"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-    </LinearLayout>
+</LinearLayout>

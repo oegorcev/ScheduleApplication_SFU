@@ -14,19 +14,17 @@ import java.util.ArrayList;
 
 import Utils.Constants;
 import model.Teacher.ClassTeacher;
+import model.Teacher.WeekTeacher;
 
 /**
  * Created by Mr.Nobody43 on 20.01.2018.
  */
 
 public class ScheduleTeacherAdapter extends BaseAdapter {
-    Context ctx;
-    LayoutInflater lInflater;
-    ArrayList<ClassTeacher> objects;
 
-    public ScheduleTeacherAdapter(Context context, ArrayList<ClassTeacher> classTeacher) {
+    public ScheduleTeacherAdapter(Context context, WeekTeacher WeekTeacher) {
         ctx = context;
-        objects = classTeacher;
+        _weekTeacher = WeekTeacher;
         lInflater = (LayoutInflater) ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -34,13 +32,20 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
     // кол-во элементов
     @Override
     public int getCount() {
-        return objects.size();
+        return _weekTeacher.getWeek().get(_indexTab).get_classesBotWeek().size();
     }
 
     // элемент по позиции
     @Override
     public Object getItem(int position) {
-        return objects.get(position);
+        switch (_indexTab){
+            case 0:
+                return _weekTeacher.getWeek().get(_indexTab).get_classesBotWeek().get(position);
+            case 1:
+                return _weekTeacher.getWeek().get(_indexTab).get_classesTopWeek().get(position);
+            default:
+                return _weekTeacher.getWeek().get(_indexTab).get_classesBotWeek().get(position);
+        }
     }
 
     // id по позиции
@@ -53,40 +58,51 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
         return ((ClassTeacher) getItem(position));
     }
 
+    public void refreshData(int idTab, int idWeek){
+
+        //наполняем измененными данными
+        _indexTab= idTab;
+        _indexWeek = idWeek;
+        //передергиваем адаптер
+        notifyDataSetChanged();
+    }
+
     // пункт списка
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // используем созданные, но не используемые view
-        View view = null;
 
         ClassTeacher p = getClass(position);
 
-        if (view == null){
-            view = lInflater.inflate(R.layout.schedule_list_teacher_item, parent, false);
+        if(convertView == null) {
+            convertView = lInflater.inflate(R.layout.schedule_list_teacher_item, parent, false);
         }
 
         String cnt = Integer.toString(position + 1);
-        ((TextView) view.findViewById(R.id.id_pair)).setText(cnt);
-        ((TextView) view.findViewById(R.id.time)).setText(p.get_time());
+        ((TextView) convertView.findViewById(R.id.id_pair)).setText(cnt);
+        ((TextView) convertView.findViewById(R.id.time)).setText(p.get_time());
 
-        LinearLayout.LayoutParams lParams1 = (LinearLayout.LayoutParams) ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair2", "id", ctx.getPackageName())))).getLayoutParams();
-        ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair2", "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        LinearLayout.LayoutParams lParams1 = (LinearLayout.LayoutParams) ((LinearLayout) convertView.findViewById((ctx.getResources().getIdentifier("pair2", "id", ctx.getPackageName())))).getLayoutParams();
+        ((LinearLayout) convertView.findViewById((ctx.getResources().getIdentifier("pair2", "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
         for (Integer iCnt = 1; iCnt <= p.get_subject().size(); ++iCnt)
         {
 
+            String sCnt = iCnt.toString();
+            String packageName = ctx.getPackageName();
+
             if(iCnt > 1){
-                ((LinearLayout) view.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(lParams1);
+                ((LinearLayout) convertView.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(lParams1);
             }
 
             if (p.get_subject().get(0).equals(Constants.FREE)) {
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("subject" + iCnt.toString(), "id", ctx.getPackageName())))).setText(Constants.FREE_TIME);
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("type" + iCnt.toString(), "id", ctx.getPackageName())))).setText(Constants.EMPTY_STRING);
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("groups" + iCnt.toString(), "id", ctx.getPackageName())))).setText(Constants.EMPTY_STRING);
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("classroom" + iCnt.toString(), "id", ctx.getPackageName())))).setText(Constants.EMPTY_STRING);
+                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("subject" + sCnt, "id", packageName)))).setText(Constants.FREE_TIME);
+                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("type" + sCnt, "id", packageName)))).setText(Constants.EMPTY_STRING);
+                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("groups" + sCnt, "id", packageName)))).setText(Constants.EMPTY_STRING);
+                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("classroom" + sCnt, "id", packageName)))).setText(Constants.EMPTY_STRING);
 
             } else {
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("subject" + iCnt.toString(), "id", ctx.getPackageName())))).setText(p.get_subject().get(iCnt - 1));
+                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("subject" + sCnt, "id", packageName)))).setText(p.get_subject().get(iCnt - 1));
 
                 String groups = "";
 
@@ -97,13 +113,20 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
                     groups += cur + "\n";
                 }
 
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("groups" + iCnt.toString(), "id", ctx.getPackageName())))).setText(groups);
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("type" + iCnt.toString(), "id", ctx.getPackageName())))).setText(p.get_type().get(iCnt - 1));
-                ((TextView) view.findViewById((ctx.getResources().getIdentifier("classroom" + iCnt.toString(), "id", ctx.getPackageName())))).setText(p.get_classroom().get(iCnt - 1));
+                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("groups" + sCnt, "id", packageName)))).setText(groups);
+                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("type" + sCnt, "id", packageName)))).setText(p.get_type().get(iCnt - 1));
+                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("classroom" + sCnt, "id", packageName)))).setText(p.get_classroom().get(iCnt - 1));
             }
         }
 
 
-        return view;
+        return convertView;
     }
+
+    private Context ctx;
+    private LayoutInflater lInflater;
+    private WeekTeacher _weekTeacher;
+    ArrayList<ClassTeacher> objects;
+    private int _indexTab;
+    private int _indexWeek;
 }
