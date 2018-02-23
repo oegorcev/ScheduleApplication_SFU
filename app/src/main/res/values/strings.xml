@@ -1,3 +1,40 @@
 <resources>
-    <string name="app_name">Shedule_application</string>
+    <string name="app_name">Расписание занятий ИТА ЮФУ</string>
+    <string name="tab1">Понедельник</string>
+    <string name="tab2">Вторник</string>
+    <string name="tab3">Среда</string>
+    <string name="tab4">Четверг</string>
+    <string name="tab5">Пятница</string>
+    <string name="tab6">Суббота</string>
+    <string name="tab7">Воскресенье</string>
+    <string name="changeSchedule">Сменить</string>
+    <string name="menuChangeSchedule">Сменить расписание</string>
+    <string name="menuExams">Расписание экзаменов</string>
+    <string name="menuMain">Расписание занятий</string>
+    <string name="menuUpdateSchedule">Обновить расписание</string>
+    <string name="menuOptions">Настройки</string>
+
+    <string-array name="years">
+        <item>2017—2018 учебный год</item>
+        <item>2018—2019 учебный год</item>
+        <item>2019—2020 учебный год</item>
+        <item>2020—2021 учебный год</item>
+        <item>2021—2022 учебный год</item>
+        <item>2022—2023 учебный год</item>
+        <item>2023—2024 учебный год</item>
+        <item>2024—2025 учебный год</item>
+        <item>2025—2026 учебный год</item>
+        <item>2026—2027 учебный год</item>
+        <item>2027—2028 учебный год</item>
+    </string-array>
+
+    <string-array name="semestrs">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string name="semestr">Семестр:</string>
+    <string name="years">Учебный год:</string>
+    <string name="freeTime">Свободное время!</string>
+
 </resources>
