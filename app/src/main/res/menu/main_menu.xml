@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/updateSchedule"
+        android:checkable="false"
+        android:title="@string/menuUpdateSchedule" />
+    <item
+        android:id="@+id/mainSchedule"
+        android:title="@string/menuMain"/>
+    <item
+        android:id="@+id/examsSchedule"
+        android:title="@string/menuExams"/>
+    <item
+        android:id="@+id/changeSchedule"
+        android:title="@string/menuChangeSchedule"/>
+    <item
+        android:id="@+id/options"
+        android:title="@string/menuOptions"/>
+</menu>
+
