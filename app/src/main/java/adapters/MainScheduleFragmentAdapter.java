@@ -1,5 +1,6 @@
 package adapters;
 
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -36,7 +37,6 @@ public class MainScheduleFragmentAdapter extends FragmentStatePagerAdapter {
         _day_of_a_weak.add(Constants.FRIDAY);
         _day_of_a_weak.add(Constants.SATURDAY);
         _day_of_a_weak.add(Constants.SUNDAY);
-
     }
 
     @Override
@@ -95,6 +95,20 @@ public class MainScheduleFragmentAdapter extends FragmentStatePagerAdapter {
     public void set_currentSchedule(WeekClassRoom _currentSchedule) {
         this._currentScheduleClassRoom = _currentSchedule;
     }
+
+    private class LoadFragment extends AsyncTask<Integer, Void, Void> {
+        @Override
+        protected Void doInBackground(Integer... params) {
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {}
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
+    }
+
 
     private WeekGroup _currentScheduleGroup;
     private WeekTeacher _currentScheduleTeacher;

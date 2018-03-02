@@ -32,14 +32,15 @@ public class MainSchedule extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setBackgroundDrawable(null);
         setContentView(R.layout.activity_main_schedule);
 
         pager = (ViewPager) findViewById(R.id.pager);
+        pb =  findViewById(R.id.inflateProgressbar);
 
         _myDb = new DataBaseHelper(this);
 
         _query = getCurruntQuery();
-
         renderScheduleData(_query);
     }
 
@@ -108,11 +109,11 @@ public class MainSchedule extends AppCompatActivity  {
 
             if(pagerAdapter == null){
                 pagerAdapter = new MainScheduleFragmentAdapter(getSupportFragmentManager(), MainSchedule.this, Utilities.SetState(_query));
-                pager.setOffscreenPageLimit(6);
+                pager.setOffscreenPageLimit(1); //чекнуть два
+
             } else
             {
                 pagerAdapter.notifyDataSetChanged();
-
             }
 
             pagerAdapter.set_CURRENT_STATE(Utilities.SetState(_query));
@@ -137,8 +138,8 @@ public class MainSchedule extends AppCompatActivity  {
             }
 
             pager.setAdapter(pagerAdapter);
-
             //pager.setCurrentItem(day);
+
 
             _db = _myDb.getWritableDatabase();
 
@@ -153,6 +154,7 @@ public class MainSchedule extends AppCompatActivity  {
             }
 
             _myDb.close();
+            pb.setVisibility(View.GONE);
         }
     }
 
@@ -249,6 +251,7 @@ public class MainSchedule extends AppCompatActivity  {
         this._currentWeek = _currentWeek;
     }
 
+    View pb;
     ViewPager pager;
     MainScheduleFragmentAdapter pagerAdapter;
     private WeekGroup _currentScheduleGroup;

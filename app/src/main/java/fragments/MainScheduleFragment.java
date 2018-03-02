@@ -87,8 +87,14 @@ public class MainScheduleFragment extends Fragment {
         return view;
     }
 
+
     public void set_CURRENT_STATE(Integer _CURRENT_STATE) {
         this._CURRENT_STATE = _CURRENT_STATE;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
     }
 
     private Integer _CURRENT_STATE;
