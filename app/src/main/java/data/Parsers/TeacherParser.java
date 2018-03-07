@@ -72,8 +72,6 @@ public class TeacherParser extends AbstractParser {
         }
         subjects.add(subject);
 
-        String type = data[index];
-
         types.add(data[index++]);
 
         String gr = "";

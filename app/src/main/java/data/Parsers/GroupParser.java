@@ -71,8 +71,6 @@ public class GroupParser extends AbstractParser {
         }
         subjects.add(subject);
 
-        String type = data[index];
-
         types.add(data[index++]);
 
         String cr = "";

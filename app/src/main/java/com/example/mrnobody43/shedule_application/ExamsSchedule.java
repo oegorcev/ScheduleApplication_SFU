@@ -1,11 +1,16 @@
 package com.example.mrnobody43.shedule_application;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import data.DataBase.DataBaseMapper;
+import data.Scheduler;
+import model.Exams.AllExams;
 
 /**
  * Created by Mr.Nobody43 on 07.02.2018.
@@ -16,8 +21,45 @@ public class ExamsSchedule extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exams_schedule);
+        DataBaseMapper dataBaseMapper = new DataBaseMapper(this);
 
+
+        _query = dataBaseMapper.getCurruntQuery();
+        renderScheduleData(_query);
     }
+
+    public void renderScheduleData(String name) {
+
+        _query = name;
+        setTitle(_query  + " - Экзамены");
+
+        _currentScheduleExams = null;
+
+        ExamsSchedule.ScheduleTask scheduleTask = new ExamsSchedule.ScheduleTask();
+        scheduleTask.execute();
+    }
+
+    private class  ScheduleTask extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            Scheduler scheduler = new Scheduler(ExamsSchedule.this,_query);
+            scheduler.execute();
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,5 +98,12 @@ public class ExamsSchedule extends AppCompatActivity {
 
         return true;
     }
+
+    public void set_currentScheduleExams(AllExams _currentScheduleExams) {
+        this._currentScheduleExams = _currentScheduleExams;
+    }
+
+    private AllExams _currentScheduleExams;
+    private String _query = "";
 }
 

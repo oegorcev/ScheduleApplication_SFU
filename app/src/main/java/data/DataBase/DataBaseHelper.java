@@ -1,4 +1,4 @@
-package data;
+package data.DataBase;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -39,5 +39,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE2 = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME2 + " (" + ID + " TEXT PRIMARY KEY," +
             OPTION + " TEXT)";
+
 }
 

@@ -21,7 +21,7 @@ import java.util.GregorianCalendar;
 import Utils.Constants;
 import Utils.Utilities;
 import adapters.MainScheduleFragmentAdapter;
-import data.DataBaseHelper;
+import data.DataBase.DataBaseHelper;
 import data.Scheduler;
 import model.ClassRoom.WeekClassRoom;
 import model.Group.WeekGroup;
@@ -69,7 +69,6 @@ public class MainSchedule extends AppCompatActivity  {
 
         renderScheduleData(new_query);
     }
-
 
     public void onClassroomClick(View V) {
 

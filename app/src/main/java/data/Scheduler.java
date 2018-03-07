@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
+import com.example.mrnobody43.shedule_application.ExamsSchedule;
 import com.example.mrnobody43.shedule_application.MainSchedule;
 
 import java.util.ArrayList;
@@ -12,13 +13,18 @@ import java.util.List;
 import Utils.Constants;
 import Utils.Pair;
 import Utils.Utilities;
+import data.DataBase.DataBaseHelper;
 import data.Parsers.AbstractParser;
 import data.Parsers.ClassroomParser;
+import data.Parsers.ExamParser;
 import data.Parsers.GroupParser;
 import data.Parsers.TeacherParser;
 import model.ClassRoom.ClassClassRoom;
 import model.ClassRoom.DayClassRoom;
 import model.ClassRoom.WeekClassRoom;
+import model.Exams.AllExams;
+import model.Exams.ClassExam;
+import model.Exams.DayExam;
 import model.Group.ClassGroup;
 import model.Group.DayGroup;
 import model.Group.WeekGroup;
@@ -32,14 +38,23 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         super();
         _query = query;
         _myDb = new DataBaseHelper(mainSchedule);
-        _mainSchedule = mainSchedule;
+        _mainActivity = mainSchedule;
+    }
+
+    public Scheduler(ExamsSchedule examsSchedule, String query) {
+        super();
+        _query = query;
+        _myDb = new DataBaseHelper(examsSchedule);
+        _examsActivity = examsSchedule;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         _CURRENT_STATE = Utilities.SetState(_query);
-        _parser = new AbstractParser(_mainSchedule);
+
+        if(_examsActivity != null)  _parser = new AbstractParser(_examsActivity);
+        else _parser = new AbstractParser(_mainActivity);
 
         String semestr = "1";
         String potok = Constants.FIRST_POTOK.toString();
@@ -76,10 +91,15 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
 
     protected Void doInBackground(MainSchedule... params) {
 
-        if (_parser.getScheduleMain() != null && !(_parser.getScheduleMain().isEmpty())) {
+        if(_examsActivity != null) {
             _times = _parser.get_times();
-            _schedule = _parser.getScheduleMain();
-            _mainSchedule.set_currentWeek(_parser.getCurrentWeek());
+            _examsSchedule = _parser.getScheduleExams();
+            MakeExamSchedule();
+        }
+        else  if (_parser.getScheduleMain() != null && !(_parser.getScheduleMain().isEmpty())) {
+            _times = _parser.get_times();
+            _weekSchedule = _parser.getScheduleMain();
+            _mainActivity.set_currentWeek(_parser.getCurrentWeek());
 
             switch (_CURRENT_STATE) {
                 case Constants.GROUP: {
@@ -104,14 +124,14 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
     }
 
     private void MakeGroupSchedule() {
-        GroupParser groupParser = new GroupParser(_mainSchedule);
+        GroupParser groupParser = new GroupParser(_mainActivity);
         WeekGroup weekGroup = new WeekGroup();
         ArrayList<DayGroup> dayGroups = new ArrayList<DayGroup>();
 
         for (int i = 0; i < 7; ++i) {
             DayGroup curDayGroup = new DayGroup();
 
-            curDayGroup.set_day_of_the_week(_schedule.get(i).get(0).getFirst());
+            curDayGroup.set_day_of_the_week(_weekSchedule.get(i).get(0).getFirst());
 
             ArrayList<ClassGroup> classesTop = new ArrayList<ClassGroup>();
             ArrayList<ClassGroup> classesBot = new ArrayList<ClassGroup>();
@@ -120,8 +140,8 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
                 ClassGroup _classGroupTop = new ClassGroup();
                 ClassGroup _classGroupBot = new ClassGroup();
 
-                _classGroupTop = groupParser.parseClass(_schedule.get(i).get(j).getFirst().split(" "));
-                _classGroupBot = groupParser.parseClass(_schedule.get(i).get(j).getSecond().split(" "));
+                _classGroupTop = groupParser.parseClass(_weekSchedule.get(i).get(j).getFirst().split(" "));
+                _classGroupBot = groupParser.parseClass(_weekSchedule.get(i).get(j).getSecond().split(" "));
 
                 _classGroupTop.set_time(_times.get(j - 1));
                 _classGroupBot.set_time(_times.get(j - 1));
@@ -137,21 +157,20 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         }
 
         weekGroup.setWeek(dayGroups);
-        _mainSchedule.set_currentSchedule(weekGroup);
+        _mainActivity.set_currentSchedule(weekGroup);
 
-        return;
     }
 
     private void MakeTeacherSchedule() {
 
-        TeacherParser teacherParser = new TeacherParser(_mainSchedule);
+        TeacherParser teacherParser = new TeacherParser(_mainActivity);
         WeekTeacher weekTeacher = new WeekTeacher();
         ArrayList<DayTeacher> dayTeachers = new ArrayList<DayTeacher>();
 
         for (int i = 0; i < 7; ++i) {
             DayTeacher curDayTeacher = new DayTeacher();
 
-            curDayTeacher.set_day_of_the_week(_schedule.get(i).get(0).getFirst());
+            curDayTeacher.set_day_of_the_week(_weekSchedule.get(i).get(0).getFirst());
 
             ArrayList<ClassTeacher> classesTop = new ArrayList<ClassTeacher>();
             ArrayList<ClassTeacher> classesBot = new ArrayList<ClassTeacher>();
@@ -160,8 +179,8 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
                 ClassTeacher _classTeacherTop = new ClassTeacher();
                 ClassTeacher _classTeacherBot = new ClassTeacher();
 
-                _classTeacherTop = teacherParser.parseClass(_schedule.get(i).get(j).getFirst().split(" "));
-                _classTeacherBot = teacherParser.parseClass(_schedule.get(i).get(j).getSecond().split(" "));
+                _classTeacherTop = teacherParser.parseClass(_weekSchedule.get(i).get(j).getFirst().split(" "));
+                _classTeacherBot = teacherParser.parseClass(_weekSchedule.get(i).get(j).getSecond().split(" "));
 
                 _classTeacherTop.set_time(_times.get(j - 1));
                 _classTeacherBot.set_time(_times.get(j - 1));
@@ -177,13 +196,12 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         }
 
         weekTeacher.setWeek(dayTeachers);
-        _mainSchedule.set_currentSchedule(weekTeacher);
+        _mainActivity.set_currentSchedule(weekTeacher);
 
-        return;
     }
 
     private void MakeClassRoomSchedule(){
-        ClassroomParser classroomParser = new ClassroomParser(_mainSchedule);
+        ClassroomParser classroomParser = new ClassroomParser(_mainActivity);
 
         WeekClassRoom weekClassRoom = new WeekClassRoom();
         ArrayList<DayClassRoom> dayClassRoom = new ArrayList<DayClassRoom>();
@@ -191,7 +209,7 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         for (int i = 0; i < 7; ++i) {
             DayClassRoom curDayClassRoom = new DayClassRoom();
 
-            curDayClassRoom.set_day_of_the_week(_schedule.get(i).get(0).getFirst());
+            curDayClassRoom.set_day_of_the_week(_weekSchedule.get(i).get(0).getFirst());
 
             ArrayList<ClassClassRoom> classesTop = new ArrayList<ClassClassRoom>();
             ArrayList<ClassClassRoom> classesBot = new ArrayList<ClassClassRoom>();
@@ -200,8 +218,8 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
                 ClassClassRoom _classClassRoomTop = new ClassClassRoom();
                 ClassClassRoom _classClassRoomBot = new ClassClassRoom();
 
-                _classClassRoomTop = classroomParser.parseClass(_schedule.get(i).get(j).getFirst().split(" "));
-                _classClassRoomBot = classroomParser.parseClass(_schedule.get(i).get(j).getSecond().split(" "));
+                _classClassRoomTop = classroomParser.parseClass(_weekSchedule.get(i).get(j).getFirst().split(" "));
+                _classClassRoomBot = classroomParser.parseClass(_weekSchedule.get(i).get(j).getSecond().split(" "));
 
                 _classClassRoomTop.set_time(_times.get(j - 1));
                 _classClassRoomBot.set_time(_times.get(j - 1));
@@ -217,16 +235,48 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         }
 
         weekClassRoom.setWeek(dayClassRoom);
-        _mainSchedule.set_currentSchedule(weekClassRoom);
+        _mainActivity.set_currentSchedule(weekClassRoom);
+    }
 
-        return;
+    private void MakeExamSchedule(){
+        ExamParser examParser = new ExamParser(_examsActivity);
+
+        AllExams allExams = new AllExams();
+        ArrayList<DayExam> dayExams = new ArrayList<DayExam>();
+
+        for (int i = 0; i < (_examsSchedule == null ? 0 : _examsSchedule.size()); ++i) {
+            DayExam curDayExam = new DayExam();
+
+            curDayExam.set_day_of_the_week(_examsSchedule.get(i).get(0).getFirst());
+
+            ArrayList<ClassExam> classes = new ArrayList<ClassExam>();
+
+            for (int j = 1; j <   _examsSchedule.get(i).size(); ++j) {
+                ClassExam classExam = new ClassExam();
+
+                classExam = examParser.parseClass(_examsSchedule.get(i).get(j).getFirst().split(" "));
+
+                classExam.set_time(_times.get(j - 1));
+
+                classes.add(classExam);
+            }
+
+            curDayExam.set_classes(classes);
+
+            dayExams.add(curDayExam);
+        }
+
+        allExams.setWeek(dayExams);
+        _examsActivity.set_currentScheduleExams(allExams);
     }
 
     private String _query;
     private AbstractParser _parser;
-    private MainSchedule _mainSchedule;
+    private MainSchedule _mainActivity;
+    private ExamsSchedule _examsActivity;
     private Integer _CURRENT_STATE;
-    private List<List<Pair<String, String>>> _schedule;
+    private List<List<Pair<String, String>>> _weekSchedule;
+    private List<List<Pair<String, String>>> _examsSchedule;
     private ArrayList<String> _times;
     private DataBaseHelper _myDb;
     private SQLiteDatabase _db;

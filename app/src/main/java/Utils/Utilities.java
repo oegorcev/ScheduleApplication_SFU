@@ -17,7 +17,10 @@ public class Utilities {
     }
 
     public static boolean CheckType(String s) {
-        return s.equals(Constants.LECTION) || s.equals(Constants.PRACTIC) || s.equals(Constants.LAB);
+        return s.equals(Constants.LECTION) || s.equals(Constants.PRACTIC)
+                || s.equals(Constants.LAB) || s.equals(Constants.CONSULTATION)
+                || s.equals(Constants.CREDIT) ||  s.equals(Constants.UST_LECTION)
+                || s.equals(Constants.EXAM);
     }
 
     public static Integer SetState(String query)
@@ -34,9 +37,6 @@ public class Utilities {
 
         return  Constants.GROUP;
     }
-
-
-
 
     public static boolean IsGroup (String s) {
         //Если перед тире стоит буква, то это точно не группа или группы нет

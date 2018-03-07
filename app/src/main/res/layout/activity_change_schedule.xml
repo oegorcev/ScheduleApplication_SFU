@@ -21,6 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5" />
+
         </LinearLayout>
 
         <Button
@@ -29,5 +30,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/changeSchedule"/>
+
+        <ListView
+            android:id="@+id/searchList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

@@ -22,7 +22,7 @@ import java.util.List;
 import Utils.Constants;
 import Utils.Pair;
 import Utils.Utilities;
-import data.DataBaseHelper;
+import data.DataBase.DataBaseHelper;
 
 /**
  * Created by Mr.Nobody43 on 15.01.2018.
@@ -78,7 +78,6 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         Cursor c = _db.query(DataBaseHelper.TABLE_NAME1, null, null, null, null, null, null);
 
         if (c.moveToFirst()) {
-            boolean flag = true;
             while (true) {
                 if (c.isAfterLast()) break;
 
@@ -89,7 +88,6 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
                 String bdId = c.getString(idIndex);
                 if (query.equals(bdId)) {
                     doc = Jsoup.parse(offlineData);
-                    flag = false;
                     break;
                 } else c.moveToNext();
             }

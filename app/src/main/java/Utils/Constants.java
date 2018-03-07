@@ -40,6 +40,10 @@ public class Constants {
    public static final String LECTION = "(лек.)";
    public static final String PRACTIC = "(прак.)";
    public static final String LAB = "(лаб.)";
+   public static final String CONSULTATION = "(конс.)";
+   public static final String CREDIT = "(зач.)";
+   public static final String UST_LECTION = "(уст. лек.)";
+   public static final String EXAM = "(экз.)";
 
    public static final String FIRST_SUB_BAD = "1??.";
    public static final String SECOND_SUB_BAD = "2??.";
