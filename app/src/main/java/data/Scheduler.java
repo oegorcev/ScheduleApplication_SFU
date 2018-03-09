@@ -1,7 +1,5 @@
 package data;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
 import com.example.mrnobody43.shedule_application.ExamsSchedule;
@@ -13,7 +11,7 @@ import java.util.List;
 import Utils.Constants;
 import Utils.Pair;
 import Utils.Utilities;
-import data.DataBase.DataBaseHelper;
+import data.DataBase.DataBaseMapper;
 import data.Parsers.AbstractParser;
 import data.Parsers.ClassroomParser;
 import data.Parsers.ExamParser;
@@ -37,14 +35,13 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
     public Scheduler(MainSchedule mainSchedule, String query) {
         super();
         _query = query;
-        _myDb = new DataBaseHelper(mainSchedule);
         _mainActivity = mainSchedule;
+        _dataBaseMapper = new DataBaseMapper(mainSchedule);
     }
 
     public Scheduler(ExamsSchedule examsSchedule, String query) {
         super();
         _query = query;
-        _myDb = new DataBaseHelper(examsSchedule);
         _examsActivity = examsSchedule;
     }
 
@@ -56,37 +53,9 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         if(_examsActivity != null)  _parser = new AbstractParser(_examsActivity);
         else _parser = new AbstractParser(_mainActivity);
 
-        String semestr = "1";
-        String potok = Constants.FIRST_POTOK.toString();
+        ArrayList<String> params = _dataBaseMapper.getParseOptions();
 
-        _db = _myDb.getReadableDatabase();
-
-        Cursor c = _db.query(DataBaseHelper.TABLE_NAME2, null, null, null, null, null, null);
-
-        if (c.moveToFirst()) {
-
-            while (true) {
-                if (c.isAfterLast()) break;
-
-                int idIndex = c.getColumnIndex(DataBaseHelper.ID);
-                int optionIndex = c.getColumnIndex(DataBaseHelper.OPTION);
-
-                String offlineData = c.getString(optionIndex);
-                String bdId = c.getString(idIndex);
-
-                if (Constants.SEMESTR_DB_ID.equals(bdId)) {
-                    semestr = offlineData;
-                } else if (Constants.YEARS_DB_ID.equals(bdId)) {
-                    potok = offlineData;
-                }
-
-                c.moveToNext();
-
-            }
-        }
-        _myDb.close();
-
-        _parser.execute(_query, semestr, potok);
+        _parser.execute(_query, params.get(0), params.get(1));
     }
 
     protected Void doInBackground(MainSchedule... params) {
@@ -278,6 +247,5 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
     private List<List<Pair<String, String>>> _weekSchedule;
     private List<List<Pair<String, String>>> _examsSchedule;
     private ArrayList<String> _times;
-    private DataBaseHelper _myDb;
-    private SQLiteDatabase _db;
+    private DataBaseMapper _dataBaseMapper;
 }

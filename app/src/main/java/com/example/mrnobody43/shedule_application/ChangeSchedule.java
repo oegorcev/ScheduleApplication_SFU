@@ -20,7 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import Utils.Constants;
+import data.DataBase.DataBaseMapper;
 
 /**
  * Created by Mr.Nobody43 on 24.01.2018.
@@ -33,6 +33,7 @@ public class ChangeSchedule extends AppCompatActivity {
         setContentView(R.layout.activity_change_schedule);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        _dataBaseMapper = new DataBaseMapper(this);
         changeSchedule = (Button) findViewById(R.id.changeSchedule);
         search = (EditText) findViewById(R.id.search);
         searchList = (ListView) findViewById(R.id.searchList);
@@ -65,11 +66,8 @@ public class ChangeSchedule extends AppCompatActivity {
         {
             @Override
             public void onClick(View v){
-                Intent intent = new Intent();
+                _dataBaseMapper.setNewQuery( search.getText().toString());
 
-                intent.putExtra(Constants.CHANGED_SCHEDULE, search.getText().toString());
-
-                setResult(RESULT_OK, intent);
                 finish();
             }
         });
@@ -159,4 +157,5 @@ public class ChangeSchedule extends AppCompatActivity {
     EditText search;
     private ArrayList<String> _queryDb;
     private ArrayList<String> _currentQueryDb;
+    private DataBaseMapper _dataBaseMapper;
 }

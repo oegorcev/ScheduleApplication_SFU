@@ -21,10 +21,10 @@ public class ExamsSchedule extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exams_schedule);
-        DataBaseMapper dataBaseMapper = new DataBaseMapper(this);
+        _dataBaseMapper = new DataBaseMapper(this);
 
 
-        _query = dataBaseMapper.getCurruntQuery();
+        _query = _dataBaseMapper.getCurruntQuery();
         renderScheduleData(_query);
     }
 
@@ -82,7 +82,7 @@ public class ExamsSchedule extends AppCompatActivity {
                 startActivityForResult(intent, 1);
                 break;
             case R.id.updateSchedule:
-                //renderScheduleData(_query);
+                renderScheduleData(_query);
                 break;
             case R.id.mainSchedule:
                 intent = new Intent(ExamsSchedule.this, MainSchedule.class);
@@ -99,11 +99,18 @@ public class ExamsSchedule extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        _query = _dataBaseMapper.getCurruntQuery();
+        renderScheduleData(_query);
+    }
+
     public void set_currentScheduleExams(AllExams _currentScheduleExams) {
         this._currentScheduleExams = _currentScheduleExams;
     }
 
     private AllExams _currentScheduleExams;
     private String _query = "";
+    private DataBaseMapper _dataBaseMapper;
 }
 

@@ -1,8 +1,6 @@
 package com.example.mrnobody43.shedule_application;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,6 +20,7 @@ import Utils.Constants;
 import Utils.Utilities;
 import adapters.MainScheduleFragmentAdapter;
 import data.DataBase.DataBaseHelper;
+import data.DataBase.DataBaseMapper;
 import data.Scheduler;
 import model.ClassRoom.WeekClassRoom;
 import model.Group.WeekGroup;
@@ -35,12 +34,13 @@ public class MainSchedule extends AppCompatActivity  {
         getWindow().setBackgroundDrawable(null);
         setContentView(R.layout.activity_main_schedule);
 
+        _dataBaseMapper = new DataBaseMapper(this);
         pager = (ViewPager) findViewById(R.id.pager);
         pb =  findViewById(R.id.inflateProgressbar);
 
         _myDb = new DataBaseHelper(this);
 
-        _query = getCurruntQuery();
+        _query = _dataBaseMapper.getCurruntQuery();
         renderScheduleData(_query);
     }
 
@@ -139,52 +139,8 @@ public class MainSchedule extends AppCompatActivity  {
             pager.setAdapter(pagerAdapter);
             //pager.setCurrentItem(day);
 
-
-            _db = _myDb.getWritableDatabase();
-
-            ContentValues cv = new ContentValues();
-            cv.put(DataBaseHelper.ID, Constants.CUR_QUERY_DB_ID);
-            cv.put(DataBaseHelper.OPTION, _query);
-
-            int was = _db.update(DataBaseHelper.TABLE_NAME2, cv, DataBaseHelper.ID + " = ?", new String[] { Constants.CUR_QUERY_DB_ID });
-            if(was == 0)
-            {
-                _db.insert(DataBaseHelper.TABLE_NAME2, null, cv);
-            }
-
-            _myDb.close();
             pb.setVisibility(View.GONE);
         }
-    }
-
-    private String getCurruntQuery()
-    {
-        String s = "Расписание занятий ИТА ЮФУ";
-
-        _db = _myDb.getReadableDatabase();
-
-        Cursor c = _db.query(DataBaseHelper.TABLE_NAME2, null, null, null, null, null, null);
-
-        if (c.moveToFirst()) {
-            boolean flag = true;
-            while (true) {
-                if (c.isAfterLast()) break;
-
-                int idIndex = c.getColumnIndex(DataBaseHelper.ID);
-                int optionIndex = c.getColumnIndex(DataBaseHelper.OPTION);
-
-                String offlineData = c.getString(optionIndex);
-                String bdId = c.getString(idIndex);
-                if (Constants.CUR_QUERY_DB_ID.equals(bdId)) {
-                    s = offlineData;
-                    flag = false;
-                    break;
-                } else c.moveToNext();
-            }
-        }
-        _myDb.close();
-
-        return s;
     }
 
     @Override
@@ -228,10 +184,8 @@ public class MainSchedule extends AppCompatActivity  {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data != null) {
-            _query = data.getStringExtra(Constants.CHANGED_SCHEDULE);
-            renderScheduleData(_query);
-        }
+        _query = _dataBaseMapper.getCurruntQuery();
+        renderScheduleData(_query);
     }
 
     public void set_currentSchedule(WeekGroup _currentSchedule) {
@@ -261,4 +215,5 @@ public class MainSchedule extends AppCompatActivity  {
     private String _currentWeek;
     private DataBaseHelper _myDb;
     private SQLiteDatabase _db;
+    private DataBaseMapper _dataBaseMapper;
 }

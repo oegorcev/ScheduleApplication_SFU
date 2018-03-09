@@ -1,13 +1,9 @@
 package data.Parsers;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Looper;
 import android.widget.Toast;
 
 import org.jsoup.Jsoup;
@@ -22,7 +18,7 @@ import java.util.List;
 import Utils.Constants;
 import Utils.Pair;
 import Utils.Utilities;
-import data.DataBase.DataBaseHelper;
+import data.DataBase.DataBaseMapper;
 
 /**
  * Created by Mr.Nobody43 on 15.01.2018.
@@ -30,19 +26,13 @@ import data.DataBase.DataBaseHelper;
 
 public class AbstractParser extends AsyncTask<String, Void, Void> implements IParser {
 
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) _mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
     public  AbstractParser(){}
 
     public AbstractParser(Context mContext)
     {
         this._mContext = mContext;
-        _myDb = new DataBaseHelper(mContext);
+        _dataBaseMapper = new DataBaseMapper(mContext);
+        _isServerBroken = false;
     }
 
     @Override
@@ -54,11 +44,12 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
             doc = DownloadSchedule(params[0], params[1], params[2]);
             s = getCurrentWeek(params[1], params[2]);
             if(doc == null){
-                doc = GetDbSchedule(params[0]);
+                _isServerBroken = true;
+                doc = _dataBaseMapper.getDbSchedule(params[0]);
             }
         }
         else {
-            doc = GetDbSchedule(params[0]);
+            doc = _dataBaseMapper.getDbSchedule(params[0]);
         }
 
         if(doc != null) {
@@ -70,55 +61,27 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         return null;
     }
 
-    public Document GetDbSchedule(String query){
-        Document doc = null;
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
 
-        _db = _myDb.getReadableDatabase();
-
-        Cursor c = _db.query(DataBaseHelper.TABLE_NAME1, null, null, null, null, null, null);
-
-        if (c.moveToFirst()) {
-            while (true) {
-                if (c.isAfterLast()) break;
-
-                int idIndex = c.getColumnIndex(DataBaseHelper.ID);
-                int htmlIndex = c.getColumnIndex(DataBaseHelper.HTML_CODE);
-
-                String offlineData = c.getString(htmlIndex);
-                String bdId = c.getString(idIndex);
-                if (query.equals(bdId)) {
-                    doc = Jsoup.parse(offlineData);
-                    break;
-                } else c.moveToNext();
-            }
+        if(_isServerBroken) {
+            Toast toast = Toast.makeText(_mContext, "Сервер недоступен!", Toast.LENGTH_SHORT);
+            toast.show();
         }
-        _myDb.close();
-
-        return doc;
     }
 
-    public Document DownloadSchedule(String queury, String semestr, String potok) {
+    public Document DownloadSchedule(String query, String semestr, String potok) {
         Document doc = null;
         try {
-            queury = queury.replace(" ", "%20");
+            query = query.replace(" ", "%20");
 
-            doc = Jsoup.connect(Constants.URL + queury + Constants.POTOK + potok + Constants.SEMESTR + semestr).get();
+            doc = Jsoup.connect(Constants.URL + query + Constants.POTOK + potok + Constants.SEMESTR + semestr).get();
 
-            _db = _myDb.getWritableDatabase();
-
-            ContentValues cv = new ContentValues();
-            cv.put(DataBaseHelper.ID, queury);
-            cv.put(DataBaseHelper.HTML_CODE, doc.toString());
-
-            int was = _db.update(DataBaseHelper.TABLE_NAME1, cv, DataBaseHelper.ID + " = ?", new String[] { queury });
-            if(was == 0)
-            {
-                _db.insert(DataBaseHelper.TABLE_NAME1, null, cv);
-            }
-
-            _myDb.close();
+            _dataBaseMapper.setNewSchedule(doc, query);
 
         } catch (IOException e) {
+
             e.printStackTrace();
         }
 
@@ -138,9 +101,6 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
             infoString = mas[1];
 
         } catch (IOException e) {
-            Looper.prepare();
-            _toast = Toast.makeText(_mContext, "Сервер недоступен!", Toast.LENGTH_SHORT);
-            _toast.show();
             e.printStackTrace();
         }
 
@@ -229,20 +189,19 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         return schedule;
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) _mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     public ArrayList<String> get_times() {
         return _times;
     }
 
-    public void setTimes(ArrayList<String> _times) {
-        this._times = _times;
-    }
-
     public List<List<Pair<String, String>>> getScheduleMain() {
         return _scheduleMain;
-    }
-
-    public void setScheduleMain(List<List<Pair<String, String>>> _scheduleMain) {
-        this._scheduleMain = _scheduleMain;
     }
 
     public List<List<Pair<String, String>>> getScheduleExams() {
@@ -265,8 +224,7 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
     private List<List<Pair<String, String>>> _scheduleMain;
     private String _currentWeek;
     private List<List<Pair<String, String>>> _scheduleExams;
-    private DataBaseHelper _myDb;
-    private SQLiteDatabase _db;
     private Context _mContext;
-    private Toast _toast;
+    private boolean _isServerBroken;
+    private DataBaseMapper _dataBaseMapper;
 }
