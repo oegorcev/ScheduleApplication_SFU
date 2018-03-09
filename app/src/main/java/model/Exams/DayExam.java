@@ -8,15 +8,15 @@ import java.util.ArrayList;
 
 public class DayExam {
 
-    private String _day_of_the_week;
+    private String _day;
     private ArrayList<ClassExam> _classes;
 
-    public String get_day_of_the_week() {
-        return _day_of_the_week;
+    public String get_day() {
+        return _day;
     }
 
-    public void set_day_of_the_week(String _day_of_the_week) {
-        this._day_of_the_week = _day_of_the_week;
+    public void set_day(String _day) {
+        this._day = _day;
     }
 
     public ArrayList<ClassExam> get_classes() {

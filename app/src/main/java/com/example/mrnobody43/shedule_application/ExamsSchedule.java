@@ -3,11 +3,16 @@ package com.example.mrnobody43.shedule_application;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
+import java.util.ArrayList;
+
+import adapters.ExamFragmentAdapter;
 import data.DataBase.DataBaseMapper;
 import data.Scheduler;
 import model.Exams.AllExams;
@@ -20,9 +25,11 @@ public class ExamsSchedule extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exams_schedule);
+        setContentView(R.layout.activity_schedule);
         _dataBaseMapper = new DataBaseMapper(this);
 
+        pager = (ViewPager) findViewById(R.id.pager);
+        pb =  findViewById(R.id.inflateProgressbar);
 
         _query = _dataBaseMapper.getCurruntQuery();
         renderScheduleData(_query);
@@ -49,17 +56,36 @@ public class ExamsSchedule extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(String... params) {
-
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
 
+            ArrayList<String> days = new ArrayList<String>();
+
+            for(int iCnt = 0; iCnt <  _currentScheduleExams.getAll().size(); ++iCnt) {
+                days.add(_currentScheduleExams.getAll().get(iCnt).get_day());
+            }
+
+            if(pagerAdapter == null){
+                pagerAdapter = new ExamFragmentAdapter(getSupportFragmentManager(), ExamsSchedule.this, days);
+                pager.setOffscreenPageLimit(1); //чекнуть два
+
+            } else
+            {
+                pagerAdapter.notifyDataSetChanged();
+            }
+
+            pagerAdapter.set_allExams(_currentScheduleExams);
+
+            pager.setAdapter(pagerAdapter);
+
+            pb.setVisibility(View.GONE);
+
+            super.onPostExecute(aVoid);
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,6 +135,9 @@ public class ExamsSchedule extends AppCompatActivity {
         this._currentScheduleExams = _currentScheduleExams;
     }
 
+    View pb;
+    ViewPager pager;
+    ExamFragmentAdapter pagerAdapter;
     private AllExams _currentScheduleExams;
     private String _query = "";
     private DataBaseMapper _dataBaseMapper;

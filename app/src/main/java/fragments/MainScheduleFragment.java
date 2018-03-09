@@ -52,7 +52,7 @@ public class MainScheduleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view  = inflater.inflate(R.layout.main_schedule_fragment, container, false);
+        View view  = inflater.inflate(R.layout.fragment_schedule, container, false);
 
         listView1 = (ListView) view.findViewById(R.id.list1);
 

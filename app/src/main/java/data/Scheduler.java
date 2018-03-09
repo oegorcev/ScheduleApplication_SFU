@@ -43,6 +43,7 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         super();
         _query = query;
         _examsActivity = examsSchedule;
+        _dataBaseMapper = new DataBaseMapper(examsSchedule);
     }
 
     @Override
@@ -53,7 +54,8 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         if(_examsActivity != null)  _parser = new AbstractParser(_examsActivity);
         else _parser = new AbstractParser(_mainActivity);
 
-        ArrayList<String> params = _dataBaseMapper.getParseOptions();
+        ArrayList<String> params = new ArrayList<String>();
+        params = _dataBaseMapper.getParseOptions();
 
         _parser.execute(_query, params.get(0), params.get(1));
     }
@@ -216,7 +218,7 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         for (int i = 0; i < (_examsSchedule == null ? 0 : _examsSchedule.size()); ++i) {
             DayExam curDayExam = new DayExam();
 
-            curDayExam.set_day_of_the_week(_examsSchedule.get(i).get(0).getFirst());
+            curDayExam.set_day(_examsSchedule.get(i).get(0).getFirst());
 
             ArrayList<ClassExam> classes = new ArrayList<ClassExam>();
 
@@ -235,7 +237,7 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
             dayExams.add(curDayExam);
         }
 
-        allExams.setWeek(dayExams);
+        allExams.setAll(dayExams);
         _examsActivity.set_currentScheduleExams(allExams);
     }
 

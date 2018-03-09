@@ -1,7 +1,6 @@
 package com.example.mrnobody43.shedule_application;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -19,7 +18,6 @@ import java.util.GregorianCalendar;
 import Utils.Constants;
 import Utils.Utilities;
 import adapters.MainScheduleFragmentAdapter;
-import data.DataBase.DataBaseHelper;
 import data.DataBase.DataBaseMapper;
 import data.Scheduler;
 import model.ClassRoom.WeekClassRoom;
@@ -32,13 +30,11 @@ public class MainSchedule extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setBackgroundDrawable(null);
-        setContentView(R.layout.activity_main_schedule);
+        setContentView(R.layout.activity_schedule);
 
         _dataBaseMapper = new DataBaseMapper(this);
         pager = (ViewPager) findViewById(R.id.pager);
         pb =  findViewById(R.id.inflateProgressbar);
-
-        _myDb = new DataBaseHelper(this);
 
         _query = _dataBaseMapper.getCurruntQuery();
         renderScheduleData(_query);
@@ -55,31 +51,6 @@ public class MainSchedule extends AppCompatActivity  {
 
         ScheduleTask scheduleTask = new ScheduleTask();
         scheduleTask.execute();
-    }
-
-
-    public void onTeacherClick(View V) {
-
-        LinearLayout vwParentRow = (LinearLayout)V.getParent();
-
-        _prev_query = _query;
-
-        TextView child = (TextView)vwParentRow.getChildAt(1);
-        String new_query = child.getText().toString();
-
-        renderScheduleData(new_query);
-    }
-
-    public void onClassroomClick(View V) {
-
-        LinearLayout vwParentRow = (LinearLayout)V.getParent();
-
-        _prev_query = _query;
-
-        TextView child = (TextView)vwParentRow.getChildAt(2);
-        String new_query = child.getText().toString();
-
-        renderScheduleData(new_query);
     }
 
     private class  ScheduleTask extends AsyncTask<String, Void, Void> {
@@ -188,6 +159,33 @@ public class MainSchedule extends AppCompatActivity  {
         renderScheduleData(_query);
     }
 
+    public void onTeacherClick(View V) {
+
+        LinearLayout vwParentRow = (LinearLayout)V.getParent();
+
+        _prev_query = _query;
+
+        TextView child = (TextView)vwParentRow.getChildAt(1);
+
+        _query = child.getText().toString();
+        _dataBaseMapper.setNewQuery(_query);
+
+        renderScheduleData(_query);
+    }
+
+    public void onClassroomClick(View V) {
+
+        LinearLayout vwParentRow = (LinearLayout)V.getParent();
+
+        _prev_query = _query;
+
+        TextView child = (TextView)vwParentRow.getChildAt(2);
+        _query = child.getText().toString();
+        _dataBaseMapper.setNewQuery(_query);
+
+        renderScheduleData(_query);
+    }
+
     public void set_currentSchedule(WeekGroup _currentSchedule) {
         this._currentScheduleGroup = _currentSchedule;
     }
@@ -213,7 +211,5 @@ public class MainSchedule extends AppCompatActivity  {
     private String _prev_query;
     private String _query = "";
     private String _currentWeek;
-    private DataBaseHelper _myDb;
-    private SQLiteDatabase _db;
     private DataBaseMapper _dataBaseMapper;
 }

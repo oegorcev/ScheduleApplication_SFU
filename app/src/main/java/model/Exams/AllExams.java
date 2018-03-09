@@ -10,12 +10,12 @@ public class AllExams {
 
     private ArrayList<DayExam> _allDays;
 
-    public ArrayList<DayExam> getWeek() {
+    public ArrayList<DayExam> getAll() {
         return _allDays;
     }
 
-    public void setWeek(ArrayList<DayExam> week) {
-        this._allDays = week;
+    public void setAll(ArrayList<DayExam> all) {
+        this._allDays = all;
     }
 
 }
