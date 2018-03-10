@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.example.mrnobody43.shedule_application.R;
 
-import java.util.ArrayList;
-
 import Utils.Constants;
 import model.Teacher.ClassTeacher;
 import model.Teacher.WeekTeacher;
@@ -23,11 +21,11 @@ import model.Teacher.WeekTeacher;
 public class ScheduleTeacherAdapter extends BaseAdapter {
 
     public ScheduleTeacherAdapter(Context context, WeekTeacher WeekTeacher,int day, int week) {
-        ctx = context;
+        _ctx = context;
         _weekTeacher = WeekTeacher;
         _indexTab= day;
         _indexWeek = week;
-        lInflater = (LayoutInflater) ctx
+        _lInflater = (LayoutInflater) _ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -45,7 +43,7 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
     // элемент по позиции
     @Override
     public Object getItem(int position) {
-        switch (_indexTab){
+        switch (_indexWeek % 2){
             case 0:
                 return _weekTeacher.getWeek().get(_indexTab).get_classesBotWeek().get(position);
             case 1:
@@ -61,7 +59,7 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
         return position;
     }
 
-    ClassTeacher getClass(int position) {
+    private ClassTeacher getClass(int position) {
         return ((ClassTeacher) getItem(position));
     }
 
@@ -73,34 +71,34 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
         ClassTeacher p = getClass(position);
 
         if(convertView == null || convertView.getParent() != parent) {
-            convertView = lInflater.inflate(R.layout.schedule_list_teacher_item, parent, false);
+            convertView = _lInflater.inflate(R.layout.schedule_list_teacher_item, parent, false);
         }
 
         String cnt = Integer.toString(position + 1);
         ((TextView) convertView.findViewById(R.id.id_pair)).setText(cnt);
         ((TextView) convertView.findViewById(R.id.time)).setText(p.get_time());
 
-        LinearLayout.LayoutParams lParams1 = (LinearLayout.LayoutParams) ((LinearLayout) convertView.findViewById((ctx.getResources().getIdentifier("pair2", "id", ctx.getPackageName())))).getLayoutParams();
-        ((LinearLayout) convertView.findViewById((ctx.getResources().getIdentifier("pair2", "id", ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+        LinearLayout.LayoutParams lParams1 = (LinearLayout.LayoutParams) ((LinearLayout) convertView.findViewById((_ctx.getResources().getIdentifier("pair2", "id", _ctx.getPackageName())))).getLayoutParams();
+        ((LinearLayout) convertView.findViewById((_ctx.getResources().getIdentifier("pair2", "id", _ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
         for (Integer iCnt = 1; iCnt <= p.get_subject().size(); ++iCnt)
         {
 
             String sCnt = iCnt.toString();
-            String packageName = ctx.getPackageName();
+            String packageName = _ctx.getPackageName();
 
             if(iCnt > 1){
-                ((LinearLayout) convertView.findViewById((ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", ctx.getPackageName())))).setLayoutParams(lParams1);
+                ((LinearLayout) convertView.findViewById((_ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", _ctx.getPackageName())))).setLayoutParams(lParams1);
             }
 
             if (p.get_subject().get(0).equals(Constants.FREE)) {
-                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("subject" + sCnt, "id", packageName)))).setText(Constants.FREE_TIME);
-                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("type" + sCnt, "id", packageName)))).setText(Constants.EMPTY_STRING);
-                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("groups" + sCnt, "id", packageName)))).setText(Constants.EMPTY_STRING);
-                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("classroom" + sCnt, "id", packageName)))).setText(Constants.EMPTY_STRING);
+                ((TextView) convertView.findViewById((_ctx.getResources().getIdentifier("subject" + sCnt, "id", packageName)))).setText(Constants.FREE_TIME);
+                ((TextView) convertView.findViewById((_ctx.getResources().getIdentifier("type" + sCnt, "id", packageName)))).setText(Constants.EMPTY_STRING);
+                ((TextView) convertView.findViewById((_ctx.getResources().getIdentifier("groups" + sCnt, "id", packageName)))).setText(Constants.EMPTY_STRING);
+                ((TextView) convertView.findViewById((_ctx.getResources().getIdentifier("classroom" + sCnt, "id", packageName)))).setText(Constants.EMPTY_STRING);
 
             } else {
-                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("subject" + sCnt, "id", packageName)))).setText(p.get_subject().get(iCnt - 1));
+                ((TextView) convertView.findViewById((_ctx.getResources().getIdentifier("subject" + sCnt, "id", packageName)))).setText(p.get_subject().get(iCnt - 1));
 
                 String groups = "";
 
@@ -111,9 +109,9 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
                     groups += cur + "\n";
                 }
 
-                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("groups" + sCnt, "id", packageName)))).setText(groups);
-                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("type" + sCnt, "id", packageName)))).setText(p.get_type().get(iCnt - 1));
-                ((TextView) convertView.findViewById((ctx.getResources().getIdentifier("classroom" + sCnt, "id", packageName)))).setText(p.get_classroom().get(iCnt - 1));
+                ((TextView) convertView.findViewById((_ctx.getResources().getIdentifier("groups" + sCnt, "id", packageName)))).setText(groups);
+                ((TextView) convertView.findViewById((_ctx.getResources().getIdentifier("type" + sCnt, "id", packageName)))).setText(p.get_type().get(iCnt - 1));
+                ((TextView) convertView.findViewById((_ctx.getResources().getIdentifier("classroom" + sCnt, "id", packageName)))).setText(p.get_classroom().get(iCnt - 1));
             }
         }
 
@@ -121,10 +119,9 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private Context ctx;
-    private LayoutInflater lInflater;
+    private Context _ctx;
+    private LayoutInflater _lInflater;
     private WeekTeacher _weekTeacher;
-    ArrayList<ClassTeacher> objects;
     private int _indexTab;
     private int _indexWeek;
 }

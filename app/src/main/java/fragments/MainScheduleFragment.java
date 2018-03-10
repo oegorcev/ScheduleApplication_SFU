@@ -16,6 +16,7 @@ import adapters.ScheduleClassRoomAdapter;
 import adapters.ScheduleEmptyAdapter;
 import adapters.ScheduleGroupAdapter;
 import adapters.ScheduleTeacherAdapter;
+import model.ClassRoom.WeekClassRoom;
 import model.Group.WeekGroup;
 import model.Teacher.WeekTeacher;
 
@@ -43,6 +44,15 @@ public class MainScheduleFragment extends Fragment {
         return pageFragment;
     }
 
+    static public MainScheduleFragment newInstance(MainSchedule ctx, WeekClassRoom currentScheduleClassroom, int day, int CURRENT_STATE, int week) {
+        MainScheduleFragment pageFragment = new MainScheduleFragment();
+
+        pageFragment.set_CURRENT_STATE(CURRENT_STATE);
+        pageFragment._scheduleClassRoomAdapter = new ScheduleClassRoomAdapter(ctx, currentScheduleClassroom, day, week);
+
+        return pageFragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,28 +64,32 @@ public class MainScheduleFragment extends Fragment {
 
         View view  = inflater.inflate(R.layout.fragment_schedule, container, false);
 
-        listView1 = (ListView) view.findViewById(R.id.list1);
+        ListView listView = (ListView) view.findViewById(R.id.list1);
 
         if(_CURRENT_STATE != null) {
             switch (_CURRENT_STATE) {
                 case Constants.GROUP: {
                     if (_scheduleGroupAdapter != null && !_scheduleGroupAdapter.isNull()) {
-                        listView1.setAdapter(_scheduleGroupAdapter);
+                        listView.setAdapter(_scheduleGroupAdapter);
                     } else {
-                        listView1.setAdapter(new ScheduleEmptyAdapter(getContext()));
+                        listView.setAdapter(new ScheduleEmptyAdapter(getContext()));
                     }
                     break;
                 }
                 case Constants.TEACHER: {
                     if (_scheduleTeacherAdapter != null && !_scheduleTeacherAdapter.isNull()) {
-                        listView1.setAdapter(_scheduleTeacherAdapter);
+                        listView.setAdapter(_scheduleTeacherAdapter);
                     } else {
-                        listView1.setAdapter(new ScheduleEmptyAdapter(getContext()));
+                        listView.setAdapter(new ScheduleEmptyAdapter(getContext()));
                     }
                     break;
                 }
                 case Constants.CLASSROOM: {
-
+                    if (_scheduleClassRoomAdapter != null && !_scheduleClassRoomAdapter.isNull()) {
+                        listView.setAdapter(_scheduleClassRoomAdapter);
+                    } else {
+                        listView.setAdapter(new ScheduleEmptyAdapter(getContext()));
+                    }
                     break;
                 }
                 default: {
@@ -87,7 +101,6 @@ public class MainScheduleFragment extends Fragment {
         return view;
     }
 
-
     public void set_CURRENT_STATE(Integer _CURRENT_STATE) {
         this._CURRENT_STATE = _CURRENT_STATE;
     }
@@ -98,7 +111,6 @@ public class MainScheduleFragment extends Fragment {
     }
 
     private Integer _CURRENT_STATE;
-    private ListView listView1;
     private ScheduleClassRoomAdapter _scheduleClassRoomAdapter;
     private ScheduleTeacherAdapter _scheduleTeacherAdapter;
     private ScheduleGroupAdapter _scheduleGroupAdapter;

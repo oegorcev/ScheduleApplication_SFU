@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,18 +33,23 @@ public class MainSchedule extends AppCompatActivity  {
         getWindow().setBackgroundDrawable(null);
         setContentView(R.layout.activity_schedule);
 
+        _swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        _swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                renderScheduleData(true);
+            }
+        });
+
         _dataBaseMapper = new DataBaseMapper(this);
         pager = (ViewPager) findViewById(R.id.pager);
         pb =  findViewById(R.id.inflateProgressbar);
 
         _query = _dataBaseMapper.getCurruntQuery();
-        renderScheduleData(_query);
+        renderScheduleData();
     }
 
-    public void renderScheduleData(String name) {
-
-        _query = name;
-        setTitle(_query);
+    public void renderScheduleData() {
 
         _currentScheduleClassRoom = null;
         _currentScheduleGroup = null;
@@ -51,6 +57,18 @@ public class MainSchedule extends AppCompatActivity  {
 
         ScheduleTask scheduleTask = new ScheduleTask();
         scheduleTask.execute();
+    }
+
+    public void renderScheduleData(Boolean isPull) {
+
+        _currentScheduleClassRoom = null;
+        _currentScheduleGroup = null;
+        _currentScheduleTeacher = null;
+
+        ScheduleTask scheduleTask = new ScheduleTask();
+        scheduleTask.execute();
+
+        _swipeContainer.setRefreshing(false);
     }
 
     private class  ScheduleTask extends AsyncTask<String, Void, Void> {
@@ -79,13 +97,14 @@ public class MainSchedule extends AppCompatActivity  {
 
             if(pagerAdapter == null){
                 pagerAdapter = new MainScheduleFragmentAdapter(getSupportFragmentManager(), MainSchedule.this, Utilities.SetState(_query));
-                pager.setOffscreenPageLimit(1); //чекнуть два
+                pager.setOffscreenPageLimit(2); //чекнуть два
 
             } else
             {
                 pagerAdapter.notifyDataSetChanged();
             }
 
+            pagerAdapter.set_showsWeek(_curWeek);
             pagerAdapter.set_CURRENT_STATE(Utilities.SetState(_query));
 
             switch (Utilities.SetState(_query))
@@ -110,7 +129,20 @@ public class MainSchedule extends AppCompatActivity  {
             pager.setAdapter(pagerAdapter);
             //pager.setCurrentItem(day);
 
+            setTitles();
             pb.setVisibility(View.GONE);
+        }
+    }
+
+    private void setTitles() {
+        String week = _dataBaseMapper.getCurrentWeek();
+        setTitle(_query + ". " + week + " неделя.");
+        if(getSupportActionBar()!= null) {
+            if(_curWeek % 2 == 0){
+                getSupportActionBar().setSubtitle("Показывается " +  "нижняя" + " неделя.");
+            } else {
+                getSupportActionBar().setSubtitle("Показывается " +  "верхняя" + " неделя.");
+            }
         }
     }
 
@@ -119,10 +151,25 @@ public class MainSchedule extends AppCompatActivity  {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
 
+        _menu = menu;
         MenuItem item = menu.findItem(R.id.examsSchedule);
         item.setVisible(true);
         item = menu.findItem(R.id.mainSchedule);
         item.setVisible(false);
+
+        _curWeek = Integer.parseInt(_dataBaseMapper.getCurrentWeek());
+
+        if(_curWeek % 2 == 0) {
+            item = menu.findItem(R.id.botWeek);
+            item.setVisible(true);
+            item = menu.findItem(R.id.upWeek);
+            item.setVisible(false);
+        } else {
+            item = menu.findItem(R.id.botWeek);
+            item.setVisible(true);
+            item = menu.findItem(R.id.upWeek);
+            item.setVisible(false);
+        }
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -136,7 +183,7 @@ public class MainSchedule extends AppCompatActivity  {
                 startActivityForResult(intent, 1);
                 break;
             case R.id.updateSchedule:
-                renderScheduleData(_query);
+                renderScheduleData();
                 break;
             case R.id.examsSchedule:
                 intent = new Intent(MainSchedule.this, ExamsSchedule.class);
@@ -145,6 +192,22 @@ public class MainSchedule extends AppCompatActivity  {
             case R.id.options:
                 intent = new Intent(MainSchedule.this, Options.class);
                 startActivity(intent);
+                break;
+            case R.id.upWeek:
+                item.setVisible(false);
+                _curWeek++;
+                _curWeek %= 2;
+                item = _menu.findItem(R.id.botWeek);
+                item.setVisible(true);
+                renderScheduleData();
+                break;
+            case R.id.botWeek:
+                _curWeek++;
+                _curWeek %= 2;
+                item.setVisible(false);
+                item = _menu.findItem(R.id.upWeek);
+                item.setVisible(true);
+                renderScheduleData();
                 break;
             default:
                 break;
@@ -156,7 +219,7 @@ public class MainSchedule extends AppCompatActivity  {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         _query = _dataBaseMapper.getCurruntQuery();
-        renderScheduleData(_query);
+        renderScheduleData();
     }
 
     public void onTeacherClick(View V) {
@@ -170,7 +233,7 @@ public class MainSchedule extends AppCompatActivity  {
         _query = child.getText().toString();
         _dataBaseMapper.setNewQuery(_query);
 
-        renderScheduleData(_query);
+        renderScheduleData();
     }
 
     public void onClassroomClick(View V) {
@@ -183,7 +246,7 @@ public class MainSchedule extends AppCompatActivity  {
         _query = child.getText().toString();
         _dataBaseMapper.setNewQuery(_query);
 
-        renderScheduleData(_query);
+        renderScheduleData();
     }
 
     public void set_currentSchedule(WeekGroup _currentSchedule) {
@@ -198,18 +261,16 @@ public class MainSchedule extends AppCompatActivity  {
         this._currentScheduleClassRoom = _currentSchedule;
     }
 
-    public void set_currentWeek(String _currentWeek) {
-        this._currentWeek = _currentWeek;
-    }
-
     View pb;
     ViewPager pager;
     MainScheduleFragmentAdapter pagerAdapter;
+    private Menu _menu;
+    private SwipeRefreshLayout _swipeContainer;
     private WeekGroup _currentScheduleGroup;
     private WeekTeacher _currentScheduleTeacher;
     private WeekClassRoom _currentScheduleClassRoom;
     private String _prev_query;
     private String _query = "";
-    private String _currentWeek;
+    private Integer _curWeek;
     private DataBaseMapper _dataBaseMapper;
 }

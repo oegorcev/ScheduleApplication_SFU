@@ -20,7 +20,7 @@ import model.Exams.ClassExam;
 public class ExamAdapter extends BaseAdapter {
     public ExamAdapter(Context context, AllExams allExams, int day) {
         _allExams = allExams;
-        indexTab= day;
+        _indexTab = day;
         _lInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -32,11 +32,11 @@ public class ExamAdapter extends BaseAdapter {
 
     // кол-во элементов
     @Override
-    public int getCount() {return _allExams.getAll().get(indexTab).get_classes().size();}
+    public int getCount() {return _allExams.getAll().get(_indexTab).get_classes().size();}
 
     // элемент по позиции
     @Override
-    public Object getItem(int position) {return _allExams.getAll().get(indexTab).get_classes().get(position);}
+    public Object getItem(int position) {return _allExams.getAll().get(_indexTab).get_classes().get(position);}
 
     @Override
     public long getItemId(int position) {
@@ -82,5 +82,5 @@ public class ExamAdapter extends BaseAdapter {
 
     private LayoutInflater _lInflater;
     private AllExams _allExams;
-    private int indexTab;
+    private int _indexTab;
 }

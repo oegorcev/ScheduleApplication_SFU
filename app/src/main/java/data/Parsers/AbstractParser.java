@@ -38,11 +38,10 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
     @Override
     protected Void doInBackground(String... params) {
         Document doc = null;
-        String s = "1";
 
         if(isNetworkAvailable()){
             doc = DownloadSchedule(params[0], params[1], params[2]);
-            s = getCurrentWeek(params[1], params[2]);
+            downloadCurrentWeek(params[1], params[2]);
             if(doc == null){
                 _isServerBroken = true;
                 doc = _dataBaseMapper.getDbSchedule(params[0]);
@@ -55,8 +54,6 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         if(doc != null) {
             ParseDocument(doc);
         }
-
-        setCurrentWeek(s);
 
         return null;
     }
@@ -75,8 +72,7 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         Document doc = null;
         try {
             query = query.replace(" ", "%20");
-
-            doc = Jsoup.connect(Constants.URL + query + Constants.POTOK + potok + Constants.SEMESTR + semestr).get();
+            doc = Jsoup.connect(Constants.URL + query + Constants.POTOK + potok + Constants.SEMESTR + semestr).timeout(2500).get();
 
             _dataBaseMapper.setNewSchedule(doc, query);
 
@@ -88,23 +84,21 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         return doc;
     }
 
-    public String getCurrentWeek(String semestr, String potok)
+    private void downloadCurrentWeek(String semestr, String potok)
     {
         Document doc = null;
         String infoString = "";
 
         try {
-            doc = Jsoup.connect(Constants.WEEK_URL + potok + Constants.SEMESTR + semestr).get();
+            doc = Jsoup.connect(Constants.WEEK_URL + potok + Constants.SEMESTR + semestr).timeout(2500).get();
             Element info = doc.getElementById(Constants.WEEK_INFO);
             infoString = info.text();
             String[] mas = infoString.split(" ");
-            infoString = mas[1];
+            _dataBaseMapper.setWeek(mas[1]);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return infoString;
     }
 
     public void ParseDocument(Document doc) {
@@ -208,21 +202,8 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         return _scheduleExams;
     }
 
-    public void setScheduleExams(List<List<Pair<String, String>>> _scheduleExams) {
-        this._scheduleExams = _scheduleExams;
-    }
-
-    public String getCurrentWeek() {
-        return _currentWeek;
-    }
-
-    public void setCurrentWeek(String _currentWeek) {
-        this._currentWeek = _currentWeek;
-    }
-
     private ArrayList<String> _times;
     private List<List<Pair<String, String>>> _scheduleMain;
-    private String _currentWeek;
     private List<List<Pair<String, String>>> _scheduleExams;
     private Context _mContext;
     private boolean _isServerBroken;

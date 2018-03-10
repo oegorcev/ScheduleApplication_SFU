@@ -73,27 +73,10 @@ public class Constants {
 
    public static final String SEMESTR_DB_ID = "semestr";
    public static final String YEARS_DB_ID = "year";
+   public static final String WEEK_DB_ID = "week";
    public static final String CUR_QUERY_DB_ID = "query";
 
    public static final String SEPARATOR = " ";
    public static final String EMPTY_STRING = "";
    public static final char DOT = '.';
-
-   public static final String CHANGED_SCHEDULE = "new_query";
-
-
-   public static String getCurPot()
-   {
-      int curYear = calendar.get(Calendar.YEAR);
-      int curMonth = calendar.get(Calendar.MONTH);
-
-      int pot = FIRST_POTOK + (curYear - FIRST_YEAR);
-
-      if(curYear != FIRST_YEAR)
-      {
-         if(curMonth < START_NEXT_SEMESTR) --pot;
-      }
-
-      return  Integer.toString(pot);
-   }
 }

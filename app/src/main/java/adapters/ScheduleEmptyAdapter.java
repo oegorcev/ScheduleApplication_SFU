@@ -60,5 +60,4 @@ public class ScheduleEmptyAdapter extends BaseAdapter {
 
         return view;
     }
-
 }

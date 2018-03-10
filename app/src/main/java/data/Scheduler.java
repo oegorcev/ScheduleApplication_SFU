@@ -70,7 +70,6 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         else  if (_parser.getScheduleMain() != null && !(_parser.getScheduleMain().isEmpty())) {
             _times = _parser.get_times();
             _weekSchedule = _parser.getScheduleMain();
-            _mainActivity.set_currentWeek(_parser.getCurrentWeek());
 
             switch (_CURRENT_STATE) {
                 case Constants.GROUP: {

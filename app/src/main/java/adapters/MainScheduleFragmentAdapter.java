@@ -39,30 +39,10 @@ public class MainScheduleFragmentAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public Fragment getItem(int position) {
-
-        switch (_CURRENT_STATE)
-        {
-            case Constants.GROUP: {
-                return _fragments.get(position);
-            }
-            case Constants.TEACHER: {
-                return MainScheduleFragment.newInstance(_ctx,  _currentScheduleTeacher, position, _CURRENT_STATE, 1);
-            }
-            case Constants.CLASSROOM: {
-                return MainScheduleFragment.newInstance(_ctx,  _currentScheduleGroup, position, _CURRENT_STATE, 1);/////////////
-            }
-            default: {
-                break;
-            }
-        }
-        return MainScheduleFragment.newInstance(_ctx,  _currentScheduleGroup, position, _CURRENT_STATE, 1);
-    }
+    public Fragment getItem(int position) { return _fragments.get(position);}
 
     @Override
-    public CharSequence getPageTitle(int position) {
-        return _day_of_a_weak.get(position);
-    }
+    public CharSequence getPageTitle(int position) {return _day_of_a_weak.get(position);}
 
     public void set_CURRENT_STATE(Integer _CURRENT_STATE) {
         this._CURRENT_STATE = _CURRENT_STATE;
@@ -78,28 +58,36 @@ public class MainScheduleFragmentAdapter extends FragmentStatePagerAdapter {
     }
 
     public void set_currentSchedule(WeekGroup _currentSchedule) {
-        this._currentScheduleGroup = _currentSchedule;
-
         _fragments.clear();
 
         for(int cnt = 0; cnt < Constants.DAYS_ON_WEEK; ++cnt) {
-            _fragments.add(MainScheduleFragment.newInstance(_ctx,  _currentScheduleGroup, cnt, _CURRENT_STATE, 1));
+            _fragments.add(MainScheduleFragment.newInstance(_ctx,  _currentSchedule, cnt, _CURRENT_STATE, _showsWeek));
         }
     }
 
     public void set_currentSchedule(WeekTeacher _currentSchedule) {
-        this._currentScheduleTeacher = _currentSchedule;
+        _fragments.clear();
+
+        for(int cnt = 0; cnt < Constants.DAYS_ON_WEEK; ++cnt) {
+            _fragments.add(MainScheduleFragment.newInstance(_ctx,  _currentSchedule, cnt, _CURRENT_STATE, _showsWeek));
+        }
     }
 
     public void set_currentSchedule(WeekClassRoom _currentSchedule) {
-        this._currentScheduleClassRoom = _currentSchedule;
+        _fragments.clear();
+
+        for(int cnt = 0; cnt < Constants.DAYS_ON_WEEK; ++cnt) {
+            _fragments.add(MainScheduleFragment.newInstance(_ctx,  _currentSchedule, cnt, _CURRENT_STATE, _showsWeek));
+        }
     }
 
-    private WeekGroup _currentScheduleGroup;
-    private WeekTeacher _currentScheduleTeacher;
-    private WeekClassRoom _currentScheduleClassRoom;
+    public void set_showsWeek(Integer _showsWeek) {
+        this._showsWeek = _showsWeek;
+    }
+
     private ArrayList<String>_day_of_a_weak;
     private Integer _CURRENT_STATE;
     private MainSchedule _ctx;
+    private Integer _showsWeek;
     private ArrayList<Fragment> _fragments;
 }

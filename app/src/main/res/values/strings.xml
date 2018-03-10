@@ -13,6 +13,7 @@
     <string name="menuMain">Расписание занятий</string>
     <string name="menuUpdateSchedule">Обновить расписание</string>
     <string name="menuOptions">Настройки</string>
+    <string name="menuButtonChangeWeek">Поменять неделю</string>
 
     <string-array name="years">
         <item>2017—2018 учебный год</item>
