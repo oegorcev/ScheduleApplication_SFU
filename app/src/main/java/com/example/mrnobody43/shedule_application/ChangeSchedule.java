@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import Utils.Constants;
 import data.DataBase.DataBaseMapper;
 
 /**
@@ -66,13 +67,27 @@ public class ChangeSchedule extends AppCompatActivity {
         {
             @Override
             public void onClick(View v){
-                _dataBaseMapper.setNewQuery( search.getText().toString());
+                String str = search.getText().toString();
+                str = deleteEndSpases(str);
+                _dataBaseMapper.setNewQuery(str);
 
                 finish();
             }
         });
 
     }
+
+    private String deleteEndSpases(String str) {
+        for(int iCnt = (int)str.length() - 1; iCnt >= 0; --iCnt) {
+            if(str.charAt(iCnt) != Constants.SPACE) {
+                str = str.substring(0, iCnt + 1);
+                break;
+            }
+        }
+
+        return str;
+    }
+
 
     @Override
     public boolean onSupportNavigateUp(){

@@ -17,6 +17,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textColor="#000000"
+                android:text="1"
                 android:textSize="45sp" />
 
             <LinearLayout
@@ -39,6 +40,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
+                        android:text="11:55-13:30"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -55,6 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
+                        android:text="АИППС"
                         android:layout_marginRight="10dp"
                         android:textSize="15sp" />
 
@@ -63,6 +66,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#5882FA"
+                        android:text="Опрышко А.А."
                         android:onClick="onTeacherClick"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -77,6 +81,7 @@
                     <TextView
                         android:id="@+id/other_information1"
                         android:layout_width="wrap_content"
+                        android:text="(прак.) 2-пг"
                         android:layout_height="wrap_content"
                         android:textSize="13sp" />
 
@@ -90,6 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:textColor="#5882FA"
+                android:text="Г-228"
                 android:onClick="onClassroomClick"
                 android:textSize="20sp" />
         </LinearLayout>
