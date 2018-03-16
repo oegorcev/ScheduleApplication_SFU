@@ -94,6 +94,16 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
             Element info = doc.getElementById(Constants.WEEK_INFO);
             infoString = info.text();
             String[] mas = infoString.split(" ");
+
+            ArrayList<Integer> params = _dataBaseMapper.getSpinnerParams();
+
+            /*Для семестра с чемпионатом мира*/
+            if(params.get(1).equals(0) && params.get(0).equals(1)){
+                Integer t = Integer.parseInt(mas[1]);
+                t += 2;
+                mas[1] = t.toString();
+            }
+            /*-------------------------------*/
             _dataBaseMapper.setWeek(mas[1]);
 
         } catch (IOException e) {

@@ -1,9 +1,5 @@
 package adapters;
 
-/**
- * Created by Mr.Nobody43 on 02.01.2018.
- */
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,15 +13,19 @@ import com.example.mrnobody43.shedule_application.R;
 import java.util.ArrayList;
 
 import Utils.Constants;
-import model.Group.ClassGroup;
-import model.Group.WeekGroup;
+import model.Teacher.ClassTeacher;
+import model.Teacher.WeekTeacher;
 
-public class ScheduleGroupAdapter extends BaseAdapter {
+/**
+ * Created by Mr.Nobody43 on 20.01.2018.
+ */
 
-    public ScheduleGroupAdapter(Context context, WeekGroup weekGroup, int day, int week) {
+public class ScheduleTeacherAdapter extends BaseAdapter {
+
+    public ScheduleTeacherAdapter(Context context, WeekTeacher WeekTeacher,int day, int week) {
         _ctx = context;
-        _weekGroup = weekGroup;
-        _indexTab = day;
+        _weekTeacher = WeekTeacher;
+        _indexTab= day;
         _indexWeek = week;
         _lInflater = (LayoutInflater) _ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -33,13 +33,13 @@ public class ScheduleGroupAdapter extends BaseAdapter {
 
     public boolean isNull()
     {
-        return _weekGroup == null || _weekGroup.isEmpty();
+        return _weekTeacher == null || _weekTeacher.isEmpty();
     }
 
     // кол-во элементов
     @Override
     public int getCount() {
-        return _weekGroup.get_week().get(_indexTab).get_classesBotWeek().size();
+        return _weekTeacher.getWeek().get(_indexTab).get_classesBotWeek().size();
     }
 
     // элемент по позиции
@@ -47,32 +47,35 @@ public class ScheduleGroupAdapter extends BaseAdapter {
     public Object getItem(int position) {
         switch (_indexWeek % 2){
             case 0:
-                return _weekGroup.get_week().get(_indexTab).get_classesBotWeek().get(position);
+                return _weekTeacher.getWeek().get(_indexTab).get_classesBotWeek().get(position);
             case 1:
-                return _weekGroup.get_week().get(_indexTab).get_classesTopWeek().get(position);
+                return _weekTeacher.getWeek().get(_indexTab).get_classesTopWeek().get(position);
             default:
-                return _weekGroup.get_week().get(_indexTab).get_classesBotWeek().get(position);
+                return _weekTeacher.getWeek().get(_indexTab).get_classesBotWeek().get(position);
         }
     }
 
+    // id по позиции
     @Override
     public long getItemId(int position) {
         return position;
     }
 
-    private ClassGroup getClass(int position) {
-        return ((ClassGroup) getItem(position));
+    private ClassTeacher getClass(int position) {
+        return ((ClassTeacher) getItem(position));
     }
 
+    // пункт списка
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ClassGroup p = getClass(position);
-
+        ClassTeacher p = getClass(position);
         ViewHolder viewHolder;
 
-        if(convertView == null || parent != convertView.getParent()) {
-            convertView = _lInflater.inflate(R.layout.schedule_list_group_item, parent, false);
+        if(convertView == null || convertView.getParent() != parent) {
+
+            convertView = _lInflater.inflate(R.layout.schedule_list_teacher_item, parent, false);
+
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
 
@@ -82,27 +85,32 @@ public class ScheduleGroupAdapter extends BaseAdapter {
             LinearLayout.LayoutParams lParams1 = (LinearLayout.LayoutParams) ((LinearLayout) convertView.findViewById(R.id.pair2)).getLayoutParams();
             viewHolder.pairs.get(1).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
-            //max = 6???
-            for (int iCnt = 0; iCnt < p.get_subject().size(); ++iCnt) {
+            for (Integer iCnt = 0; iCnt < Math.min(Constants.MAX_PAIR_COUNT, p.get_subject().size()); ++iCnt) {
 
                 if (iCnt > 0) {
                     viewHolder.pairs.get(iCnt).setLayoutParams(lParams1);
                 }
 
-                if (p.get_subject().get(iCnt).equals(Constants.FREE)) {
+                if (p.get_subject().get(0).equals(Constants.FREE)) {
                     viewHolder.subjects.get(iCnt).setText(Constants.FREE_TIME);
+                    viewHolder.classrooms.get(iCnt).setText(Constants.EMPTY_STRING);
+                    viewHolder.types.get(iCnt).setText(Constants.EMPTY_STRING);
+                    viewHolder.groups.get(iCnt).setText(Constants.EMPTY_STRING);
                 } else {
                     viewHolder.subjects.get(iCnt).setText(p.get_subject().get(iCnt));
-                    viewHolder.teachers.get(iCnt).setText(p.get_teacher().get(iCnt));
+                    viewHolder.classrooms.get(iCnt).setText(p.get_classroom().get(iCnt));
+                    viewHolder.types.get(iCnt).setText(p.get_type().get(iCnt));
 
-                    String other_information = p.get_type().get(iCnt);
+                    String groups = "";
 
-                    if (!(p.get_subgroup().get(iCnt).equals(Constants.WITHOUT_SUBGROUB))) {
-                        other_information += " " + p.get_subgroup().get(iCnt);
+                    for (String cur : p.get_groups().get(iCnt)) {
+
+                        cur = cur.replace("??", "пг");
+
+                        groups += cur + "\n";
                     }
 
-                    viewHolder.otherInformations.get(iCnt).setText(other_information);
-                    viewHolder.classrooms.get(iCnt).setText(p.get_classroom().get(iCnt));
+                    viewHolder.groups.get(iCnt).setText(groups);
                 }
             }
         } else {
@@ -114,7 +122,7 @@ public class ScheduleGroupAdapter extends BaseAdapter {
 
     private class ViewHolder {
         final TextView idPair, time;
-        final ArrayList<TextView> subjects, teachers, otherInformations, classrooms;
+        final ArrayList<TextView> subjects, types, groups, classrooms;
         final ArrayList<LinearLayout> pairs;
         ViewHolder(View view){
             String packageName = _ctx.getPackageName();
@@ -123,27 +131,26 @@ public class ScheduleGroupAdapter extends BaseAdapter {
             time = (TextView) view.findViewById(R.id.time);
 
             subjects = new ArrayList<TextView>();
-            teachers = new ArrayList<TextView>();
-            otherInformations = new ArrayList<TextView>();
             classrooms = new ArrayList<TextView>();
+            types = new ArrayList<TextView>();
+            groups = new ArrayList<TextView>();
             pairs = new ArrayList<LinearLayout>();
 
-            for(Integer i = 1; i <= 6; ++i){
+            for(Integer i = 1; i <= Constants.MAX_PAIR_COUNT; ++i){
                 String cnt = i.toString();
 
                 pairs.add(((LinearLayout) view.findViewById((_ctx.getResources().getIdentifier("pair" + cnt, "id", packageName)))));
                 subjects.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("subject" + cnt, "id", packageName)))));
-                teachers.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("teacher" + cnt, "id", packageName)))));
-                otherInformations.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("other_information" + cnt, "id", packageName)))));
                 classrooms.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("classroom" + cnt, "id", packageName)))));
+                types.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("type" + cnt, "id", packageName)))));
+                groups.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("groups" + cnt, "id", packageName)))));
             }
-
         }
     }
 
     private Context _ctx;
     private LayoutInflater _lInflater;
-    private WeekGroup _weekGroup;
+    private WeekTeacher _weekTeacher;
     private int _indexTab;
     private int _indexWeek;
 }

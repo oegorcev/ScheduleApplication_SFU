@@ -126,7 +126,7 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
             dayGroups.add(curDayGroup);
         }
 
-        weekGroup.setWeek(dayGroups);
+        weekGroup.set_week(dayGroups);
         _mainActivity.set_currentSchedule(weekGroup);
 
     }
@@ -204,7 +204,7 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
             dayClassRoom.add(curDayClassRoom);
         }
 
-        weekClassRoom.setWeek(dayClassRoom);
+        weekClassRoom.set_week(dayClassRoom);
         _mainActivity.set_currentSchedule(weekClassRoom);
     }
 

@@ -31,7 +31,7 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
 
     public boolean isNull()
     {
-        return _weekTeacher == null;
+        return _weekTeacher == null || _weekTeacher.isEmpty();
     }
 
     // кол-во элементов

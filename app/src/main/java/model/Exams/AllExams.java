@@ -10,6 +10,11 @@ public class AllExams {
 
     private ArrayList<DayExam> _allDays;
 
+    public boolean isEmpty()
+    {
+        return this._allDays == null;
+    }
+
     public ArrayList<DayExam> getAll() {
         return _allDays;
     }

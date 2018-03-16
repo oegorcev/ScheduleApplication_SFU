@@ -68,53 +68,53 @@ public class ScheduleClassRoomAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View view = convertView;
-
         ClassClassRoom p = getClass(position);
+        ViewHolder viewHolder;
 
-        if (view == null){
-            view = _lInflater.inflate(R.layout.schedule_list_classroom_item, parent, false);
-        }
+        if(convertView == null || parent != convertView.getParent()) {
+            convertView = _lInflater.inflate(R.layout.schedule_list_classroom_item, parent, false);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
 
-        String cnt = Integer.toString(position + 1);
-        ((TextView) view.findViewById(R.id.id_pair)).setText(cnt);
-        ((TextView) view.findViewById(R.id.time)).setText(p.get_time());
+            viewHolder.idPair.setText(Integer.toString(position + 1));
+            viewHolder.time.setText(p.get_time());
 
-        for (Integer iCnt = 1; iCnt <= Math.min(20, p.get_subject().size()); ++iCnt)
-        {
+            LinearLayout.LayoutParams lParams1 = (LinearLayout.LayoutParams) ((LinearLayout) convertView.findViewById(R.id.pair2)).getLayoutParams();
+            viewHolder.pairs.get(1).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
-            if (p.get_subject().get(0).equals(Constants.FREE)) {
-                ((TextView) view.findViewById((_ctx.getResources().getIdentifier("subject" + iCnt.toString(), "id", _ctx.getPackageName())))).setText(Constants.FREE_TIME);
-                ((TextView) view.findViewById((_ctx.getResources().getIdentifier("type" + iCnt.toString(), "id", _ctx.getPackageName())))).setText(Constants.EMPTY_STRING);
-                ((TextView) view.findViewById((_ctx.getResources().getIdentifier("groups" + iCnt.toString(), "id", _ctx.getPackageName())))).setText(Constants.EMPTY_STRING);
-                ((TextView) view.findViewById((_ctx.getResources().getIdentifier("teacher" + iCnt.toString(), "id", _ctx.getPackageName())))).setText(Constants.EMPTY_STRING);
+            for (Integer iCnt = 0; iCnt < Math.min(Constants.MAX_PAIR_COUNT, p.get_subject().size()); ++iCnt) {
 
-            } else {
-                ((TextView) view.findViewById((_ctx.getResources().getIdentifier("subject" + iCnt.toString(), "id", _ctx.getPackageName())))).setText(p.get_subject().get(iCnt - 1));
-
-                String groups = "";
-
-                for (String cur: p.get_groups().get(iCnt - 1) ){
-
-                    cur = cur.replace("??", "пг");
-
-                    groups += cur + "\n";
+                if (iCnt > 0) {
+                    viewHolder.pairs.get(iCnt).setLayoutParams(lParams1);
                 }
 
-                ((TextView) view.findViewById((_ctx.getResources().getIdentifier("teacher" + iCnt.toString(), "id", _ctx.getPackageName())))).setText(p.get_teacher().get(iCnt - 1));
-                ((TextView) view.findViewById((_ctx.getResources().getIdentifier("groups" + iCnt.toString(), "id", _ctx.getPackageName())))).setText(groups);
-                ((TextView) view.findViewById((_ctx.getResources().getIdentifier("type" + iCnt.toString(), "id", _ctx.getPackageName())))).setText(p.get_type().get(iCnt - 1));
+                if (p.get_subject().get(iCnt).equals(Constants.FREE)) {
+                    viewHolder.subjects.get(iCnt).setText(Constants.FREE_TIME);
+                    viewHolder.teachers.get(iCnt).setText(Constants.EMPTY_STRING);
+                    viewHolder.types.get(iCnt).setText(Constants.EMPTY_STRING);
+                    viewHolder.groups.get(iCnt).setText(Constants.EMPTY_STRING);
+                } else {
+                    viewHolder.subjects.get(iCnt).setText(p.get_subject().get(iCnt));
+                    viewHolder.teachers.get(iCnt).setText(p.get_teacher().get(iCnt));
+                    viewHolder.types.get(iCnt).setText(p.get_type().get(iCnt));
+
+                    String groups = "";
+
+                    for (String cur : p.get_groups().get(iCnt)) {
+
+                        cur = cur.replace("??", "пг");
+
+                        groups += cur + "\n";
+                    }
+
+                    viewHolder.groups.get(iCnt).setText(groups);
+                }
             }
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        for (Integer iCnt = p.get_subject().size() + 1; iCnt <= Constants.LINEAR_LAYOUT_COUNT; ++iCnt)
-        {
-            ((LinearLayout) view.findViewById((_ctx.getResources().getIdentifier("pair" + iCnt.toString(), "id", _ctx.getPackageName())))).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
-
-        }
-
-
-        return view;
+        return convertView;
     }
 
     private class ViewHolder {
@@ -133,14 +133,14 @@ public class ScheduleClassRoomAdapter extends BaseAdapter {
             groups = new ArrayList<TextView>();
             pairs = new ArrayList<LinearLayout>();
 
-            for(Integer i = 1; i <= 20; ++i){
+            for(Integer i = 1; i <= Constants.MAX_PAIR_COUNT; ++i){
                 String cnt = i.toString();
 
                 pairs.add(((LinearLayout) view.findViewById((_ctx.getResources().getIdentifier("pair" + cnt, "id", packageName)))));
                 subjects.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("subject" + cnt, "id", packageName)))));
                 teachers.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("teacher" + cnt, "id", packageName)))));
-                types.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("other_information" + cnt, "id", packageName)))));
-                groups.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("classroom" + cnt, "id", packageName)))));
+                types.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("type" + cnt, "id", packageName)))));
+                groups.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("groups" + cnt, "id", packageName)))));
             }
         }
     }
