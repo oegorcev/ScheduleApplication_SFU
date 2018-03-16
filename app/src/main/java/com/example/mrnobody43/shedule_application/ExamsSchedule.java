@@ -91,7 +91,8 @@ public class ExamsSchedule extends AppCompatActivity {
                 pagerAdapter.notifyDataSetChanged();
             }
 
-            pagerAdapter.set_allExams(_currentScheduleExams);
+            if(_currentScheduleExams != null) pagerAdapter.set_allExams(_currentScheduleExams);
+            else pagerAdapter.set_allExams(new AllExams());
 
             pager.setAdapter(pagerAdapter);
 

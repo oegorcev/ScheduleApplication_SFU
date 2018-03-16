@@ -34,23 +34,23 @@ public class ScheduleClassRoomAdapter extends BaseAdapter {
 
     public boolean isNull()
     {
-        return _weekClassRoom == null;
+        return _weekClassRoom == null || _weekClassRoom.isEmpty();
     }
 
     // кол-во элементов
     @Override
-    public int getCount() {return _weekClassRoom.getWeek().get(_indexTab).get_classesBotWeek().size();}
+    public int getCount() {return _weekClassRoom.get_week().get(_indexTab).get_classesBotWeek().size();}
 
     // элемент по позиции
     @Override
     public Object getItem(int position) {
         switch (_indexWeek % 2){
             case 0:
-                return _weekClassRoom.getWeek().get(_indexTab).get_classesBotWeek().get(position);
+                return _weekClassRoom.get_week().get(_indexTab).get_classesBotWeek().get(position);
             case 1:
-                return _weekClassRoom.getWeek().get(_indexTab).get_classesTopWeek().get(position);
+                return _weekClassRoom.get_week().get(_indexTab).get_classesTopWeek().get(position);
             default:
-                return _weekClassRoom.getWeek().get(_indexTab).get_classesBotWeek().get(position);
+                return _weekClassRoom.get_week().get(_indexTab).get_classesBotWeek().get(position);
         }
     }
 

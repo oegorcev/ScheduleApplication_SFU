@@ -91,7 +91,7 @@ public class DataBaseMapper {
         _db = _myDb.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
-        cv.put(DataBaseHelper.ID, Constants.SEMESTR_DB_ID);
+        cv.put(DataBaseHelper.ID, Constants.WEEK_DB_ID);
         cv.put(DataBaseHelper.OPTION, week);
 
         int was = _db.update(DataBaseHelper.TABLE_NAME2, cv, DataBaseHelper.ID + " = ?", new String[] { Constants.WEEK_DB_ID });
@@ -200,6 +200,7 @@ public class DataBaseMapper {
                 } else c.moveToNext();
             }
         }
+
         _myDb.close();
 
         return s;

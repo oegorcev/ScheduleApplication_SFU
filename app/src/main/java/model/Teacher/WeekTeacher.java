@@ -7,8 +7,13 @@ import java.util.ArrayList;
  */
 
 public class WeekTeacher {
+
     private ArrayList<DayTeacher> _week;
 
+    public boolean isEmpty()
+    {
+        return this._week == null;
+    }
     public ArrayList<DayTeacher> getWeek() {
         return _week;
     }

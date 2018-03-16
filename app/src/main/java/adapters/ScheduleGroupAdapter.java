@@ -33,13 +33,13 @@ public class ScheduleGroupAdapter extends BaseAdapter {
 
     public boolean isNull()
     {
-        return _weekGroup == null;
+        return _weekGroup == null || _weekGroup.isEmpty();
     }
 
     // кол-во элементов
     @Override
     public int getCount() {
-        return _weekGroup.getWeek().get(_indexTab).get_classesBotWeek().size();
+        return _weekGroup.get_week().get(_indexTab).get_classesBotWeek().size();
     }
 
     // элемент по позиции
@@ -47,11 +47,11 @@ public class ScheduleGroupAdapter extends BaseAdapter {
     public Object getItem(int position) {
         switch (_indexWeek % 2){
             case 0:
-                return _weekGroup.getWeek().get(_indexTab).get_classesBotWeek().get(position);
+                return _weekGroup.get_week().get(_indexTab).get_classesBotWeek().get(position);
             case 1:
-                return _weekGroup.getWeek().get(_indexTab).get_classesTopWeek().get(position);
+                return _weekGroup.get_week().get(_indexTab).get_classesTopWeek().get(position);
             default:
-                return _weekGroup.getWeek().get(_indexTab).get_classesBotWeek().get(position);
+                return _weekGroup.get_week().get(_indexTab).get_classesBotWeek().get(position);
         }
     }
 

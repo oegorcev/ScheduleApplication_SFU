@@ -8,13 +8,18 @@ import java.util.ArrayList;
 
 public class WeekClassRoom {
 
-    private ArrayList<DayClassRoom> week;
+    private ArrayList<DayClassRoom> _week;
 
-    public ArrayList<DayClassRoom> getWeek() {
-        return week;
+    public boolean isEmpty()
+    {
+        return this._week == null;
     }
 
-    public void setWeek(ArrayList<DayClassRoom> week) {
-        this.week = week;
+    public ArrayList<DayClassRoom> get_week() {
+        return _week;
+    }
+
+    public void set_week(ArrayList<DayClassRoom> _week) {
+        this._week = _week;
     }
 }

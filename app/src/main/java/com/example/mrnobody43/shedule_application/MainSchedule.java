@@ -31,6 +31,7 @@ public class MainSchedule extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setBackgroundDrawable(null);
+        setTitle("");
         setContentView(R.layout.activity_schedule);
 
         _swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
@@ -46,6 +47,7 @@ public class MainSchedule extends AppCompatActivity  {
         pb =  findViewById(R.id.inflateProgressbar);
 
         _query = _dataBaseMapper.getCurruntQuery();
+        _curWeek = Integer.parseInt(_dataBaseMapper.getCurrentWeek());
         renderScheduleData();
     }
 
@@ -97,8 +99,7 @@ public class MainSchedule extends AppCompatActivity  {
 
             if(pagerAdapter == null){
                 pagerAdapter = new MainScheduleFragmentAdapter(getSupportFragmentManager(), MainSchedule.this, Utilities.SetState(_query));
-                pager.setOffscreenPageLimit(2); //чекнуть два
-
+                //pager.setOffscreenPageLimit(6); //чекнуть два
             } else
             {
                 pagerAdapter.notifyDataSetChanged();
@@ -110,15 +111,18 @@ public class MainSchedule extends AppCompatActivity  {
             switch (Utilities.SetState(_query))
             {
                 case Constants.GROUP: {
-                    pagerAdapter.set_currentSchedule(_currentScheduleGroup);
+                    if(_currentScheduleGroup != null) pagerAdapter.set_currentSchedule(_currentScheduleGroup);
+                    else pagerAdapter.set_currentSchedule(new WeekGroup());
                     break;
                 }
                 case Constants.TEACHER: {
-                    pagerAdapter.set_currentSchedule(_currentScheduleTeacher);
+                    if(_currentScheduleTeacher != null)pagerAdapter.set_currentSchedule(_currentScheduleTeacher);
+                    else pagerAdapter.set_currentSchedule(new WeekTeacher());
                     break;
                 }
                 case Constants.CLASSROOM: {
-                    pagerAdapter.set_currentSchedule(_currentScheduleClassRoom);
+                    if(_currentScheduleClassRoom != null) pagerAdapter.set_currentSchedule(_currentScheduleClassRoom);
+                    else pagerAdapter.set_currentSchedule(new WeekClassRoom());
                     break;
                 }
                 default: {
@@ -126,8 +130,9 @@ public class MainSchedule extends AppCompatActivity  {
                 }
             }
 
+            pager.setCurrentItem(day, true);
             pager.setAdapter(pagerAdapter);
-            //pager.setCurrentItem(day);
+
 
             setTitles();
             pb.setVisibility(View.GONE);

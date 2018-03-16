@@ -1,5 +1,6 @@
 package adapters;
 
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -61,7 +62,7 @@ public class MainScheduleFragmentAdapter extends FragmentStatePagerAdapter {
         _fragments.clear();
 
         for(int cnt = 0; cnt < Constants.DAYS_ON_WEEK; ++cnt) {
-            _fragments.add(MainScheduleFragment.newInstance(_ctx,  _currentSchedule, cnt, _CURRENT_STATE, _showsWeek));
+            _fragments.add(MainScheduleFragment.newInstance(_ctx, _currentSchedule, cnt, _CURRENT_STATE, _showsWeek));
         }
     }
 
@@ -79,6 +80,16 @@ public class MainScheduleFragmentAdapter extends FragmentStatePagerAdapter {
         for(int cnt = 0; cnt < Constants.DAYS_ON_WEEK; ++cnt) {
             _fragments.add(MainScheduleFragment.newInstance(_ctx,  _currentSchedule, cnt, _CURRENT_STATE, _showsWeek));
         }
+    }
+
+    @Override
+    public Parcelable saveState() {
+        return null;
+    }
+
+    @Override
+    public void restoreState(Parcelable state, ClassLoader loader) {
+
     }
 
     public void set_showsWeek(Integer _showsWeek) {
