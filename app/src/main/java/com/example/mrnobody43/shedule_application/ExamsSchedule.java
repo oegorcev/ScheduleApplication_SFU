@@ -1,6 +1,7 @@
 package com.example.mrnobody43.shedule_application;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -26,18 +27,13 @@ public class ExamsSchedule extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(this.getResources().getColor(R.color.colorRed)));
         setContentView(R.layout.activity_schedule);
         _dataBaseMapper = new DataBaseMapper(this);
 
         pager = (ViewPager) findViewById(R.id.pager);
         pb =  findViewById(R.id.inflateProgressbar);
-        _swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-        _swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                renderScheduleData(true);
-            }
-        });
 
         _query = _dataBaseMapper.getCurruntQuery();
         renderScheduleData();
@@ -49,16 +45,6 @@ public class ExamsSchedule extends AppCompatActivity {
         ExamsSchedule.ScheduleTask scheduleTask = new ExamsSchedule.ScheduleTask();
         scheduleTask.execute();
     }
-
-    public void renderScheduleData(boolean isPull) {
-        _currentScheduleExams = null;
-
-        ExamsSchedule.ScheduleTask scheduleTask = new ExamsSchedule.ScheduleTask();
-        scheduleTask.execute();
-
-        _swipeContainer.setRefreshing(false);
-    }
-
 
     private class  ScheduleTask extends AsyncTask<String, Void, Void> {
 

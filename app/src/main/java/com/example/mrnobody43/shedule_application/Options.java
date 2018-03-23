@@ -20,6 +20,7 @@ public class Options extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Настройки");
         setContentView(R.layout.activity_options);
 
         _dataBaseMapper = new DataBaseMapper(this);

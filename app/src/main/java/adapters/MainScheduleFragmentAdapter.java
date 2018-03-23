@@ -89,7 +89,6 @@ public class MainScheduleFragmentAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public void restoreState(Parcelable state, ClassLoader loader) {
-
     }
 
     public void set_showsWeek(Integer _showsWeek) {

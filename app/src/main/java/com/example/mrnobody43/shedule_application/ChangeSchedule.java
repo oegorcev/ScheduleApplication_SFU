@@ -33,6 +33,7 @@ public class ChangeSchedule extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_schedule);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Смена расписания");
 
         _dataBaseMapper = new DataBaseMapper(this);
         changeSchedule = (Button) findViewById(R.id.changeSchedule);

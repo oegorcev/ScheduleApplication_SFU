@@ -56,7 +56,11 @@ public class ScheduleEmptyAdapter extends BaseAdapter {
         }
 
         ((TextView) view.findViewById(R.id.subject1)).setText(Constants.EMPTY_SCHEDULE);
-
+        ((TextView) view.findViewById(R.id.id_pair)).setText(Constants.EMPTY_STRING);
+        ((TextView) view.findViewById(R.id.time)).setText(Constants.EMPTY_STRING);
+        ((TextView) view.findViewById(R.id.teacher1)).setText(Constants.EMPTY_STRING);
+        ((TextView) view.findViewById(R.id.other_information1)).setText(Constants.EMPTY_STRING);
+        ((TextView) view.findViewById(R.id.classroom1)).setText(Constants.EMPTY_STRING);
 
         return view;
     }

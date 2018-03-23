@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,14 +33,6 @@ public class MainSchedule extends AppCompatActivity  {
         setTitle("");
         setContentView(R.layout.activity_schedule);
 
-        _swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-        _swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                renderScheduleData(true);
-            }
-        });
-
         _dataBaseMapper = new DataBaseMapper(this);
         pager = (ViewPager) findViewById(R.id.pager);
         pb =  findViewById(R.id.inflateProgressbar);
@@ -59,18 +50,6 @@ public class MainSchedule extends AppCompatActivity  {
 
         ScheduleTask scheduleTask = new ScheduleTask();
         scheduleTask.execute();
-    }
-
-    public void renderScheduleData(Boolean isPull) {
-
-        _currentScheduleClassRoom = null;
-        _currentScheduleGroup = null;
-        _currentScheduleTeacher = null;
-
-        ScheduleTask scheduleTask = new ScheduleTask();
-        scheduleTask.execute();
-
-        _swipeContainer.setRefreshing(false);
     }
 
     private class  ScheduleTask extends AsyncTask<String, Void, Void> {
@@ -270,7 +249,6 @@ public class MainSchedule extends AppCompatActivity  {
     ViewPager pager;
     MainScheduleFragmentAdapter pagerAdapter;
     private Menu _menu;
-    private SwipeRefreshLayout _swipeContainer;
     private WeekGroup _currentScheduleGroup;
     private WeekTeacher _currentScheduleTeacher;
     private WeekClassRoom _currentScheduleClassRoom;

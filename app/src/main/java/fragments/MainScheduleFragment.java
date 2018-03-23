@@ -3,6 +3,7 @@ package fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class MainScheduleFragment extends Fragment {
 
         pageFragment.set_CURRENT_STATE(CURRENT_STATE);
         pageFragment._scheduleGroupAdapter = new ScheduleGroupAdapter(ctx,currentScheduleGroup, day, week);
+        pageFragment._ctx = ctx;
 
         return pageFragment;
     }
@@ -40,6 +42,7 @@ public class MainScheduleFragment extends Fragment {
 
         pageFragment.set_CURRENT_STATE(CURRENT_STATE);
         pageFragment._scheduleTeacherAdapter = new ScheduleTeacherAdapter(ctx, currentScheduleTeacher, day, week);
+        pageFragment._ctx = ctx;
 
         return pageFragment;
     }
@@ -49,6 +52,7 @@ public class MainScheduleFragment extends Fragment {
 
         pageFragment.set_CURRENT_STATE(CURRENT_STATE);
         pageFragment._scheduleClassRoomAdapter = new ScheduleClassRoomAdapter(ctx, currentScheduleClassroom, day, week);
+        pageFragment._ctx = ctx;
 
         return pageFragment;
     }
@@ -65,6 +69,14 @@ public class MainScheduleFragment extends Fragment {
         View view  = inflater.inflate(R.layout.fragment_schedule, container, false);
 
         ListView listView = (ListView) view.findViewById(R.id.list1);
+
+        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh()  {
+                _ctx.renderScheduleData();
+            }
+        });
 
         if(_CURRENT_STATE != null) {
             switch (_CURRENT_STATE) {
@@ -98,6 +110,7 @@ public class MainScheduleFragment extends Fragment {
             }
         }
 
+        //swipeRefreshLayout.setRefreshing(false);
         return view;
     }
 
@@ -110,6 +123,7 @@ public class MainScheduleFragment extends Fragment {
         super.onDetach();
     }
 
+    private MainSchedule _ctx;
     private Integer _CURRENT_STATE;
     private ScheduleClassRoomAdapter _scheduleClassRoomAdapter;
     private ScheduleTeacherAdapter _scheduleTeacherAdapter;
