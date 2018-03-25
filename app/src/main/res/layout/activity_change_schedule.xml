@@ -18,9 +18,12 @@
 
             <EditText
                 android:id="@+id/search"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5" />
+                android:layout_weight="5"
+                android:maxLength="255"
+                android:maxLines="1"
+                android:selectAllOnFocus="false" />
 
         </LinearLayout>
 

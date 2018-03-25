@@ -6,8 +6,9 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -54,6 +55,30 @@
                 android:entries="@array/semestrs"
                 android:gravity="end" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_weight="0.07">
+
+            <CheckedTextView
+                android:id="@+id/textHidePairs"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/hidePairs" />
+
+            <CheckBox
+                android:id="@+id/hideWeeksCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="17dp"
+                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
 
     </LinearLayout>
 </LinearLayout>

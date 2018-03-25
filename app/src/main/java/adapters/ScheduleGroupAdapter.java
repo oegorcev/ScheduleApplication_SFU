@@ -17,6 +17,7 @@ import com.example.mrnobody43.shedule_application.R;
 import java.util.ArrayList;
 
 import Utils.Constants;
+import data.DataBase.DataBaseMapper;
 import model.Group.ClassGroup;
 import model.Group.WeekGroup;
 
@@ -25,6 +26,11 @@ public class ScheduleGroupAdapter extends BaseAdapter {
     public ScheduleGroupAdapter(Context context, WeekGroup weekGroup, int day, int week) {
         _ctx = context;
         _weekGroup = weekGroup;
+        int ret = (new DataBaseMapper(_ctx).getHideWeeksOption());
+
+        if(ret == 1)  _isHideWeeks = true;
+        else _isHideWeeks = false;
+
         _indexTab = day;
         _indexWeek = week;
         _lInflater = (LayoutInflater) _ctx
@@ -81,30 +87,49 @@ public class ScheduleGroupAdapter extends BaseAdapter {
             LinearLayout.LayoutParams lParams1 = (LinearLayout.LayoutParams) ((LinearLayout) convertView.findViewById(R.id.pair2)).getLayoutParams();
             viewHolder.pairs.get(1).setLayoutParams(new LinearLayout.LayoutParams(0, 0));
 
-            //max = 6???
-            for (int iCnt = 0; iCnt < Math.min(Constants.MAX_PAIR_COUNT,  p.get_subject().size()); ++iCnt) {
+            for (int iCnt = 0, pairId = 0; iCnt < Math.min(Constants.MAX_PAIR_COUNT,  p.get_subject().size()); ++iCnt, ++pairId) {
 
-                if (iCnt > 0) {
-                    viewHolder.pairs.get(iCnt).setLayoutParams(lParams1);
+                Integer beginWeek = getBeginWeek(p.get_weeks().get(iCnt));
+                Integer endWeek = getEndWeek(p.get_weeks().get(iCnt));
+
+                if(!(checkWeek(beginWeek, endWeek, _indexWeek)) && _isHideWeeks)
+                {
+                    if(iCnt == p.get_subject().size() - 1 && pairId == 0) {
+                        viewHolder.subjects.get(pairId).setText(Constants.FREE_TIME);
+                        viewHolder.teachers.get(pairId).setText(Constants.EMPTY_STRING);
+                        viewHolder.otherInformations.get(pairId).setText(Constants.EMPTY_STRING);
+                        viewHolder.classrooms.get(pairId).setText(Constants.EMPTY_STRING);
+                    }
+
+                    pairId--;
+                    continue;
                 }
 
+                if(pairId > 0)  viewHolder.pairs.get(pairId).setLayoutParams(lParams1);
+
                 if (p.get_subject().get(iCnt).equals(Constants.FREE)) {
-                    viewHolder.subjects.get(iCnt).setText(Constants.FREE_TIME);
-                    viewHolder.teachers.get(iCnt).setText(Constants.EMPTY_STRING);
-                    viewHolder.otherInformations.get(iCnt).setText(Constants.EMPTY_STRING);
-                    viewHolder.classrooms.get(iCnt).setText(Constants.EMPTY_STRING);
+                    viewHolder.subjects.get(pairId).setText(Constants.FREE_TIME);
+                    viewHolder.teachers.get(pairId).setText(Constants.EMPTY_STRING);
+                    viewHolder.otherInformations.get(pairId).setText(Constants.EMPTY_STRING);
+                    viewHolder.classrooms.get(pairId).setText(Constants.EMPTY_STRING);
                 } else {
-                    viewHolder.subjects.get(iCnt).setText(p.get_subject().get(iCnt));
-                    viewHolder.teachers.get(iCnt).setText(p.get_teacher().get(iCnt));
+                    viewHolder.subjects.get(pairId).setText(p.get_subject().get(iCnt));
+                    viewHolder.teachers.get(pairId).setText(p.get_teacher().get(iCnt));
 
                     String other_information = p.get_type().get(iCnt);
 
+                    String weeks;
+                    if (p.get_weeks().get(iCnt).equals(Constants.ALL_WEEKS)) weeks = "";
+                    else weeks = p.get_weeks().get(iCnt);
+
                     if (!(p.get_subgroup().get(iCnt).equals(Constants.WITHOUT_SUBGROUB))) {
-                        other_information += " " + p.get_subgroup().get(iCnt);
+                        other_information += " " + weeks + " " + p.get_subgroup().get(iCnt);
+                    } else {
+                        other_information += " " + weeks;
                     }
 
-                    viewHolder.otherInformations.get(iCnt).setText(other_information);
-                    viewHolder.classrooms.get(iCnt).setText(p.get_classroom().get(iCnt));
+                    viewHolder.otherInformations.get(pairId).setText(other_information);
+                    viewHolder.classrooms.get(pairId).setText(p.get_classroom().get(iCnt));
                 }
             }
         } else {
@@ -112,6 +137,24 @@ public class ScheduleGroupAdapter extends BaseAdapter {
         }
 
         return convertView;
+    }
+
+    private Integer getBeginWeek(String s) {
+        if(s.equals(Constants.ALL_WEEKS)) return 0;
+        String begin = s.substring(1, s.indexOf('-'));
+
+        return Integer.parseInt(begin);
+    }
+
+    private Integer getEndWeek(String s) {
+        if(s.equals(Constants.ALL_WEEKS)) return 228;
+        String begin = s.substring(s.indexOf('-') + 1, s.length() - 1);
+
+        return Integer.parseInt(begin);
+    }
+
+    private boolean checkWeek(Integer left, Integer right, Integer check) {
+        return check >= left && check <= right;
     }
 
     private class ViewHolder {
@@ -145,6 +188,7 @@ public class ScheduleGroupAdapter extends BaseAdapter {
     private Context _ctx;
     private LayoutInflater _lInflater;
     private WeekGroup _weekGroup;
+    private boolean _isHideWeeks;
     private int _indexTab;
     private int _indexWeek;
 }

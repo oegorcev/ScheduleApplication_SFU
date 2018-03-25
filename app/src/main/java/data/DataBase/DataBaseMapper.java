@@ -103,6 +103,22 @@ public class DataBaseMapper {
         _myDb.close();
     }
 
+    public void setHideWeeks(String flag){
+        _db = _myDb.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(DataBaseHelper.ID, Constants.HIDE_WEEKS_DB_ID);
+        cv.put(DataBaseHelper.OPTION, flag);
+
+        int was = _db.update(DataBaseHelper.TABLE_NAME2, cv, DataBaseHelper.ID + " = ?", new String[] { Constants.HIDE_WEEKS_DB_ID });
+        if(was == 0)
+        {
+            _db.insert(DataBaseHelper.TABLE_NAME2, null, cv);
+        }
+
+        _myDb.close();
+    }
+
     public ArrayList<Integer> getSpinnerParams(){
 
         ArrayList<Integer> ret = new ArrayList<Integer>();
@@ -135,6 +151,7 @@ public class DataBaseMapper {
 
             }
         }
+        c.close();
         _myDb.close();
 
         ret.add(Integer.parseInt(semestr) - 1);
@@ -173,6 +190,38 @@ public class DataBaseMapper {
                 c.moveToNext();
             }
         }
+        c.close();
+        _myDb.close();
+
+        return ret;
+    }
+
+    public Integer getHideWeeksOption() {
+        Integer ret = 0;
+
+        _db = _myDb.getReadableDatabase();
+
+        Cursor c = _db.query(DataBaseHelper.TABLE_NAME2, null, null, null, null, null, null);
+
+        if (c.moveToFirst()) {
+
+            while (true) {
+                if (c.isAfterLast()) break;
+
+                int idIndex = c.getColumnIndex(DataBaseHelper.ID);
+                int optionIndex = c.getColumnIndex(DataBaseHelper.OPTION);
+
+                String offlineData = c.getString(optionIndex);
+                String bdId = c.getString(idIndex);
+
+                if (Constants.HIDE_WEEKS_DB_ID.equals(bdId)) {
+                    ret = Integer.parseInt(offlineData);
+                }
+                c.moveToNext();
+            }
+        }
+
+        c.close();
         _myDb.close();
 
         return ret;
@@ -201,6 +250,7 @@ public class DataBaseMapper {
             }
         }
 
+        c.close();
         _myDb.close();
 
         return s;
@@ -228,6 +278,8 @@ public class DataBaseMapper {
                 } else c.moveToNext();
             }
         }
+
+        c.close();
         _myDb.close();
 
         return s;

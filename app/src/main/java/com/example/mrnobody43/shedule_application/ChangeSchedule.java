@@ -51,7 +51,7 @@ public class ChangeSchedule extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int i, int i1, int i2) {
                 if(s.toString().equals("")) {
-                    _currentQueryDb.clear();
+                    if(_currentQueryDb != null)_currentQueryDb.clear();
                 } else {
                     searchItem(s.toString());
                 }
@@ -70,6 +70,7 @@ public class ChangeSchedule extends AppCompatActivity {
             public void onClick(View v){
                 String str = search.getText().toString();
                 str = deleteEndSpases(str);
+                Constants.addQuery(_dataBaseMapper.getCurruntQuery());
                 _dataBaseMapper.setNewQuery(str);
 
                 finish();
@@ -116,7 +117,7 @@ public class ChangeSchedule extends AppCompatActivity {
     }
 
     private void searchItem(String text) {
-        _currentQueryDb.clear();
+        if(_currentQueryDb != null) _currentQueryDb.clear();
         text = text.toLowerCase();
         for (String item : _queryDb) {
             String lowerItem = item.toLowerCase();

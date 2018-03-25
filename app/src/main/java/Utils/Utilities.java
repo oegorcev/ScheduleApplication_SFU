@@ -42,7 +42,7 @@ public class Utilities {
         //Если перед тире стоит буква, то это точно не группа или группы нет
 
         boolean someCases = s.equals("ЦДП") || s.equals("----") || s.equals("МРЦПК")
-                || s.equals("шк.26") || s.equals("-") ||  s.equals("10") || s.equals("11");
+                || s.equals("шк.26") || s.equals("-") ||  s.equals("10") || s.equals("11") || s.equals("10 А") ;
         if(someCases) {
             return true;
         } else {

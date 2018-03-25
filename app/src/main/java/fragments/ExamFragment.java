@@ -50,7 +50,7 @@ public class ExamFragment  extends Fragment {
             }
         });
 
-        if (_adapter != null && !_adapter.isNull()) {
+        if (_adapter != null &&  !_adapter.isNull()) {
             listView.setAdapter(_adapter);
         } else {
             listView.setAdapter(new ScheduleEmptyAdapter(getContext()));

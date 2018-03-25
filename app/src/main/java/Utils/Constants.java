@@ -1,6 +1,7 @@
 package Utils;
 
 import java.util.Calendar;
+import java.util.Stack;
 
 /**
  * Created by Mr.Nobody43 on 25.10.2017.
@@ -55,8 +56,14 @@ public class Constants {
    public static final String FREE = "free";
    public static final String ALL_WEEKS = "all";
    public static final String WITHOUT_SUBGROUB = "nothing";
+
    public static final String FREE_TIME = "Свободное время!";
-   public static final String EMPTY_SCHEDULE = "Расписание отсутсвует";
+   public static final String EMPTY_SCHEDULE = "Расписание отсутствует.";
+   public static final String EMPTY_EXAMS = "До экзаменов ещё далеко!";
+   public static final String BOTTOM_WEEK_SCHEDULE = "Показывается нижняя неделя.";
+   public static final String TOP_WEEK_SCHEDULE = "Показывается верхняя неделя.";
+   public static final String WEEK = " неделя";
+   public static final String EXAMS = "Экзамены";
 
    public static final int DAYS_ON_WEEK = 7;
    public static final int DATE_INDEX = 1;
@@ -73,9 +80,30 @@ public class Constants {
    public static final String YEARS_DB_ID = "year";
    public static final String WEEK_DB_ID = "week";
    public static final String CUR_QUERY_DB_ID = "query";
+   public static final String HIDE_WEEKS_DB_ID = "hideweeks";
 
    public static final String SEPARATOR = " ";
+   public static final String SLASH_SEPARATOP = " / ";
    public static final String EMPTY_STRING = "";
    public static final char DOT = '.';
    public static final char SPACE = ' ';
-        }
+
+   private static Stack<String> stack;
+
+   public static void addQuery(String string) {
+      if(stack == null) {
+         stack = new Stack<String>();
+      }
+
+      stack.add(string);
+   }
+
+   public static String getLastQuqry() {
+      if(stack == null || stack.empty()){return EMPTY_STRING;}
+
+      String top = stack.lastElement();
+      stack.pop();
+
+      return  top;
+   }
+}

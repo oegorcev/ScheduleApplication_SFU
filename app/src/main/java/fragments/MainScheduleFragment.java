@@ -110,7 +110,6 @@ public class MainScheduleFragment extends Fragment {
             }
         }
 
-        //swipeRefreshLayout.setRefreshing(false);
         return view;
     }
 

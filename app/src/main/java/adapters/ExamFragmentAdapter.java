@@ -1,5 +1,6 @@
 package adapters;
 
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -27,18 +28,24 @@ public class ExamFragmentAdapter extends FragmentStatePagerAdapter {
         _day = days;
     }
 
+
+    @Override
+    public Parcelable saveState() {
+        return null;
+    }
+
+    @Override
+    public void restoreState(Parcelable state, ClassLoader loader) {
+    }
+
     @Override
     public Fragment getItem(int position) {return _fragments.get(position);}
 
     @Override
-    public CharSequence getPageTitle(int position) {
-        return _day.get(position);
-    }
+    public CharSequence getPageTitle(int position) {return _day.get(position);}
 
     @Override
-    public int getCount() {
-        return _day.size();
-    }
+    public int getCount() {return  _day.size();}
 
     public int getItemPosition(Object object) {
         return POSITION_NONE;

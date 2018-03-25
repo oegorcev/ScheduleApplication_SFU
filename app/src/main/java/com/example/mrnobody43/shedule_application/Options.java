@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class Options extends AppCompatActivity {
 
         spinnerSemestr = (Spinner)findViewById(R.id.spinnerSemestr);
         spinnerYear = (Spinner)findViewById(R.id.spinnerYears);
+        hideWeeks = (CheckBox)findViewById(R.id.hideWeeksCheckbox);
 
         ArrayAdapter<?> adapterYear =
                 ArrayAdapter.createFromResource(this, R.array.years, android.R.layout.simple_spinner_item);
@@ -45,6 +47,21 @@ public class Options extends AppCompatActivity {
         spinnerSemestr.setAdapter(adapterSemestr);
 
         setSpinnerValue();
+        setHideWeeks();
+
+        hideWeeks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(hideWeeks.isChecked()) {
+                    _dataBaseMapper.setHideWeeks("1");
+                }
+                else {
+                    _dataBaseMapper.setHideWeeks("0");
+                }
+            }
+
+        });
 
         spinnerYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent,
@@ -77,12 +94,23 @@ public class Options extends AppCompatActivity {
         spinnerYear.setSelection(params.get(1));
     }
 
+    private void setHideWeeks(){
+        Integer flag = _dataBaseMapper.getHideWeeksOption();
+
+        if(flag == 1) {
+            hideWeeks.setChecked(true);
+        } else {
+            hideWeeks.setChecked(false);
+        }
+    }
+
     @Override
     public boolean onSupportNavigateUp(){
         finish();
         return true;
     }
 
+    CheckBox hideWeeks;
     Spinner spinnerSemestr;
     Spinner spinnerYear;
     private DataBaseMapper _dataBaseMapper;

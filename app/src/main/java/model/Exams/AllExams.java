@@ -12,7 +12,7 @@ public class AllExams {
 
     public boolean isEmpty()
     {
-        return this._allDays == null;
+        return this._allDays == null || _allDays.size() == 0;
     }
 
     public ArrayList<DayExam> getAll() {
@@ -22,5 +22,4 @@ public class AllExams {
     public void setAll(ArrayList<DayExam> all) {
         this._allDays = all;
     }
-
 }

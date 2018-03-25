@@ -5,15 +5,17 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import Utils.Constants;
 import adapters.ExamFragmentAdapter;
 import data.DataBase.DataBaseMapper;
 import data.Scheduler;
@@ -27,7 +29,7 @@ public class ExamsSchedule extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("");
+        setTitle(Constants.EMPTY_STRING);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(this.getResources().getColor(R.color.colorRed)));
         setContentView(R.layout.activity_schedule);
         _dataBaseMapper = new DataBaseMapper(this);
@@ -64,10 +66,14 @@ public class ExamsSchedule extends AppCompatActivity {
             super.onPostExecute(aVoid);
             ArrayList<String> days = new ArrayList<String>();
 
-            for(int iCnt = 0; iCnt <  _currentScheduleExams.getAll().size(); ++iCnt) {
-                days.add(_currentScheduleExams.getAll().get(iCnt).get_day());
+            if(_currentScheduleExams != null) {
+                for (int iCnt = 0; iCnt < _currentScheduleExams.getAll().size(); ++iCnt) {
+                    days.add(_currentScheduleExams.getAll().get(iCnt).get_day());
+                }
+                if(_currentScheduleExams.getAll().size() == 0){
+                    days.add(Constants.EMPTY_EXAMS);
+                }
             }
-
             if(pagerAdapter == null){
                 pagerAdapter = new ExamFragmentAdapter(getSupportFragmentManager(), ExamsSchedule.this, days);
                 pager.setOffscreenPageLimit(1); //чекнуть два
@@ -91,7 +97,7 @@ public class ExamsSchedule extends AppCompatActivity {
     private void setTitles() {
         setTitle(_query);
         if(getSupportActionBar()!= null) {
-            getSupportActionBar().setSubtitle("Экзамены");
+            getSupportActionBar().setSubtitle(Constants.EXAMS);
         }
     }
 
@@ -137,6 +143,31 @@ public class ExamsSchedule extends AppCompatActivity {
         return true;
     }
 
+    public void onTeacherClick(View V) {
+
+        LinearLayout vwParentRow = (LinearLayout)V.getParent();
+
+        TextView child = (TextView)vwParentRow.getChildAt(1);
+
+        Constants.addQuery(_query);
+        _query = child.getText().toString();
+        _dataBaseMapper.setNewQuery(_query);
+
+        renderScheduleData();
+    }
+
+    public void onClassroomClick(View V) {
+
+        LinearLayout vwParentRow = (LinearLayout)V.getParent();
+
+        Constants.addQuery(_query);
+        TextView child = (TextView)vwParentRow.getChildAt(2);
+        _query = child.getText().toString();
+        _dataBaseMapper.setNewQuery(_query);
+
+        renderScheduleData();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         _query = _dataBaseMapper.getCurruntQuery();
@@ -150,7 +181,6 @@ public class ExamsSchedule extends AppCompatActivity {
     View pb;
     ViewPager pager;
     ExamFragmentAdapter pagerAdapter;
-    private SwipeRefreshLayout _swipeContainer;
     private AllExams _currentScheduleExams;
     private String _query = "";
     private DataBaseMapper _dataBaseMapper;

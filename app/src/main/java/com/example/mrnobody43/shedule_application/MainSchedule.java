@@ -30,7 +30,7 @@ public class MainSchedule extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setBackgroundDrawable(null);
-        setTitle("");
+        setTitle(Constants.EMPTY_STRING);
         setContentView(R.layout.activity_schedule);
 
         _dataBaseMapper = new DataBaseMapper(this);
@@ -50,6 +50,19 @@ public class MainSchedule extends AppCompatActivity  {
 
         ScheduleTask scheduleTask = new ScheduleTask();
         scheduleTask.execute();
+    }
+
+    @Override
+    public void onBackPressed() {
+        String newQuery = Constants.getLastQuqry();
+        if(!newQuery.equals(Constants.EMPTY_STRING)) {
+            _dataBaseMapper.setNewQuery(newQuery);
+            _query = newQuery;
+            renderScheduleData();
+        }
+        else{
+            finish();
+        }
     }
 
     private class  ScheduleTask extends AsyncTask<String, Void, Void> {
@@ -120,12 +133,12 @@ public class MainSchedule extends AppCompatActivity  {
 
     private void setTitles() {
         String week = _dataBaseMapper.getCurrentWeek();
-        setTitle(_query + ". " + week + " неделя.");
+        setTitle(_query + Constants.SLASH_SEPARATOP + week + Constants.WEEK);
         if(getSupportActionBar()!= null) {
             if(_curWeek % 2 == 0){
-                getSupportActionBar().setSubtitle("Показывается " +  "нижняя" + " неделя.");
+                getSupportActionBar().setSubtitle(Constants.BOTTOM_WEEK_SCHEDULE);
             } else {
-                getSupportActionBar().setSubtitle("Показывается " +  "верхняя" + " неделя.");
+                getSupportActionBar().setSubtitle(Constants.TOP_WEEK_SCHEDULE);
             }
         }
     }
@@ -210,10 +223,9 @@ public class MainSchedule extends AppCompatActivity  {
 
         LinearLayout vwParentRow = (LinearLayout)V.getParent();
 
-        _prev_query = _query;
-
         TextView child = (TextView)vwParentRow.getChildAt(1);
 
+        Constants.addQuery(_query);
         _query = child.getText().toString();
         _dataBaseMapper.setNewQuery(_query);
 
@@ -224,8 +236,7 @@ public class MainSchedule extends AppCompatActivity  {
 
         LinearLayout vwParentRow = (LinearLayout)V.getParent();
 
-        _prev_query = _query;
-
+        Constants.addQuery(_query);
         TextView child = (TextView)vwParentRow.getChildAt(2);
         _query = child.getText().toString();
         _dataBaseMapper.setNewQuery(_query);
@@ -252,7 +263,6 @@ public class MainSchedule extends AppCompatActivity  {
     private WeekGroup _currentScheduleGroup;
     private WeekTeacher _currentScheduleTeacher;
     private WeekClassRoom _currentScheduleClassRoom;
-    private String _prev_query;
     private String _query = "";
     private Integer _curWeek;
     private DataBaseMapper _dataBaseMapper;

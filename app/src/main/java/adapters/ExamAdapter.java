@@ -27,12 +27,13 @@ public class ExamAdapter extends BaseAdapter {
 
     public boolean isNull()
     {
-        return _allExams == null;
+        return _allExams == null || _allExams.isEmpty();
     }
 
     // кол-во элементов
     @Override
-    public int getCount() {return _allExams.getAll().get(_indexTab).get_classes().size();}
+    public int getCount() {
+        return _allExams.getAll().get(_indexTab).get_classes().size();}
 
     // элемент по позиции
     @Override
@@ -79,6 +80,7 @@ public class ExamAdapter extends BaseAdapter {
 
         return convertView;
     }
+
 
     private LayoutInflater _lInflater;
     private AllExams _allExams;
