@@ -64,16 +64,16 @@ public class ExamGroupAdapter extends BaseAdapter {
                 ((TextView) convertView.findViewById(R.id.subject)).setText(Constants.FREE_TIME);
             }
             else {
-                ((TextView) convertView.findViewById(R.id.subject)).setText(p.get_subject().get(0));
+                ((TextView) convertView.findViewById(R.id.subject)).setText(p.get_subject().get(0) + " " + p.get_type().get(0));
 
                 String teachers = "";
 
                 for (int iCnt = 0; iCnt < p.get_teacher().size(); ++iCnt) {
-                    teachers += p.get_teacher().get(iCnt) + " ";
+                    teachers += p.get_teacher().get(iCnt);
+                    if(iCnt < p.get_teacher().size() - 1) teachers += "\n";
                 }
 
                 ((TextView) convertView.findViewById(R.id.teacher)).setText(teachers);
-                ((TextView) convertView.findViewById(R.id.type)).setText(p.get_type().get(0));
                 ((TextView) convertView.findViewById(R.id.classroom)).setText(p.get_classroom().get(0));
             }
         }

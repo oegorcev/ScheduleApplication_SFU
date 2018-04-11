@@ -10,7 +10,9 @@ import com.example.mrnobody43.shedule_application.ExamsSchedule;
 import java.util.ArrayList;
 
 import fragments.ExamFragment;
+import model.ExamClassroom.ExamsClassroom;
 import model.ExamGroup.ExamsGroup;
+import model.ExamTeacher.ExamsTeacher;
 
 /**
  * Created by Mr.Nobody43 on 09.03.2018.
@@ -51,14 +53,33 @@ public class ExamFragmentAdapter extends FragmentStatePagerAdapter {
         return POSITION_NONE;
     }
 
-    public void set_allExams(ExamsGroup _ExamsGroup) {
+    public void set_currentSchedule(ExamsGroup _currentSchedule) {
         _fragments.clear();
 
         for(int cnt = 0; cnt < _day.size(); ++cnt) {
-            _fragments.add(ExamFragment.newInstance(_ctx, _ExamsGroup, cnt));
+            _fragments.add(ExamFragment.newInstance(_ctx, _currentSchedule, cnt, _CURRENT_STATE));
         }
     }
 
+    public void set_currentSchedule(ExamsTeacher _currentSchedule) {
+        _fragments.clear();
+
+        for(int cnt = 0; cnt < _day.size(); ++cnt) {
+            _fragments.add(ExamFragment.newInstance(_ctx,  _currentSchedule, cnt, _CURRENT_STATE));
+        }
+    }
+
+    public void set_currentSchedule(ExamsClassroom _currentSchedule) {
+        _fragments.clear();
+
+        for(int cnt = 0; cnt < _day.size(); ++cnt) {
+            _fragments.add(ExamFragment.newInstance(_ctx,  _currentSchedule, cnt, _CURRENT_STATE));
+        }
+    }
+
+    public void set_CURRENT_STATE(Integer _CURRENT_STATE) {this._CURRENT_STATE = _CURRENT_STATE; }
+
+    private Integer _CURRENT_STATE;
     private ArrayList<String>_day;
     private ExamsSchedule _ctx;
     private ArrayList<Fragment> _fragments;

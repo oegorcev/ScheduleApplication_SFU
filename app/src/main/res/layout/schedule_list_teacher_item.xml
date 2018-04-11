@@ -162,6 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
+                android:textColor="#5882FA"
                 android:textSize="20sp" />
         </LinearLayout>
 

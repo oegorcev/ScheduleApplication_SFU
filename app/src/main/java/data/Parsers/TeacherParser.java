@@ -30,7 +30,6 @@ public class TeacherParser extends AbstractParser {
         ArrayList<String> classrooms = new ArrayList<String>();
         ArrayList<String> weeks = new ArrayList<String>();
 
-
         if(data.length == 1) {
             groups.get(_counter).add(Constants.FREE);
             subjects.add(Constants.FREE);

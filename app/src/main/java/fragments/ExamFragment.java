@@ -26,27 +26,30 @@ import model.ExamTeacher.ExamsTeacher;
 
 public class ExamFragment  extends Fragment {
 
-    static public ExamFragment newInstance(ExamsSchedule ctx, ExamsGroup examsGroup, int day) {
+    static public ExamFragment newInstance(ExamsSchedule ctx, ExamsGroup examsGroup, int day, int CURRENT_STATE) {
         ExamFragment pageFragment = new ExamFragment();
 
+        pageFragment.set_CURRENT_STATE(CURRENT_STATE);
         pageFragment._groupAdapter = new ExamGroupAdapter(ctx, examsGroup, day);
         pageFragment._ctx = ctx;
 
         return pageFragment;
     }
 
-    static public ExamFragment newInstance(ExamsSchedule ctx, ExamsClassroom examsClassroom, int day) {
+    static public ExamFragment newInstance(ExamsSchedule ctx, ExamsClassroom examsClassroom, int day, int CURRENT_STATE) {
         ExamFragment pageFragment = new ExamFragment();
 
+        pageFragment.set_CURRENT_STATE(CURRENT_STATE);
         pageFragment._classroomAdapter = new ExamClassroomAdapter(ctx, examsClassroom, day);
         pageFragment._ctx = ctx;
 
         return pageFragment;
     }
 
-    static public ExamFragment newInstance(ExamsSchedule ctx, ExamsTeacher examsTeacher, int day) {
+    static public ExamFragment newInstance(ExamsSchedule ctx, ExamsTeacher examsTeacher, int day, int CURRENT_STATE) {
         ExamFragment pageFragment = new ExamFragment();
 
+        pageFragment.set_CURRENT_STATE(CURRENT_STATE);
         pageFragment._teacherAdapter = new ExamTeacherAdapter(ctx, examsTeacher, day);
         pageFragment._ctx = ctx;
 
@@ -113,6 +116,8 @@ public class ExamFragment  extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
+
+    public void set_CURRENT_STATE(Integer _CURRENT_STATE) {this._CURRENT_STATE = _CURRENT_STATE;}
 
     private ExamsSchedule _ctx;
     private Integer _CURRENT_STATE;

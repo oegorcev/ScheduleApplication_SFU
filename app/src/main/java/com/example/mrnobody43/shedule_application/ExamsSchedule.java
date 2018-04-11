@@ -16,10 +16,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import Utils.Constants;
+import Utils.Utilities;
 import adapters.ExamFragmentAdapter;
 import data.DataBase.DataBaseMapper;
 import data.Scheduler;
+import model.ExamClassroom.ExamsClassroom;
 import model.ExamGroup.ExamsGroup;
+import model.ExamTeacher.ExamsTeacher;
 
 /**
  * Created by Mr.Nobody43 on 07.02.2018.
@@ -42,7 +45,7 @@ public class ExamsSchedule extends AppCompatActivity {
     }
 
     public void renderScheduleData() {
-        _currentScheduleExams = null;
+        _currentScheduleExamsGroup = null;
 
         ExamsSchedule.ScheduleTask scheduleTask = new ExamsSchedule.ScheduleTask();
         scheduleTask.execute();
@@ -66,14 +69,40 @@ public class ExamsSchedule extends AppCompatActivity {
             super.onPostExecute(aVoid);
             ArrayList<String> days = new ArrayList<String>();
 
-            if(_currentScheduleExams != null) {
-                for (int iCnt = 0; iCnt < _currentScheduleExams.getAll().size(); ++iCnt) {
-                    days.add(_currentScheduleExams.getAll().get(iCnt).get_day());
+            switch (Utilities.GetState(_query))
+            {
+                case Constants.GROUP: {
+                    for (int iCnt = 0; iCnt < _currentScheduleExamsGroup.getAll().size(); ++iCnt) {
+                        days.add(_currentScheduleExamsGroup.getAll().get(iCnt).get_day());
+                    }
+                    if(_currentScheduleExamsGroup.getAll().size() == 0){
+                        days.add(Constants.EMPTY_EXAMS);
+                    }
+                    break;
                 }
-                if(_currentScheduleExams.getAll().size() == 0){
-                    days.add(Constants.EMPTY_EXAMS);
+                case Constants.TEACHER: {
+                    for (int iCnt = 0; iCnt < _currentScheduleExamsTeacher.getAll().size(); ++iCnt) {
+                        days.add(_currentScheduleExamsTeacher.getAll().get(iCnt).get_day());
+                    }
+                    if(_currentScheduleExamsTeacher.getAll().size() == 0){
+                        days.add(Constants.EMPTY_EXAMS);
+                    }
+                    break;
+                }
+                case Constants.CLASSROOM: {
+                    for (int iCnt = 0; iCnt < _currentScheduleExamsClassroom.getAll().size(); ++iCnt) {
+                        days.add(_currentScheduleExamsClassroom.getAll().get(iCnt).get_day());
+                    }
+                    if(_currentScheduleExamsClassroom.getAll().size() == 0){
+                        days.add(Constants.EMPTY_EXAMS);
+                    }
+                    break;
+                }
+                default: {
+                    break;
                 }
             }
+
             if(pagerAdapter == null){
                 pagerAdapter = new ExamFragmentAdapter(getSupportFragmentManager(), ExamsSchedule.this, days);
                 pager.setOffscreenPageLimit(1); //чекнуть два
@@ -83,8 +112,29 @@ public class ExamsSchedule extends AppCompatActivity {
                 pagerAdapter.notifyDataSetChanged();
             }
 
-            if(_currentScheduleExams != null) pagerAdapter.set_allExams(_currentScheduleExams);
-            else pagerAdapter.set_allExams(new ExamsGroup());
+            pagerAdapter.set_CURRENT_STATE(Utilities.GetState(_query));
+
+            switch (Utilities.GetState(_query))
+            {
+                case Constants.GROUP: {
+                    if(_currentScheduleExamsGroup != null) pagerAdapter.set_currentSchedule(_currentScheduleExamsGroup);
+                    else pagerAdapter.set_currentSchedule(new ExamsGroup());
+                    break;
+                }
+                case Constants.TEACHER: {
+                    if(_currentScheduleExamsTeacher != null)pagerAdapter.set_currentSchedule(_currentScheduleExamsTeacher);
+                    else pagerAdapter.set_currentSchedule(new ExamsGroup());
+                    break;
+                }
+                case Constants.CLASSROOM: {
+                    if(_currentScheduleExamsClassroom != null) pagerAdapter.set_currentSchedule(_currentScheduleExamsClassroom);
+                    else pagerAdapter.set_currentSchedule(new ExamsClassroom());
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
 
             pager.setAdapter(pagerAdapter);
 
@@ -174,14 +224,20 @@ public class ExamsSchedule extends AppCompatActivity {
         renderScheduleData();
     }
 
-    public void set_currentScheduleExams(ExamsGroup _currentScheduleExams) {
-        this._currentScheduleExams = _currentScheduleExams;
+    public void set_currentScheduleExamsGroup(ExamsGroup _currentScheduleExamsGroup) {
+        this._currentScheduleExamsGroup = _currentScheduleExamsGroup;
     }
+
+    public void set_currentScheduleExamsTeacher(ExamsTeacher _currentScheduleExamsTeacher) {this._currentScheduleExamsTeacher = _currentScheduleExamsTeacher;}
+
+    public void set_currentScheduleExamsClassroom(ExamsClassroom _currentScheduleExamsClassroom) {this._currentScheduleExamsClassroom = _currentScheduleExamsClassroom;}
 
     View pb;
     ViewPager pager;
     ExamFragmentAdapter pagerAdapter;
-    private ExamsGroup _currentScheduleExams;
+    private ExamsGroup _currentScheduleExamsGroup;
+    private ExamsTeacher _currentScheduleExamsTeacher;
+    private ExamsClassroom _currentScheduleExamsClassroom;
     private String _query = "";
     private DataBaseMapper _dataBaseMapper;
 }

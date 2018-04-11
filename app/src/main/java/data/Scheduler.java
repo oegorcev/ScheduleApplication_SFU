@@ -15,6 +15,7 @@ import data.DataBase.DataBaseMapper;
 import data.Parsers.AbstractParser;
 import data.Parsers.ClassroomParser;
 import data.Parsers.ExamGroupParser;
+import data.Parsers.ExamTeacherParser;
 import data.Parsers.GroupParser;
 import data.Parsers.TeacherParser;
 import model.ClassRoom.ClassClassRoom;
@@ -23,6 +24,9 @@ import model.ClassRoom.WeekClassRoom;
 import model.ExamGroup.ExamsGroup;
 import model.ExamGroup.ClassExamGroup;
 import model.ExamGroup.DayExamGroup;
+import model.ExamTeacher.ClassExamTeacher;
+import model.ExamTeacher.DayExamTeacher;
+import model.ExamTeacher.ExamsTeacher;
 import model.Group.ClassGroup;
 import model.Group.DayGroup;
 import model.Group.WeekGroup;
@@ -49,7 +53,7 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        _CURRENT_STATE = Utilities.SetState(_query);
+        _CURRENT_STATE = Utilities.GetState(_query);
 
         if(_examsActivity != null)  _parser = new AbstractParser(_examsActivity);
         else _parser = new AbstractParser(_mainActivity);
@@ -65,7 +69,25 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         if(_examsActivity != null) {
             _times = _parser.get_times();
             _examsSchedule = _parser.getScheduleExams();
-            MakeExamSchedule();
+
+
+            switch (_CURRENT_STATE) {
+                case Constants.GROUP: {
+                    MakeExamGroupSchedule();
+                    break;
+                }
+                case Constants.TEACHER: {
+                    MakeExamTeacherSchedule();
+                    break;
+                }
+                case Constants.CLASSROOM: {
+                   // MakeClassRoomSchedule();
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
         }
         else  if (_parser.getScheduleMain() != null && !(_parser.getScheduleMain().isEmpty())) {
             _times = _parser.get_times();
@@ -208,7 +230,7 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         _mainActivity.set_currentSchedule(weekClassRoom);
     }
 
-    private void MakeExamSchedule(){
+    private void MakeExamGroupSchedule(){
         ExamGroupParser examGroupParser = new ExamGroupParser(_examsActivity);
 
         ExamsGroup examsGroup = new ExamsGroup();
@@ -237,7 +259,39 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
         }
 
         examsGroup.setAll(dayExamGroups);
-        _examsActivity.set_currentScheduleExams(examsGroup);
+        _examsActivity.set_currentScheduleExamsGroup(examsGroup);
+    }
+
+    private void MakeExamTeacherSchedule(){
+        ExamTeacherParser examTeacherParser = new ExamTeacherParser(_examsActivity);
+
+        ExamsTeacher examsTeacher = new ExamsTeacher();
+        ArrayList<DayExamTeacher> dayExamTeacher = new ArrayList<DayExamTeacher>();
+
+        for (int i = 0; i < (_examsSchedule == null ? 0 : _examsSchedule.size()); ++i) {
+            DayExamTeacher curDayExamTeacher = new DayExamTeacher();
+
+            curDayExamTeacher.set_day(_examsSchedule.get(i).get(0).getFirst());
+
+            ArrayList<ClassExamTeacher> classes = new ArrayList<ClassExamTeacher>();
+
+            for (int j = 1; j <   _examsSchedule.get(i).size(); ++j) {
+                ClassExamTeacher classExamTeacher = new ClassExamTeacher();
+
+                classExamTeacher = examTeacherParser.parseClass(_examsSchedule.get(i).get(j).getFirst().split(" "));
+
+                classExamTeacher.set_time(_times.get(j - 1));
+
+                classes.add(classExamTeacher);
+            }
+
+            curDayExamTeacher.set_classes(classes);
+
+            dayExamTeacher.add(curDayExamTeacher);
+        }
+
+        examsTeacher.setAll(dayExamTeacher);
+        _examsActivity.set_currentScheduleExamsTeacher(examsTeacher);
     }
 
     private String _query;

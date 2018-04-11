@@ -23,7 +23,7 @@ public class Utilities {
                 || s.equals(Constants.EXAM);
     }
 
-    public static Integer SetState(String query)
+    public static Integer GetState(String query)
     {
         String[] mas = query.split(" ");
 

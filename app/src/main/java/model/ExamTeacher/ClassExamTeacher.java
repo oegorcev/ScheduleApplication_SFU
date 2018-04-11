@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ClassExamTeacher {
     private String _time;
     private ArrayList<String> _subject;
-    private ArrayList<String> _group;
+    private ArrayList<ArrayList<String>> _groups;
     private ArrayList<String> _classroom;
     private ArrayList<String> _type;
 
@@ -29,13 +29,9 @@ public class ClassExamTeacher {
         this._subject = _subject;
     }
 
-    public ArrayList<String> get_group() {
-        return _group;
-    }
+    public ArrayList<ArrayList<String>> get_groups() {return _groups; }
 
-    public void set_group(ArrayList<String> _group) {
-        this._group = _group;
-    }
+    public void set_groups(ArrayList<ArrayList<String>> _groups) {this._groups = _groups; }
 
     public ArrayList<String> get_classroom() {
         return _classroom;

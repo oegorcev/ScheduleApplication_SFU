@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.example.mrnobody43.shedule_application.R;
 
 import Utils.Constants;
-import model.ExamGroup.ClassExamGroup;
+import model.ExamTeacher.ClassExamTeacher;
 import model.ExamTeacher.ExamsTeacher;
 
 /**
@@ -44,17 +44,17 @@ public class ExamTeacherAdapter extends BaseAdapter {
         return position;
     }
 
-    private ClassExamGroup getClass(int position) {
-        return ((ClassExamGroup) getItem(position));
+    private ClassExamTeacher getClass(int position) {
+        return ((ClassExamTeacher) getItem(position));
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ClassExamGroup p = getClass(position);
+        ClassExamTeacher p = getClass(position);
 
         if(convertView == null || parent != convertView.getParent()) {
-            convertView = _lInflater.inflate(R.layout.schedule_list_exam_group_item, parent, false);
+            convertView = _lInflater.inflate(R.layout.schedule_list_exam_teacher_item, parent, false);
 
             String cnt = Integer.toString(position + 1);
             ((TextView) convertView.findViewById(R.id.id_pair)).setText(cnt);
@@ -64,23 +64,22 @@ public class ExamTeacherAdapter extends BaseAdapter {
                 ((TextView) convertView.findViewById(R.id.subject)).setText(Constants.FREE_TIME);
             }
             else {
-                ((TextView) convertView.findViewById(R.id.subject)).setText(p.get_subject().get(0));
+                ((TextView) convertView.findViewById(R.id.subject)).setText(p.get_subject().get(0) + " " + p.get_type().get(0));
 
-                String teachers = "";
+                String groups = "";
 
-                for (int iCnt = 0; iCnt < p.get_teacher().size(); ++iCnt) {
-                    teachers += p.get_teacher().get(iCnt) + " ";
+                for (int iCnt = 0; iCnt < p.get_groups().get(0).size(); ++iCnt) {
+                    groups += p.get_groups().get(0).get(iCnt);
+                    if(iCnt <  p.get_groups().get(0).size() - 1) groups += "\n";
                 }
 
-                ((TextView) convertView.findViewById(R.id.teacher)).setText(teachers);
-                ((TextView) convertView.findViewById(R.id.type)).setText(p.get_type().get(0));
+                ((TextView) convertView.findViewById(R.id.groups)).setText(groups);
                 ((TextView) convertView.findViewById(R.id.classroom)).setText(p.get_classroom().get(0));
             }
         }
 
         return convertView;
     }
-
 
     private LayoutInflater _lInflater;
     private ExamsTeacher _ExamsTeacher;

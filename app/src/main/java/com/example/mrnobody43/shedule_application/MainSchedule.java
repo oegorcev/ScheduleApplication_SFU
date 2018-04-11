@@ -90,7 +90,7 @@ public class MainSchedule extends AppCompatActivity  {
             }
 
             if(pagerAdapter == null){
-                pagerAdapter = new MainScheduleFragmentAdapter(getSupportFragmentManager(), MainSchedule.this, Utilities.SetState(_query));
+                pagerAdapter = new MainScheduleFragmentAdapter(getSupportFragmentManager(), MainSchedule.this, Utilities.GetState(_query));
                 //pager.setOffscreenPageLimit(6); //чекнуть два
             } else
             {
@@ -98,9 +98,9 @@ public class MainSchedule extends AppCompatActivity  {
             }
 
             pagerAdapter.set_showsWeek(_curWeek);
-            pagerAdapter.set_CURRENT_STATE(Utilities.SetState(_query));
+            pagerAdapter.set_CURRENT_STATE(Utilities.GetState(_query));
 
-            switch (Utilities.SetState(_query))
+            switch (Utilities.GetState(_query))
             {
                 case Constants.GROUP: {
                     if(_currentScheduleGroup != null) pagerAdapter.set_currentSchedule(_currentScheduleGroup);
