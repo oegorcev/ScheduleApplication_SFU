@@ -11,9 +11,14 @@ import android.widget.ListView;
 import com.example.mrnobody43.shedule_application.ExamsSchedule;
 import com.example.mrnobody43.shedule_application.R;
 
-import adapters.ExamAdapter;
+import Utils.Constants;
+import adapters.ExamClassroomAdapter;
+import adapters.ExamGroupAdapter;
+import adapters.ExamTeacherAdapter;
 import adapters.ScheduleEmptyAdapter;
-import model.Exams.AllExams;
+import model.ExamClassroom.ExamsClassroom;
+import model.ExamGroup.ExamsGroup;
+import model.ExamTeacher.ExamsTeacher;
 
 /**
  * Created by Mr.Nobody43 on 09.03.2018.
@@ -21,10 +26,28 @@ import model.Exams.AllExams;
 
 public class ExamFragment  extends Fragment {
 
-    static public ExamFragment newInstance(ExamsSchedule ctx, AllExams allExams, int day) {
+    static public ExamFragment newInstance(ExamsSchedule ctx, ExamsGroup examsGroup, int day) {
         ExamFragment pageFragment = new ExamFragment();
 
-        pageFragment._adapter = new ExamAdapter(ctx, allExams, day);
+        pageFragment._groupAdapter = new ExamGroupAdapter(ctx, examsGroup, day);
+        pageFragment._ctx = ctx;
+
+        return pageFragment;
+    }
+
+    static public ExamFragment newInstance(ExamsSchedule ctx, ExamsClassroom examsClassroom, int day) {
+        ExamFragment pageFragment = new ExamFragment();
+
+        pageFragment._classroomAdapter = new ExamClassroomAdapter(ctx, examsClassroom, day);
+        pageFragment._ctx = ctx;
+
+        return pageFragment;
+    }
+
+    static public ExamFragment newInstance(ExamsSchedule ctx, ExamsTeacher examsTeacher, int day) {
+        ExamFragment pageFragment = new ExamFragment();
+
+        pageFragment._teacherAdapter = new ExamTeacherAdapter(ctx, examsTeacher, day);
         pageFragment._ctx = ctx;
 
         return pageFragment;
@@ -42,6 +65,7 @@ public class ExamFragment  extends Fragment {
         View view  = inflater.inflate(R.layout.fragment_schedule, container, false);
 
         ListView listView = (ListView) view.findViewById(R.id.list1);
+
         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -50,10 +74,36 @@ public class ExamFragment  extends Fragment {
             }
         });
 
-        if (_adapter != null &&  !_adapter.isNull()) {
-            listView.setAdapter(_adapter);
-        } else {
-            listView.setAdapter(new ScheduleEmptyAdapter(getContext()));
+        if(_CURRENT_STATE != null) {
+            switch (_CURRENT_STATE) {
+                case Constants.GROUP: {
+                    if (_groupAdapter != null &&  !_groupAdapter.isNull()) {
+                        listView.setAdapter(_groupAdapter);
+                    } else {
+                        listView.setAdapter(new ScheduleEmptyAdapter(getContext()));
+                    }
+                    break;
+                }
+                case Constants.TEACHER: {
+                    if (_teacherAdapter != null &&  !_teacherAdapter.isNull()) {
+                        listView.setAdapter(_teacherAdapter);
+                    } else {
+                        listView.setAdapter(new ScheduleEmptyAdapter(getContext()));
+                    }
+                    break;
+                }
+                case Constants.CLASSROOM: {
+                    if (_classroomAdapter != null &&  !_classroomAdapter.isNull()) {
+                        listView.setAdapter(_classroomAdapter);
+                    } else {
+                        listView.setAdapter(new ScheduleEmptyAdapter(getContext()));
+                    }
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
         }
 
         return view;
@@ -65,5 +115,8 @@ public class ExamFragment  extends Fragment {
     }
 
     private ExamsSchedule _ctx;
-    private ExamAdapter _adapter;
+    private Integer _CURRENT_STATE;
+    private ExamGroupAdapter _groupAdapter;
+    private ExamClassroomAdapter _classroomAdapter;
+    private ExamTeacherAdapter _teacherAdapter;
 }

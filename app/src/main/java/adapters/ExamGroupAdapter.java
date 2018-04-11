@@ -10,16 +10,16 @@ import android.widget.TextView;
 import com.example.mrnobody43.shedule_application.R;
 
 import Utils.Constants;
-import model.Exams.AllExams;
-import model.Exams.ClassExam;
+import model.ExamGroup.ExamsGroup;
+import model.ExamGroup.ClassExamGroup;
 
 /**
  * Created by Mr.Nobody43 on 09.03.2018.
  */
 
-public class ExamAdapter extends BaseAdapter {
-    public ExamAdapter(Context context, AllExams allExams, int day) {
-        _allExams = allExams;
+public class ExamGroupAdapter extends BaseAdapter {
+    public ExamGroupAdapter(Context context, ExamsGroup examsGroup, int day) {
+        _ExamsGroup = examsGroup;
         _indexTab = day;
         _lInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -27,34 +27,34 @@ public class ExamAdapter extends BaseAdapter {
 
     public boolean isNull()
     {
-        return _allExams == null || _allExams.isEmpty();
+        return _ExamsGroup == null || _ExamsGroup.isEmpty();
     }
 
     // кол-во элементов
     @Override
     public int getCount() {
-        return _allExams.getAll().get(_indexTab).get_classes().size();}
+        return _ExamsGroup.getAll().get(_indexTab).get_classes().size();}
 
     // элемент по позиции
     @Override
-    public Object getItem(int position) {return _allExams.getAll().get(_indexTab).get_classes().get(position);}
+    public Object getItem(int position) {return _ExamsGroup.getAll().get(_indexTab).get_classes().get(position);}
 
     @Override
     public long getItemId(int position) {
         return position;
     }
 
-    private ClassExam getClass(int position) {
-        return ((ClassExam) getItem(position));
+    private ClassExamGroup getClass(int position) {
+        return ((ClassExamGroup) getItem(position));
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ClassExam p = getClass(position);
+        ClassExamGroup p = getClass(position);
 
         if(convertView == null || parent != convertView.getParent()) {
-            convertView = _lInflater.inflate(R.layout.schedule_list_exams_item, parent, false);
+            convertView = _lInflater.inflate(R.layout.schedule_list_exam_group_item, parent, false);
 
             String cnt = Integer.toString(position + 1);
             ((TextView) convertView.findViewById(R.id.id_pair)).setText(cnt);
@@ -83,6 +83,6 @@ public class ExamAdapter extends BaseAdapter {
 
 
     private LayoutInflater _lInflater;
-    private AllExams _allExams;
+    private ExamsGroup _ExamsGroup;
     private int _indexTab;
 }

@@ -14,15 +14,15 @@ import Utils.Utilities;
 import data.DataBase.DataBaseMapper;
 import data.Parsers.AbstractParser;
 import data.Parsers.ClassroomParser;
-import data.Parsers.ExamParser;
+import data.Parsers.ExamGroupParser;
 import data.Parsers.GroupParser;
 import data.Parsers.TeacherParser;
 import model.ClassRoom.ClassClassRoom;
 import model.ClassRoom.DayClassRoom;
 import model.ClassRoom.WeekClassRoom;
-import model.Exams.AllExams;
-import model.Exams.ClassExam;
-import model.Exams.DayExam;
+import model.ExamGroup.ExamsGroup;
+import model.ExamGroup.ClassExamGroup;
+import model.ExamGroup.DayExamGroup;
 import model.Group.ClassGroup;
 import model.Group.DayGroup;
 import model.Group.WeekGroup;
@@ -209,35 +209,35 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
     }
 
     private void MakeExamSchedule(){
-        ExamParser examParser = new ExamParser(_examsActivity);
+        ExamGroupParser examGroupParser = new ExamGroupParser(_examsActivity);
 
-        AllExams allExams = new AllExams();
-        ArrayList<DayExam> dayExams = new ArrayList<DayExam>();
+        ExamsGroup examsGroup = new ExamsGroup();
+        ArrayList<DayExamGroup> dayExamGroups = new ArrayList<DayExamGroup>();
 
         for (int i = 0; i < (_examsSchedule == null ? 0 : _examsSchedule.size()); ++i) {
-            DayExam curDayExam = new DayExam();
+            DayExamGroup curDayExamGroup = new DayExamGroup();
 
-            curDayExam.set_day(_examsSchedule.get(i).get(0).getFirst());
+            curDayExamGroup.set_day(_examsSchedule.get(i).get(0).getFirst());
 
-            ArrayList<ClassExam> classes = new ArrayList<ClassExam>();
+            ArrayList<ClassExamGroup> classes = new ArrayList<ClassExamGroup>();
 
             for (int j = 1; j <   _examsSchedule.get(i).size(); ++j) {
-                ClassExam classExam = new ClassExam();
+                ClassExamGroup classExamGroup = new ClassExamGroup();
 
-                classExam = examParser.parseClass(_examsSchedule.get(i).get(j).getFirst().split(" "));
+                classExamGroup = examGroupParser.parseClass(_examsSchedule.get(i).get(j).getFirst().split(" "));
 
-                classExam.set_time(_times.get(j - 1));
+                classExamGroup.set_time(_times.get(j - 1));
 
-                classes.add(classExam);
+                classes.add(classExamGroup);
             }
 
-            curDayExam.set_classes(classes);
+            curDayExamGroup.set_classes(classes);
 
-            dayExams.add(curDayExam);
+            dayExamGroups.add(curDayExamGroup);
         }
 
-        allExams.setAll(dayExams);
-        _examsActivity.set_currentScheduleExams(allExams);
+        examsGroup.setAll(dayExamGroups);
+        _examsActivity.set_currentScheduleExams(examsGroup);
     }
 
     private String _query;

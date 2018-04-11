@@ -54,7 +54,7 @@ public class MainSchedule extends AppCompatActivity  {
 
     @Override
     public void onBackPressed() {
-        String newQuery = Constants.getLastQuqry();
+        String newQuery = Constants.getLastQuery();
         if(!newQuery.equals(Constants.EMPTY_STRING)) {
             _dataBaseMapper.setNewQuery(newQuery);
             _query = newQuery;

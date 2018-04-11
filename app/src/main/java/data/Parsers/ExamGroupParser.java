@@ -6,21 +6,21 @@ import java.util.ArrayList;
 
 import Utils.Constants;
 import Utils.Utilities;
-import model.Exams.ClassExam;
+import model.ExamGroup.ClassExamGroup;
 
 /**
  * Created by Mr.Nobody43 on 07.03.2018.
  */
 
-public class ExamParser extends AbstractParser {
+public class ExamGroupParser extends AbstractParser {
 
-    public ExamParser(Context mContext)
+    public ExamGroupParser(Context mContext)
     {
         super(mContext);
     }
 
-    public ClassExam parseClass(String[] data){
-        ClassExam aClassExam = new ClassExam();
+    public ClassExamGroup parseClass(String[] data){
+        ClassExamGroup aClassExamGroup = new ClassExamGroup();
 
         ArrayList<String> teachers = new ArrayList<String>();
         ArrayList<String> subjects = new ArrayList<String>();
@@ -41,12 +41,12 @@ public class ExamParser extends AbstractParser {
             }
         }
 
-        aClassExam.set_classroom(classrooms);
-        aClassExam.set_subject(subjects);
-        aClassExam.set_teacher(teachers);
-        aClassExam.set_type(types);
+        aClassExamGroup.set_classroom(classrooms);
+        aClassExamGroup.set_subject(subjects);
+        aClassExamGroup.set_teacher(teachers);
+        aClassExamGroup.set_type(types);
 
-        return aClassExam;
+        return aClassExamGroup;
     }
 
     private int parseData( String[] data,

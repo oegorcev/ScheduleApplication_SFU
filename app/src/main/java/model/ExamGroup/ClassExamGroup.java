@@ -1,4 +1,4 @@
-package model.Exams;
+package model.ExamGroup;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Mr.Nobody43 on 07.03.2018.
  */
 
-public class ClassExam {
+public class ClassExamGroup {
 
         private String _time;
         private ArrayList<String> _subject;

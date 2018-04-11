@@ -1,4 +1,4 @@
-package model.Exams;
+package model.ExamGroup;
 
 import java.util.ArrayList;
 
@@ -6,20 +6,20 @@ import java.util.ArrayList;
  * Created by Mr.Nobody43 on 07.03.2018.
  */
 
-public class AllExams {
+public class ExamsGroup {
 
-    private ArrayList<DayExam> _allDays;
+    private ArrayList<DayExamGroup> _allDays;
 
     public boolean isEmpty()
     {
         return this._allDays == null || _allDays.size() == 0;
     }
 
-    public ArrayList<DayExam> getAll() {
+    public ArrayList<DayExamGroup> getAll() {
         return _allDays;
     }
 
-    public void setAll(ArrayList<DayExam> all) {
+    public void setAll(ArrayList<DayExamGroup> all) {
         this._allDays = all;
     }
 }

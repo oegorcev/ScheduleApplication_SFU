@@ -19,7 +19,7 @@ import Utils.Constants;
 import adapters.ExamFragmentAdapter;
 import data.DataBase.DataBaseMapper;
 import data.Scheduler;
-import model.Exams.AllExams;
+import model.ExamGroup.ExamsGroup;
 
 /**
  * Created by Mr.Nobody43 on 07.02.2018.
@@ -84,7 +84,7 @@ public class ExamsSchedule extends AppCompatActivity {
             }
 
             if(_currentScheduleExams != null) pagerAdapter.set_allExams(_currentScheduleExams);
-            else pagerAdapter.set_allExams(new AllExams());
+            else pagerAdapter.set_allExams(new ExamsGroup());
 
             pager.setAdapter(pagerAdapter);
 
@@ -174,14 +174,14 @@ public class ExamsSchedule extends AppCompatActivity {
         renderScheduleData();
     }
 
-    public void set_currentScheduleExams(AllExams _currentScheduleExams) {
+    public void set_currentScheduleExams(ExamsGroup _currentScheduleExams) {
         this._currentScheduleExams = _currentScheduleExams;
     }
 
     View pb;
     ViewPager pager;
     ExamFragmentAdapter pagerAdapter;
-    private AllExams _currentScheduleExams;
+    private ExamsGroup _currentScheduleExams;
     private String _query = "";
     private DataBaseMapper _dataBaseMapper;
 }

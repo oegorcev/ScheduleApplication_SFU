@@ -10,7 +10,7 @@ import com.example.mrnobody43.shedule_application.ExamsSchedule;
 import java.util.ArrayList;
 
 import fragments.ExamFragment;
-import model.Exams.AllExams;
+import model.ExamGroup.ExamsGroup;
 
 /**
  * Created by Mr.Nobody43 on 09.03.2018.
@@ -51,11 +51,11 @@ public class ExamFragmentAdapter extends FragmentStatePagerAdapter {
         return POSITION_NONE;
     }
 
-    public void set_allExams(AllExams _allExams) {
+    public void set_allExams(ExamsGroup _ExamsGroup) {
         _fragments.clear();
 
         for(int cnt = 0; cnt < _day.size(); ++cnt) {
-            _fragments.add(ExamFragment.newInstance(_ctx,  _allExams, cnt));
+            _fragments.add(ExamFragment.newInstance(_ctx, _ExamsGroup, cnt));
         }
     }
 

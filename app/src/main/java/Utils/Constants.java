@@ -98,7 +98,7 @@ public class Constants {
       stack.add(string);
    }
 
-   public static String getLastQuqry() {
+   public static String getLastQuery() {
       if(stack == null || stack.empty()){return EMPTY_STRING;}
 
       String top = stack.lastElement();
