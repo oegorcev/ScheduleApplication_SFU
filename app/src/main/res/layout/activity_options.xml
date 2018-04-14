@@ -44,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
+                android:layout_weight="0.13"
                 android:text="@string/semestr" />
 
             <Spinner
@@ -59,26 +60,33 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0.07"
             android:orientation="horizontal"
-            android:weightSum="1"
-            android:layout_weight="0.07">
+            android:weightSum="1">
 
             <CheckedTextView
                 android:id="@+id/textHidePairs"
-                android:layout_width="200dp"
+                android:layout_width="89dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
-                android:text="@string/hidePairs" />
+                android:text="@string/hidePairs"
+                android:layout_weight="0.33" />
 
             <CheckBox
                 android:id="@+id/hideWeeksCheckbox"
                 android:layout_width="wrap_content"
-                android:layout_marginTop="17dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_height="wrap_content" />
+                android:layout_marginTop="17dp" />
         </LinearLayout>
 
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="212dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content"
+            android:text="@string/save" />
 
     </LinearLayout>
 </LinearLayout>

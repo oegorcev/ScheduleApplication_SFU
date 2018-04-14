@@ -45,55 +45,31 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/mainlayout"
+            <TextView
+                android:id="@+id/subject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:orientation="horizontal">
+                android:layout_gravity="left"
+                android:layout_marginRight="10dp"
+                android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/subject"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginRight="10dp"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/teacher"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#5882FA"
-                    android:onClick="onTeacherClick"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/Inlayout"
+            <TextView
+                android:id="@+id/teachers"
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:orientation="horizontal">
+                android:textColor="#000000"
+                android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
+            <TextView
+                android:id="@+id/groups"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="#000000"
+                android:textSize="15sp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/classroom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:textColor="#5882FA"
-            android:onClick="onClassroomClick"
-            android:textSize="20sp" />
     </LinearLayout>
 
 </LinearLayout>

@@ -41,6 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="11:55-13:30"
+                    android:textColor="#B43104"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -57,35 +58,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:layout_marginRight="10dp"
+                    android:textColor="#424242"
                     android:text="АИППС"
                     android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/teacher1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onTeacherClick"
-                    android:text="Опрышко А.А."
-                    android:textColor="#5882FA"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/Inlayout1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/other_information1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="(прак.) 2-пг"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="#424242"
                     android:textSize="13sp" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/teacher1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onTeacherClick"
+                android:text="Опрышко А.А."
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="#5882FA"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -128,32 +125,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
-                        android:layout_marginRight="10dp"
+                        android:textColor="#424242"
                         android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/teacher2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#5882FA"
-                        android:onClick="onTeacherClick"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Inlayout2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/other_information2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#424242"
+                        android:layout_marginLeft="4dp"
                         android:textSize="13sp" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/teacher2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#5882FA"
+                    android:onClick="onTeacherClick"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -166,265 +159,248 @@
                 android:textSize="20sp" />
         </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/pair3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal">
+
         <LinearLayout
-            android:id="@+id/pair3"
+            android:id="@+id/Main_Infomation3"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/Main_Infomation3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/mainlayout3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/subject3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginRight="10dp"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/teacher3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#5882FA"
-                        android:onClick="onTeacherClick"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Inlayout3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/other_information3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/classroom3"
+                android:id="@+id/mainlayout3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:textColor="#5882FA"
-                android:textSize="20sp" />
-        </LinearLayout>
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/pair4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/Main_Infomation4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/mainlayout4"
+                <TextView
+                    android:id="@+id/subject3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
+                    android:layout_gravity="left"
+                    android:textColor="#424242"
+                    android:textSize="15sp" />
 
-                    <TextView
-                        android:id="@+id/subject4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginRight="10dp"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/teacher4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#5882FA"
-                        android:onClick="onTeacherClick"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Inlayout4"
+                <TextView
+                    android:id="@+id/other_information3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/other_information4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
-
+                    android:textColor="#424242"
+                    android:layout_marginLeft="4dp"
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/classroom4"
+                android:id="@+id/teacher3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:textColor="#5882FA"
-                android:textSize="20sp" />
+                android:onClick="onTeacherClick"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="15sp" />
+
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/pair5"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/Main_Infomation5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/mainlayout5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/subject5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginRight="10dp"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/teacher5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#5882FA"
-                        android:onClick="onTeacherClick"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Inlayout5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/other_information5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/classroom5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textColor="#5882FA"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/pair6"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/Main_Infomation6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/mainlayout6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/subject6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginRight="10dp"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/teacher6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#5882FA"
-                        android:onClick="onTeacherClick"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Inlayout6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/other_information6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/classroom6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textColor="#5882FA"
-                android:textSize="20sp" />
-        </LinearLayout>
-
+        <TextView
+            android:id="@+id/classroom3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="#5882FA"
+            android:textSize="20sp" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pair4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/Main_Infomation4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/mainlayout4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/subject4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:textColor="#424242"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/other_information4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#424242"
+                    android:layout_marginLeft="4dp"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/teacher4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#5882FA"
+                android:onClick="onTeacherClick"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/classroom4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="#5882FA"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pair5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/Main_Infomation5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/mainlayout5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/subject5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:textColor="#424242"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/other_information5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#424242"
+                    android:layout_marginLeft="4dp"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/teacher5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#5882FA"
+                android:onClick="onTeacherClick"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/classroom5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="#5882FA"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pair6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/Main_Infomation6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/mainlayout6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/subject6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:textColor="#424242"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/other_information6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#424242"
+                    android:layout_marginLeft="4dp"
+                    android:textSize="13sp" />
+             </LinearLayout>
+
+            <TextView
+                android:id="@+id/teacher6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#5882FA"
+                android:onClick="onTeacherClick"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/classroom6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="#5882FA"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</LinearLayout>

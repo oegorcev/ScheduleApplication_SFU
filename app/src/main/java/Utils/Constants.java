@@ -43,7 +43,8 @@ public class Constants {
    public static final String LAB = "(лаб.)";
    public static final String CONSULTATION = "(конс.)";
    public static final String CREDIT = "(зач.)";
-   public static final String UST_LECTION = "(уст. лек.)";
+   public static final String UST_LECTION = "(уст.";
+   public static final String KURS_WORK = "(курс.";
    public static final String EXAM = "(экз.)";
 
    public static final String FIRST_SUB_BAD = "1??.";
@@ -76,6 +77,9 @@ public class Constants {
    public static final int TEACHER = 1;
    public static final int CLASSROOM = 2;
 
+   public static final String BAD_CASE_IN = "Вакансия%20ВМК%20....";
+   public static final String BAD_CASE_OUT = "Вакансия%20%20ВМК%20....";
+
    public static final String SEMESTR_DB_ID = "semestr";
    public static final String YEARS_DB_ID = "year";
    public static final String WEEK_DB_ID = "week";
@@ -89,6 +93,7 @@ public class Constants {
    public static final char SPACE = ' ';
 
    private static Stack<String> stack;
+   public static Integer lastPage;
 
    public static void addQuery(String string) {
       if(stack == null) {

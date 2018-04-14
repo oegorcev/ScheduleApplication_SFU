@@ -20,7 +20,7 @@ public class Utilities {
         return s.equals(Constants.LECTION) || s.equals(Constants.PRACTIC)
                 || s.equals(Constants.LAB) || s.equals(Constants.CONSULTATION)
                 || s.equals(Constants.CREDIT) ||  s.equals(Constants.UST_LECTION)
-                || s.equals(Constants.EXAM);
+                || s.equals(Constants.EXAM) || s.equals(Constants.KURS_WORK);
     }
 
     public static Integer GetState(String query)
@@ -46,7 +46,7 @@ public class Utilities {
         if(someCases) {
             return true;
         } else {
-            if (!s.equals("- -.-.") && !s.equals("---") && (s.indexOf('-') != -1)  && s.indexOf("Вакансия") == -1) {
+            if (!s.equals("-.-.") && !s.equals("- -.-.") && !s.equals("---") && (s.indexOf('-') != -1)  && s.indexOf("Вакансия") == -1) {
                 return !Character.isLetter(s.charAt(s.indexOf('-') - 1)) && (s.indexOf('(') == -1);
             } else {
                 return false;

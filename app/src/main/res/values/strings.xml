@@ -38,6 +38,5 @@
     <string name="years">Учебный год:</string>
     <string name="hidePairs">Скрывать закончившиеся или ещё не начавшиеся пары:</string>
     <string name="freeTime">Свободное время!</string>
-
-
+    <string name="save">Сохранить</string>
 </resources>

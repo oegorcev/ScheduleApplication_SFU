@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 
@@ -33,6 +34,7 @@ public class Options extends AppCompatActivity {
         spinnerSemestr = (Spinner)findViewById(R.id.spinnerSemestr);
         spinnerYear = (Spinner)findViewById(R.id.spinnerYears);
         hideWeeks = (CheckBox)findViewById(R.id.hideWeeksCheckbox);
+        saveChanges = (Button) findViewById(R.id.saveButton) ;
 
         ArrayAdapter<?> adapterYear =
                 ArrayAdapter.createFromResource(this, R.array.years, android.R.layout.simple_spinner_item);
@@ -49,15 +51,27 @@ public class Options extends AppCompatActivity {
         setSpinnerValue();
         setHideWeeks();
 
+        saveChanges.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+                _dataBaseMapper.setPotok(_potok);
+                _dataBaseMapper.setSemestr(_semestr);
+                _dataBaseMapper.setHideWeeks(_hideWeek);
+
+                finish();
+            }
+        });
+
         hideWeeks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(hideWeeks.isChecked()) {
-                    _dataBaseMapper.setHideWeeks("1");
+                    _hideWeek = "1";
                 }
                 else {
-                    _dataBaseMapper.setHideWeeks("0");
+                    _hideWeek ="0";
                 }
             }
 
@@ -68,7 +82,7 @@ public class Options extends AppCompatActivity {
                                        View itemSelected, int selectedItemPosition, long selectedId) {
 
                 Integer potok = Constants.FIRST_POTOK + selectedItemPosition;
-                _dataBaseMapper.setPotok(potok.toString());
+                _potok = potok.toString();
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -79,7 +93,7 @@ public class Options extends AppCompatActivity {
                                        View itemSelected, int selectedItemPosition, long selectedId) {
 
                 String[] choose = getResources().getStringArray(R.array.semestrs);
-                _dataBaseMapper.setSemestr(choose[selectedItemPosition]);
+                _semestr = choose[selectedItemPosition];
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -90,6 +104,9 @@ public class Options extends AppCompatActivity {
 
         ArrayList<Integer> params = _dataBaseMapper.getSpinnerParams();
 
+        _potok = Integer.toString(Constants.FIRST_POTOK + params.get(1));
+        _semestr = params.get(0).toString();
+
         spinnerSemestr.setSelection(params.get(0));
         spinnerYear.setSelection(params.get(1));
     }
@@ -98,8 +115,10 @@ public class Options extends AppCompatActivity {
         Integer flag = _dataBaseMapper.getHideWeeksOption();
 
         if(flag == 1) {
+            _hideWeek = "1";
             hideWeeks.setChecked(true);
         } else {
+            _hideWeek = "0";
             hideWeeks.setChecked(false);
         }
     }
@@ -111,7 +130,11 @@ public class Options extends AppCompatActivity {
     }
 
     CheckBox hideWeeks;
+    Button saveChanges;
     Spinner spinnerSemestr;
     Spinner spinnerYear;
+    private String _potok;
+    private String _hideWeek;
+    private String _semestr;
     private DataBaseMapper _dataBaseMapper;
 }

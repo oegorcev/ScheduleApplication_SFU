@@ -71,7 +71,12 @@ public class TeacherParser extends AbstractParser {
         }
         subjects.add(subject);
 
-        types.add(data[index++]);
+        if(data[index].equals(Constants.KURS_WORK)) {
+            types.add(data[index] + data[index + 1]);
+            index += 2;
+        } else {
+            types.add(data[index++]);
+        }
 
         String gr = "";
         int cntGroups = 0;

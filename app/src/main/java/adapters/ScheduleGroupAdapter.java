@@ -113,20 +113,20 @@ public class ScheduleGroupAdapter extends BaseAdapter {
                     viewHolder.otherInformations.get(pairId).setText(Constants.EMPTY_STRING);
                     viewHolder.classrooms.get(pairId).setText(Constants.EMPTY_STRING);
                 } else {
-                    viewHolder.subjects.get(pairId).setText(p.get_subject().get(iCnt));
-                    viewHolder.teachers.get(pairId).setText(p.get_teacher().get(iCnt));
 
-                    String other_information = p.get_type().get(iCnt);
+                    viewHolder.teachers.get(pairId).setText(p.get_teacher().get(iCnt));
 
                     String weeks;
                     if (p.get_weeks().get(iCnt).equals(Constants.ALL_WEEKS)) weeks = "";
                     else weeks = p.get_weeks().get(iCnt);
 
                     if (!(p.get_subgroup().get(iCnt).equals(Constants.WITHOUT_SUBGROUB))) {
-                        other_information += " " + weeks + " " + p.get_subgroup().get(iCnt);
+                        viewHolder.subjects.get(pairId).setText(p.get_subject().get(iCnt) + " - " + p.get_subgroup().get(iCnt));
                     } else {
-                        other_information += " " + weeks;
+                        viewHolder.subjects.get(pairId).setText(p.get_subject().get(iCnt));
                     }
+
+                    String other_information = p.get_type().get(iCnt) + " " + weeks;
 
                     viewHolder.otherInformations.get(pairId).setText(other_information);
                     viewHolder.classrooms.get(pairId).setText(p.get_classroom().get(iCnt));

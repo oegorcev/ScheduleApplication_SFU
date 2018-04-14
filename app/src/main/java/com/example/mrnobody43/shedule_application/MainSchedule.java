@@ -40,6 +40,16 @@ public class MainSchedule extends AppCompatActivity  {
         _query = _dataBaseMapper.getCurruntQuery();
         _curWeek = Integer.parseInt(_dataBaseMapper.getCurrentWeek());
         renderScheduleData();
+
+
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            public void onPageScrollStateChanged(int state) {}
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+            public void onPageSelected(int position) {
+                Constants.lastPage = position;
+            }
+        });
     }
 
     public void renderScheduleData() {
@@ -122,9 +132,13 @@ public class MainSchedule extends AppCompatActivity  {
                 }
             }
 
-            pager.setCurrentItem(day, true);
             pager.setAdapter(pagerAdapter);
-
+            if(Constants.lastPage == null)
+            {
+                pager.setCurrentItem(day);
+                Constants.lastPage = day;
+            }
+            else pager.setCurrentItem(Constants.lastPage);
 
             setTitles();
             pb.setVisibility(View.GONE);
@@ -188,7 +202,7 @@ public class MainSchedule extends AppCompatActivity  {
                 break;
             case R.id.options:
                 intent = new Intent(MainSchedule.this, Options.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.upWeek:
                 item.setVisible(false);
@@ -223,7 +237,8 @@ public class MainSchedule extends AppCompatActivity  {
 
         LinearLayout vwParentRow = (LinearLayout)V.getParent();
 
-        TextView child = (TextView)vwParentRow.getChildAt(1);
+        TextView child = (TextView)vwParentRow.getChildAt(2);
+        if(child == null) child = (TextView)vwParentRow.getChildAt(1);
 
         Constants.addQuery(_query);
         _query = child.getText().toString();

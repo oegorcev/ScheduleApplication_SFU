@@ -11,7 +11,6 @@ public class ClassExamClassroom {
     private ArrayList<String> _subject;
     private ArrayList<ArrayList<String>> _groups;
     private ArrayList<String> _teacher;
-    private ArrayList<String> _classroom;
     private ArrayList<String> _type;
 
     public String get_time() {
@@ -30,21 +29,9 @@ public class ClassExamClassroom {
         this._subject = _subject;
     }
 
-    public ArrayList<String> get_teacher() {
-        return _teacher;
-    }
+    public ArrayList<String> get_teacher() {return _teacher; }
 
-    public void set_teacher(ArrayList<String> _teacher) {
-        this._teacher = _teacher;
-    }
-
-    public ArrayList<String> get_classroom() {
-        return _classroom;
-    }
-
-    public void set_classroom(ArrayList<String> _classroom) {
-        this._classroom = _classroom;
-    }
+    public void set_teacher(ArrayList<String> _teacher) {this._teacher = _teacher; }
 
     public ArrayList<String> get_type() {
         return _type;

@@ -14,6 +14,7 @@ import Utils.Utilities;
 import data.DataBase.DataBaseMapper;
 import data.Parsers.AbstractParser;
 import data.Parsers.ClassroomParser;
+import data.Parsers.ExamClassroomParser;
 import data.Parsers.ExamGroupParser;
 import data.Parsers.ExamTeacherParser;
 import data.Parsers.GroupParser;
@@ -21,9 +22,12 @@ import data.Parsers.TeacherParser;
 import model.ClassRoom.ClassClassRoom;
 import model.ClassRoom.DayClassRoom;
 import model.ClassRoom.WeekClassRoom;
-import model.ExamGroup.ExamsGroup;
+import model.ExamClassroom.ClassExamClassroom;
+import model.ExamClassroom.DayExamClassroom;
+import model.ExamClassroom.ExamsClassroom;
 import model.ExamGroup.ClassExamGroup;
 import model.ExamGroup.DayExamGroup;
+import model.ExamGroup.ExamsGroup;
 import model.ExamTeacher.ClassExamTeacher;
 import model.ExamTeacher.DayExamTeacher;
 import model.ExamTeacher.ExamsTeacher;
@@ -81,7 +85,7 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
                     break;
                 }
                 case Constants.CLASSROOM: {
-                   // MakeClassRoomSchedule();
+                    MakeExamClassroomSchedule();
                     break;
                 }
                 default: {
@@ -292,6 +296,38 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
 
         examsTeacher.setAll(dayExamTeacher);
         _examsActivity.set_currentScheduleExamsTeacher(examsTeacher);
+    }
+
+    private void MakeExamClassroomSchedule(){
+        ExamClassroomParser examClassroomParser = new ExamClassroomParser(_examsActivity);
+
+        ExamsClassroom examsClassroom = new ExamsClassroom();
+        ArrayList<DayExamClassroom> dayExamClassroom = new ArrayList<DayExamClassroom>();
+
+        for (int i = 0; i < (_examsSchedule == null ? 0 : _examsSchedule.size()); ++i) {
+            DayExamClassroom curDayExamClassroom = new DayExamClassroom();
+
+            curDayExamClassroom.set_day(_examsSchedule.get(i).get(0).getFirst());
+
+            ArrayList<ClassExamClassroom> classes = new ArrayList<ClassExamClassroom>();
+
+            for (int j = 1; j <   _examsSchedule.get(i).size(); ++j) {
+                ClassExamClassroom classExamClassroom = new ClassExamClassroom();
+
+                classExamClassroom = examClassroomParser.parseClass(_examsSchedule.get(i).get(j).getFirst().split(" "));
+
+                classExamClassroom.set_time(_times.get(j - 1));
+
+                classes.add(classExamClassroom);
+            }
+
+            curDayExamClassroom.set_classes(classes);
+
+            dayExamClassroom.add(curDayExamClassroom);
+        }
+
+        examsClassroom.setAll(dayExamClassroom);
+        _examsActivity.set_currentScheduleExamsClassroom(examsClassroom);
     }
 
     private String _query;

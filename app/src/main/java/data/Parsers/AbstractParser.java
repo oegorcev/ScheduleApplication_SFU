@@ -72,6 +72,9 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         Document doc = null;
         try {
             query = query.replace(" ", "%20");
+
+            if(query.equals(Constants.BAD_CASE_IN)) query = Constants.BAD_CASE_OUT;
+
             doc = Jsoup.connect(Constants.URL + query + Constants.POTOK + potok + Constants.SEMESTR + semestr).timeout(2500).get();
 
             _dataBaseMapper.setNewSchedule(doc, query);

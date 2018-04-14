@@ -9,9 +9,11 @@ import android.widget.TextView;
 
 import com.example.mrnobody43.shedule_application.R;
 
+import java.util.HashSet;
+
 import Utils.Constants;
+import model.ExamClassroom.ClassExamClassroom;
 import model.ExamClassroom.ExamsClassroom;
-import model.ExamGroup.ClassExamGroup;
 
 /**
  * Created by Mr.Nobody43 on 11.04.2018.
@@ -44,17 +46,17 @@ public class ExamClassroomAdapter extends BaseAdapter {
         return position;
     }
 
-    private ClassExamGroup getClass(int position) {
-        return ((ClassExamGroup) getItem(position));
+    private ClassExamClassroom getClass(int position) {
+        return ((ClassExamClassroom) getItem(position));
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ClassExamGroup p = getClass(position);
+        ClassExamClassroom p = getClass(position);
 
         if(convertView == null || parent != convertView.getParent()) {
-            convertView = _lInflater.inflate(R.layout.schedule_list_exam_group_item, parent, false);
+            convertView = _lInflater.inflate(R.layout.schedule_list_exam_classroom_item, parent, false);
 
             String cnt = Integer.toString(position + 1);
             ((TextView) convertView.findViewById(R.id.id_pair)).setText(cnt);
@@ -64,17 +66,32 @@ public class ExamClassroomAdapter extends BaseAdapter {
                 ((TextView) convertView.findViewById(R.id.subject)).setText(Constants.FREE_TIME);
             }
             else {
-                ((TextView) convertView.findViewById(R.id.subject)).setText(p.get_subject().get(0));
+                ((TextView) convertView.findViewById(R.id.subject)).setText(p.get_subject().get(0) + " " + p.get_type().get(0));
+
+                String groups = "";
+
+                HashSet<String> groupsHashSet = new HashSet<>();
+
+                for (int iCnt = 0; iCnt < p.get_groups().get(0).size(); ++iCnt) {groupsHashSet.add(p.get_groups().get(0).get(iCnt));}
+
+                String[] groupsArray = {};
+                groupsArray = groupsHashSet.toArray(new String[groupsHashSet.size()]);
+
+                for (int iCnt = 0; iCnt < groupsArray.length; ++iCnt) {
+                    groups += groupsArray[iCnt];
+                    if(iCnt <  p.get_groups().get(0).size() - 1) groups += "\n";
+                }
 
                 String teachers = "";
 
                 for (int iCnt = 0; iCnt < p.get_teacher().size(); ++iCnt) {
-                    teachers += p.get_teacher().get(iCnt) + " ";
+                    teachers += p.get_teacher().get(iCnt);
+                    if(iCnt < p.get_teacher().size() - 1) teachers += "\n";
                 }
 
-                ((TextView) convertView.findViewById(R.id.teacher)).setText(teachers);
-                ((TextView) convertView.findViewById(R.id.type)).setText(p.get_type().get(0));
-                ((TextView) convertView.findViewById(R.id.classroom)).setText(p.get_classroom().get(0));
+                ((TextView) convertView.findViewById(R.id.groups)).setText(groups);
+
+                ((TextView) convertView.findViewById(R.id.teachers)).setText(teachers);
             }
         }
 

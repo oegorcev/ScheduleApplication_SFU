@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ChangeSchedule" />
+        <activity android:name=".ChangeSchedule"  android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ExamsSchedule" />
         <activity android:name=".Options" />
 
