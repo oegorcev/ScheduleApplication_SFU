@@ -87,6 +87,16 @@ public class TeacherParser extends AbstractParser {
                 break;
             }
 
+            if(Utilities.IsSchool(data[index]))
+            {
+                gr += data[index++];
+                gr += " ";
+                gr += data[index];
+                groups.get(_counter).add(gr);
+                gr = "";
+                continue;
+            }
+
             if(Utilities.IsGroup(data[index]) && cntGroups > 0){
                 groups.get(_counter).add(gr);
                 gr = "";

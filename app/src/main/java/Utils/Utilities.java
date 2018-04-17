@@ -38,11 +38,17 @@ public class Utilities {
         return  Constants.GROUP;
     }
 
+    public static boolean IsSchool (String s)
+    {
+        return s.equals("10") || s.equals("11");
+    }
+
     public static boolean IsGroup (String s) {
         //Если перед тире стоит буква, то это точно не группа или группы нет
 
         boolean someCases = s.equals("ЦДП") || s.equals("----") || s.equals("МРЦПК")
-                || s.equals("шк.26") || s.equals("-") ||  s.equals("10") || s.equals("11") || s.equals("10 А") ;
+                || s.equals("шк.26") || s.equals("-") ||  s.equals("10") || s.equals("11") || s.equals("10 А")
+                || s.equals("10 В") || s.equals("10 Б") ||  s.equals("11 А") ||  s.equals("11 Б") ||  s.equals("11 В");
         if(someCases) {
             return true;
         } else {
@@ -57,7 +63,8 @@ public class Utilities {
     public static boolean IsClassRoom (String s) {
         //Если перед тире стоит буква, то это аудитория
 
-        boolean someCases = s.equals("---") || s.equals("ЛИЦ.") || s.equals("ЛИЦ. 4") || s.equals("ЛИЦ.") || s.equals("4") || s.equals("СПОРТЗАЛ") || s.equals("ТИР");
+        boolean someCases = s.equals("---") || s.equals("ЛИЦ.") || s.equals("ЛИЦ. 4") || s.equals("ЛИЦ.") || s.equals("4") || s.equals("СПОРТЗАЛ") || s.equals("ТИР")
+                || s.equals("Б-212 Р") || s.equals("Р") || s.equals("К-204 А") || s.equals("К-204 Б") || s.equals("Б") || s.equals("А");
         if(someCases) {
             return true;
         }

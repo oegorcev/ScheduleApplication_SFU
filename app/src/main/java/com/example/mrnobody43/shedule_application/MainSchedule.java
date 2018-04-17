@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import Tester.ParserTester;
 import Utils.Constants;
 import Utils.Utilities;
 import adapters.MainScheduleFragmentAdapter;
@@ -33,23 +34,35 @@ public class MainSchedule extends AppCompatActivity  {
         setTitle(Constants.EMPTY_STRING);
         setContentView(R.layout.activity_schedule);
 
-        _dataBaseMapper = new DataBaseMapper(this);
-        pager = (ViewPager) findViewById(R.id.pager);
-        pb =  findViewById(R.id.inflateProgressbar);
+        boolean test = false;
 
-        _query = _dataBaseMapper.getCurruntQuery();
-        _curWeek = Integer.parseInt(_dataBaseMapper.getCurrentWeek());
-        renderScheduleData();
+        if(test) {
+
+            ParserTester parserTester = new ParserTester(this);
+            parserTester.Test();
+        } else {
+
+            _dataBaseMapper = new DataBaseMapper(this);
+            pager = (ViewPager) findViewById(R.id.pager);
+            pb = findViewById(R.id.inflateProgressbar);
+
+            _query = _dataBaseMapper.getCurruntQuery();
+            _curWeek = Integer.parseInt(_dataBaseMapper.getCurrentWeek());
+            renderScheduleData();
 
 
-        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            public void onPageScrollStateChanged(int state) {}
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+            pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                public void onPageScrollStateChanged(int state) {
+                }
 
-            public void onPageSelected(int position) {
-                Constants.lastPage = position;
-            }
-        });
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                }
+
+                public void onPageSelected(int position) {
+                    Constants.lastPage = position;
+                }
+            });
+        }
     }
 
     public void renderScheduleData() {
