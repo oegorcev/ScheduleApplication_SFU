@@ -70,7 +70,14 @@ public class ClassroomParser extends AbstractParser {
         }
         subjects.add(subject);
 
-        types.add(data[index++]);
+
+        if(data[index].equals(Constants.KURS_WORK)) {
+            types.add(data[index] + data[index + 1]);
+            index += 2;
+        } else {
+            types.add(data[index++]);
+        }
+
 
         String gr = "";
         int cntGroups = 0;
@@ -80,6 +87,16 @@ public class ClassroomParser extends AbstractParser {
             if(index == data.length || (!(Utilities.IsGroup(data[index])) && !(Utilities.IsSubgroup(data[index])))){
                 groups.get(_counter).add(gr);
                 break;
+            }
+
+            if(Utilities.IsSchool(data[index]))
+            {
+                gr += data[index++];
+                gr += " ";
+                gr += data[index];
+                groups.get(_counter).add(gr);
+                gr = "";
+                continue;
             }
 
             if(Utilities.IsGroup(data[index]) && cntGroups > 0){

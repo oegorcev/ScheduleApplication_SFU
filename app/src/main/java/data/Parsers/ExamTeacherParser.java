@@ -65,7 +65,12 @@ public class ExamTeacherParser extends AbstractParser {
         }
         subjects.add(subject);
 
-        types.add(data[index++]);
+        if(data[index].equals(Constants.KURS_WORK) ||(data[index].equals(Constants.UST_LECTION))) {
+            types.add(data[index] + data[index + 1]);
+            index += 2;
+        } else {
+            types.add(data[index++]);
+        }
 
         String gr = "";
         int cntGroups = 0;
@@ -90,7 +95,17 @@ public class ExamTeacherParser extends AbstractParser {
             gr += data[index];
         }
 
-        classrooms.add(data[index++]);
+        if(Utilities.IsClassRoomTwoWords(data[index]) && index + 1 < data.length && data[index  + 1].length() == 1) {
+            classrooms.add(data[index] + " " + data[index + 1]);
+            index += 2;
+        }
+        else classrooms.add(data[index++]);
+
+        if(index != data.length){
+            if(Utilities.IsWeek(data[index])) {
+                index++;
+            }
+        }
 
         return index;
     }

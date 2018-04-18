@@ -1,7 +1,9 @@
 package Tester;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
+import com.example.mrnobody43.shedule_application.ExamsSchedule;
 import com.example.mrnobody43.shedule_application.MainSchedule;
 
 import java.io.BufferedReader;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 
 import data.DataBase.DataBaseMapper;
 import data.Parsers.AbstractParser;
+import data.Scheduler;
 
 /**
  * Created by Mr.Nobody43 on 17.04.2018.
@@ -20,31 +23,73 @@ import data.Parsers.AbstractParser;
 public class ParserTester {
 
     public ParserTester(MainSchedule mainSchedule) {
-        _context = mainSchedule;
+        _main = mainSchedule;
+    }
+    public ParserTester(ExamsSchedule examsSchedule) {
+        _exam = examsSchedule;
     }
 
-    public void Test()
-    {
+    public void Test() {
         Reader reader = new Reader();
         reader.execute();
     }
 
-    private void TestParser()
-    {
+    private void TestSchedulerMain() {
 
-        DataBaseMapper dataBaseMapper = new DataBaseMapper(_context);
+        for(String s : _queryDb) {
+            MainSchedule temp = _main;
+            Scheduler scheduler = new Scheduler(temp , s);
+            scheduler.execute();
+
+            int timer = 0;
+
+            while (!scheduler.isEnd) {}
+
+            while(timer < 1e5) {timer++;}
+
+            System.out.println(s + " is Ok!");
+        }
+
+        System.out.println("All is done!");
+    }
+
+    private void TestSchedulerExam() {
+
+        for(String s : _queryDb) {
+            ExamsSchedule temp = _exam;
+            Scheduler scheduler = new Scheduler(temp , s);
+            scheduler.execute();
+
+            int timer = 0;
+
+            while (!scheduler.isEnd) {}
+
+            while(timer < 1e5) {timer++;}
+
+            System.out.println(s + " is Ok!");
+        }
+
+        System.out.println("All is done!");
+    }
+
+
+    private void TestParser() {
+
+        DataBaseMapper dataBaseMapper = new DataBaseMapper(_main);
 
         ArrayList<String> params = new ArrayList<String>();
         params = dataBaseMapper.getParseOptions();
 
         for(String s : _queryDb) {
-            AbstractParser abstractParser = new AbstractParser(_context);
+            AbstractParser abstractParser = new AbstractParser(_main);
             abstractParser.execute(s, params.get(0), params.get(1));
             while (abstractParser.get_times() == null) {
             }
+
+            System.out.println(s + " is Ok!");
         }
 
-        boolean ex = false;
+        System.out.println("All is done!");
     }
 
 
@@ -58,8 +103,12 @@ public class ParserTester {
         @Override
         protected Void doInBackground(Void... params) {
             String file = "queries";
-            int resId = _context.getApplicationContext().getResources().getIdentifier(file, "raw", _context.getApplicationContext().getPackageName());
-            InputStream inputStream = _context.getApplicationContext().getResources().openRawResource(resId);
+            Context context;
+            if(_main != null) context = _main;
+            else context = _exam;
+
+            int resId = context.getApplicationContext().getResources().getIdentifier(file, "raw", context.getApplicationContext().getPackageName());
+            InputStream inputStream = context.getApplicationContext().getResources().openRawResource(resId);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream), 8192);
             try {
                 String test;
@@ -80,11 +129,12 @@ public class ParserTester {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            TestParser();
+            if(_main != null) TestSchedulerMain();
+            else  TestSchedulerExam();
         }
     }
 
-
-    private MainSchedule _context;
+    private ExamsSchedule _exam;
+    private MainSchedule _main;
     private ArrayList<String> _queryDb;
 }

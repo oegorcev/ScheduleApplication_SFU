@@ -34,35 +34,34 @@ public class MainSchedule extends AppCompatActivity  {
         setTitle(Constants.EMPTY_STRING);
         setContentView(R.layout.activity_schedule);
 
+        _dataBaseMapper = new DataBaseMapper(this);
+        pager = (ViewPager) findViewById(R.id.pager);
+        pb = findViewById(R.id.inflateProgressbar);
+
+        _query = _dataBaseMapper.getCurruntQuery();
+        _curWeek = Integer.parseInt(_dataBaseMapper.getCurrentWeek());
+
+
         boolean test = false;
 
         if(test) {
-
             ParserTester parserTester = new ParserTester(this);
             parserTester.Test();
         } else {
-
-            _dataBaseMapper = new DataBaseMapper(this);
-            pager = (ViewPager) findViewById(R.id.pager);
-            pb = findViewById(R.id.inflateProgressbar);
-
-            _query = _dataBaseMapper.getCurruntQuery();
-            _curWeek = Integer.parseInt(_dataBaseMapper.getCurrentWeek());
             renderScheduleData();
-
-
-            pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                public void onPageScrollStateChanged(int state) {
-                }
-
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                }
-
-                public void onPageSelected(int position) {
-                    Constants.lastPage = position;
-                }
-            });
         }
+
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            public void onPageScrollStateChanged(int state) {
+            }
+
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            public void onPageSelected(int position) {
+                Constants.lastPage = position;
+            }
+        });
     }
 
     public void renderScheduleData() {
@@ -283,6 +282,12 @@ public class MainSchedule extends AppCompatActivity  {
     public void set_currentSchedule(WeekClassRoom _currentSchedule) {
         this._currentScheduleClassRoom = _currentSchedule;
     }
+
+    public WeekGroup get_currentScheduleGroup() {return _currentScheduleGroup;}
+
+    public WeekTeacher get_currentScheduleTeacher() {return _currentScheduleTeacher;}
+
+    public WeekClassRoom get_currentScheduleClassRoom() {return _currentScheduleClassRoom;}
 
     View pb;
     ViewPager pager;

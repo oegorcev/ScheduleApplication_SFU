@@ -63,6 +63,8 @@ public class GroupParser extends AbstractParser {
                            ArrayList<String> subgroups,
                            ArrayList<String> weeks, int index){
 
+
+
         teachers.add(data[index++] + " " + data[index++] + (data[index].equals("....") ? " "  + data[index++] : (data[index].equals("-.-.")) ? " "  + data[index++]  :""));
         String subject = "";
         for (; !Utilities.CheckType(data[index]) ; ++index) {
@@ -71,7 +73,12 @@ public class GroupParser extends AbstractParser {
         }
         subjects.add(subject);
 
-        types.add(data[index++]);
+        if(data[index].equals(Constants.KURS_WORK)) {
+            types.add(data[index] + data[index + 1]);
+            index += 2;
+        } else {
+            types.add(data[index++]);
+        }
 
         String cr = "";
 

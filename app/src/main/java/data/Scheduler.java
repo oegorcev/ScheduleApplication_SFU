@@ -116,6 +116,8 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
             }
         }
 
+        isEnd = true;
+
         return null;
     }
 
@@ -339,4 +341,5 @@ public class Scheduler extends AsyncTask<MainSchedule, Void, Void> {
     private List<List<Pair<String, String>>> _examsSchedule;
     private ArrayList<String> _times;
     private DataBaseMapper _dataBaseMapper;
+    public boolean isEnd;
 }

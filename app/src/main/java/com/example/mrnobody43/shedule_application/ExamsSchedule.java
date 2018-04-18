@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import Tester.ParserTester;
 import Utils.Constants;
 import Utils.Utilities;
 import adapters.ExamFragmentAdapter;
@@ -41,7 +42,16 @@ public class ExamsSchedule extends AppCompatActivity {
         pb =  findViewById(R.id.inflateProgressbar);
 
         _query = _dataBaseMapper.getCurruntQuery();
-        renderScheduleData();
+
+
+        boolean test = false;
+
+        if(test) {
+            ParserTester parserTester = new ParserTester(this);
+            parserTester.Test();
+        } else {
+            renderScheduleData();
+        }
     }
 
     public void renderScheduleData() {

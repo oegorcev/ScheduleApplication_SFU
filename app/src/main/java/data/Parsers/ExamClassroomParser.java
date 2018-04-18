@@ -67,7 +67,7 @@ public class ExamClassroomParser extends AbstractParser {
         }
         subjects.add(subject);
 
-        if(data[index].equals(Constants.UST_LECTION)) {
+        if(data[index].equals(Constants.KURS_WORK) ||(data[index].equals(Constants.UST_LECTION))) {
             types.add(data[index] + data[index + 1]);
             index += 2;
         } else {
@@ -98,6 +98,11 @@ public class ExamClassroomParser extends AbstractParser {
             gr += data[index];
         }
 
+        if(index != data.length){
+            if(Utilities.IsWeek(data[index])) {
+                index++;
+            }
+        }
 
         return index;
     }

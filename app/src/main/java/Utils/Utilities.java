@@ -23,8 +23,7 @@ public class Utilities {
                 || s.equals(Constants.EXAM) || s.equals(Constants.KURS_WORK);
     }
 
-    public static Integer GetState(String query)
-    {
+    public static Integer GetState(String query) {
         String[] mas = query.split(" ");
 
         if(Utilities.IsGroup(query)){
@@ -48,7 +47,8 @@ public class Utilities {
 
         boolean someCases = s.equals("ЦДП") || s.equals("----") || s.equals("МРЦПК")
                 || s.equals("шк.26") || s.equals("-") ||  s.equals("10") || s.equals("11") || s.equals("10 А")
-                || s.equals("10 В") || s.equals("10 Б") ||  s.equals("11 А") ||  s.equals("11 Б") ||  s.equals("11 В");
+                || s.equals("10 В") || s.equals("10 Б") ||  s.equals("11 А") ||  s.equals("11 Б") ||  s.equals("11 В") || s.equals("РТсо-6-2") || s.equals("Лицей") ||  s.equals("4")
+                || s.equals("10 М");
         if(someCases) {
             return true;
         } else {
@@ -60,11 +60,20 @@ public class Utilities {
         }
     }
 
+    public static boolean IsClassRoomTwoWords (String s) {
+        boolean someCases = s.equals("Б-212") || s.equals("К-204");
+        if(someCases) {
+            return true;
+        }
+        return false;
+    }
+
     public static boolean IsClassRoom (String s) {
         //Если перед тире стоит буква, то это аудитория
 
         boolean someCases = s.equals("---") || s.equals("ЛИЦ.") || s.equals("ЛИЦ. 4") || s.equals("ЛИЦ.") || s.equals("4") || s.equals("СПОРТЗАЛ") || s.equals("ТИР")
-                || s.equals("Б-212 Р") || s.equals("Р") || s.equals("К-204 А") || s.equals("К-204 Б") || s.equals("Б") || s.equals("А");
+                || s.equals("Б-212 Р") || s.equals("Р") || s.equals("К-204 А") || s.equals("К-204 Б") || s.equals("Б") || s.equals("А") || s.equals("ГАЗЕТНЫЙ,27")
+                || s.equals("АНГАР") ||s.equals("ССС")  ;
         if(someCases) {
             return true;
         }

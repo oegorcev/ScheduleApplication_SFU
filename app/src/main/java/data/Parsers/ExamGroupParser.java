@@ -54,19 +54,29 @@ public class ExamGroupParser extends AbstractParser {
                            ArrayList<String> subjects,
                            ArrayList<String> types,
                            ArrayList<String> classrooms,
-                           int index){
+                           int index) {
 
         teachers.add(data[index++] + " " + data[index++]);
         String subject = "";
-        for (; !Utilities.CheckType(data[index]) ; ++index) {
+        for (; !Utilities.CheckType(data[index]); ++index) {
             subject = subject.concat(data[index] + " ");
 
         }
         subjects.add(subject);
 
-        types.add(data[index++]);
+        if(data[index].equals(Constants.KURS_WORK) ||(data[index].equals(Constants.UST_LECTION))) {
+            types.add(data[index] + data[index + 1]);
+            index += 2;
+        } else {
+            types.add(data[index++]);
+        }
 
-        classrooms.add(data[index++]);
+
+        if(Utilities.IsClassRoomTwoWords(data[index]) && index + 1 < data.length && data[index  + 1].length() == 1) {
+            classrooms.add(data[index] + " " + data[index + 1]);
+            index += 2;
+        }
+        else classrooms.add(data[index++]);
 
         return index;
     }

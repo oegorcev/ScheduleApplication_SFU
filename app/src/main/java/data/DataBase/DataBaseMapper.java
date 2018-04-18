@@ -246,6 +246,7 @@ public class DataBaseMapper {
                 String bdId = c.getString(idIndex);
                 if (Constants.WEEK_DB_ID.equals(bdId)) {
                     s = offlineData;
+                    if(s == null) s = "1";
                     break;
                 } else c.moveToNext();
             }
