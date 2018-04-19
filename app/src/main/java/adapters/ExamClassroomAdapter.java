@@ -63,7 +63,7 @@ public class ExamClassroomAdapter extends BaseAdapter {
             ((TextView) convertView.findViewById(R.id.time)).setText(p.get_time());
 
             if (p.get_subject().get(0).equals(Constants.FREE)) {
-                ((TextView) convertView.findViewById(R.id.subject)).setText(Constants.FREE_TIME);
+                ((TextView) convertView.findViewById(R.id.teachers)).setText(Constants.FREE_TIME);
             }
             else {
                 ((TextView) convertView.findViewById(R.id.subject)).setText(p.get_subject().get(0) + " " + p.get_type().get(0));

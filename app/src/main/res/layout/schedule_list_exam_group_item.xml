@@ -46,14 +46,11 @@
 
                 </LinearLayout>
 
-
                 <TextView
                     android:id="@+id/subject"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp"
                     android:textColor="#424242"
                     android:textSize="15sp" />
 

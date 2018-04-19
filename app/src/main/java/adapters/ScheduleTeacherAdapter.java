@@ -94,12 +94,10 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
                 if (p.get_subject().get(0).equals(Constants.FREE)) {
                     viewHolder.subjects.get(iCnt).setText(Constants.FREE_TIME);
                     viewHolder.classrooms.get(iCnt).setText(Constants.EMPTY_STRING);
-                    viewHolder.types.get(iCnt).setText(Constants.EMPTY_STRING);
                     viewHolder.groups.get(iCnt).setText(Constants.EMPTY_STRING);
                 } else {
-                    viewHolder.subjects.get(iCnt).setText(p.get_subject().get(iCnt));
+                    viewHolder.subjects.get(iCnt).setText(p.get_subject().get(iCnt) + " " + p.get_type().get(iCnt));
                     viewHolder.classrooms.get(iCnt).setText(p.get_classroom().get(iCnt));
-                    viewHolder.types.get(iCnt).setText(p.get_type().get(iCnt));
 
                     String groups = "";
 
@@ -122,7 +120,7 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
 
     private class ViewHolder {
         final TextView idPair, time;
-        final ArrayList<TextView> subjects, types, groups, classrooms;
+        final ArrayList<TextView> subjects , groups, classrooms;
         final ArrayList<LinearLayout> pairs;
         ViewHolder(View view){
             String packageName = _ctx.getPackageName();
@@ -132,7 +130,6 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
 
             subjects = new ArrayList<TextView>();
             classrooms = new ArrayList<TextView>();
-            types = new ArrayList<TextView>();
             groups = new ArrayList<TextView>();
             pairs = new ArrayList<LinearLayout>();
 
@@ -142,7 +139,6 @@ public class ScheduleTeacherAdapter extends BaseAdapter {
                 pairs.add(((LinearLayout) view.findViewById((_ctx.getResources().getIdentifier("pair" + cnt, "id", packageName)))));
                 subjects.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("subject" + cnt, "id", packageName)))));
                 classrooms.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("classroom" + cnt, "id", packageName)))));
-                types.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("type" + cnt, "id", packageName)))));
                 groups.add(((TextView) view.findViewById((_ctx.getResources().getIdentifier("groups" + cnt, "id", packageName)))));
             }
         }

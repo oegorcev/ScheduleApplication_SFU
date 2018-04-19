@@ -265,6 +265,7 @@ public class MainSchedule extends AppCompatActivity  {
 
         Constants.addQuery(_query);
         TextView child = (TextView)vwParentRow.getChildAt(2);
+        if(child == null) child = (TextView)vwParentRow.getChildAt(1);
         _query = child.getText().toString();
         _dataBaseMapper.setNewQuery(_query);
 
@@ -282,12 +283,6 @@ public class MainSchedule extends AppCompatActivity  {
     public void set_currentSchedule(WeekClassRoom _currentSchedule) {
         this._currentScheduleClassRoom = _currentSchedule;
     }
-
-    public WeekGroup get_currentScheduleGroup() {return _currentScheduleGroup;}
-
-    public WeekTeacher get_currentScheduleTeacher() {return _currentScheduleTeacher;}
-
-    public WeekClassRoom get_currentScheduleClassRoom() {return _currentScheduleClassRoom;}
 
     View pb;
     ViewPager pager;

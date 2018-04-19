@@ -161,6 +161,18 @@ public class ExamsSchedule extends AppCompatActivity {
         }
     }
 
+    public void onBackPressed() {
+        String newQuery = Constants.getLastQuery();
+        if(!newQuery.equals(Constants.EMPTY_STRING)) {
+            _dataBaseMapper.setNewQuery(newQuery);
+            _query = newQuery;
+            renderScheduleData();
+        }
+        else{
+            finish();
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
