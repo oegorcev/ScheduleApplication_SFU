@@ -215,7 +215,7 @@ public class DataBaseMapper {
                 String bdId = c.getString(idIndex);
 
                 if (Constants.HIDE_WEEKS_DB_ID.equals(bdId)) {
-                    if(offlineData == null) offlineData = "1";
+                    if(offlineData == null) offlineData = "0";
                     ret = Integer.parseInt(offlineData);
                 }
                 c.moveToNext();

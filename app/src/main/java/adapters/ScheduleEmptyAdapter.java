@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.mrnobody43.shedule_application.R;
 
 import Utils.Constants;
+import data.DataBase.DataBaseMapper;
 
 /**
  * Created by Mr.Nobody43 on 23.01.2018.
@@ -55,7 +56,10 @@ public class ScheduleEmptyAdapter extends BaseAdapter {
             view = lInflater.inflate(R.layout.schedule_list_group_item, parent, false);
         }
 
-        ((TextView) view.findViewById(R.id.subject1)).setText(Constants.EMPTY_SCHEDULE);
+
+        DataBaseMapper dataBaseMapper = new DataBaseMapper(ctx);
+        if(dataBaseMapper.getCurruntQuery().equals("Расписание занятий ИТА ЮФУ")) {((TextView) view.findViewById(R.id.subject1)).setText(Constants.HELP);}
+        else  ((TextView) view.findViewById(R.id.subject1)).setText(Constants.EMPTY_SCHEDULE);
         ((TextView) view.findViewById(R.id.id_pair)).setText(Constants.EMPTY_STRING);
         ((TextView) view.findViewById(R.id.time)).setText(Constants.EMPTY_STRING);
         ((TextView) view.findViewById(R.id.teacher1)).setText(Constants.EMPTY_STRING);

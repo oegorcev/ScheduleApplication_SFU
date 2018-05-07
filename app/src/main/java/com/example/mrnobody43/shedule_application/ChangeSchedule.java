@@ -110,6 +110,7 @@ public class ChangeSchedule extends AppCompatActivity {
                 str = deleteEndSpases(str);
                 Constants.addQuery(_dataBaseMapper.getCurruntQuery());
                 _dataBaseMapper.setNewQuery(str);
+                Constants.ClearStack();
                 finish();
                 break;
             case 16908332:

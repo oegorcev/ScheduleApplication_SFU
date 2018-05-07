@@ -132,7 +132,7 @@ public class ClassroomParser extends AbstractParser {
             weeks.add(data[index].substring(0, data[index].indexOf(')') + 1));
             data[index] = data[index].substring(data[index].indexOf(')') + 1, data[index].length());
         }
-        //Случай восемь, нет недели, расписание корректно, несколько предметов
+        //Случай четыре, нет недели, расписание корректно, несколько предметов
         else {
             weeks.add(Constants.ALL_WEEKS);
         }

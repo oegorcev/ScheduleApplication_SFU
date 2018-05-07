@@ -28,6 +28,8 @@ public class ScheduleGroupAdapter extends BaseAdapter {
         _weekGroup = weekGroup;
         int ret = (new DataBaseMapper(_ctx).getHideWeeksOption());
 
+        _curWeek = Integer.parseInt(new DataBaseMapper(_ctx).getCurrentWeek());
+
         if(ret == 1)  _isHideWeeks = true;
         else _isHideWeeks = false;
 
@@ -92,7 +94,7 @@ public class ScheduleGroupAdapter extends BaseAdapter {
                 Integer beginWeek = getBeginWeek(p.get_weeks().get(iCnt));
                 Integer endWeek = getEndWeek(p.get_weeks().get(iCnt));
 
-                if(!(checkWeek(beginWeek, endWeek, _indexWeek)) && _isHideWeeks)
+                if(!(checkWeek(beginWeek, endWeek, _curWeek)) && _isHideWeeks)
                 {
                     if(iCnt == p.get_subject().size() - 1 && pairId == 0) {
                         viewHolder.subjects.get(pairId).setText(Constants.FREE_TIME);
@@ -190,5 +192,6 @@ public class ScheduleGroupAdapter extends BaseAdapter {
     private WeekGroup _weekGroup;
     private boolean _isHideWeeks;
     private int _indexTab;
+    private int _curWeek;
     private int _indexWeek;
 }

@@ -1,6 +1,5 @@
 package Utils;
 
-import java.util.Calendar;
 import java.util.Stack;
 
 /**
@@ -8,8 +7,6 @@ import java.util.Stack;
  */
 
 public class Constants {
-
-   static Calendar calendar = Calendar.getInstance();
 
    public static final String MONDAY = "Понедельник";
    public static final String TUESDAY = "Вторник";
@@ -63,6 +60,7 @@ public class Constants {
    public static final String EMPTY_EXAMS = "До экзаменов ещё далеко!";
    public static final String BOTTOM_WEEK_SCHEDULE = "Показывается нижняя неделя.";
    public static final String TOP_WEEK_SCHEDULE = "Показывается верхняя неделя.";
+   public static final String HELP = "Добро пожаловать! Чтобы начать пользоваться приложением, выберите в меню пункт 'Сменить расписание'.";
    public static final String WEEK = " неделя";
    public static final String EXAMS = "Экзамены";
 
@@ -93,7 +91,9 @@ public class Constants {
    public static final char SPACE = ' ';
 
    private static Stack<String> stack;
+   public static Integer stackDepth = 0;
    public static Integer lastPage;
+
 
    public static void addQuery(String string) {
       if(stack == null) {
@@ -103,6 +103,15 @@ public class Constants {
       stack.add(string);
    }
 
+   public static void ClearExamsStack() {
+      while(!stack.empty() && stackDepth > 0){
+         stack.pop();
+         stackDepth--;
+      }
+
+      stackDepth = 0;
+   }
+
    public static String getLastQuery() {
       if(stack == null || stack.empty()){return EMPTY_STRING;}
 
@@ -110,5 +119,9 @@ public class Constants {
       stack.pop();
 
       return  top;
+   }
+
+   public static void ClearStack() {
+      stack.clear();
    }
 }

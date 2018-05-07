@@ -21,5 +21,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:maxLength="255"
+        android:singleLine="true"
         app:layout_constraintHorizontal_bias="0.0" />
 </android.support.constraint.ConstraintLayout>

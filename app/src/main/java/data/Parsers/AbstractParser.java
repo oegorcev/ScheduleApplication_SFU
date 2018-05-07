@@ -24,7 +24,7 @@ import data.DataBase.DataBaseMapper;
  * Created by Mr.Nobody43 on 15.01.2018.
  */
 
-public class AbstractParser extends AsyncTask<String, Void, Void> implements IParser {
+public class AbstractParser extends AsyncTask<String, Void, Void> {
 
     public  AbstractParser(){}
 
@@ -49,6 +49,7 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
         }
         else {
             doc = _dataBaseMapper.getDbSchedule(params[0]);
+            _isInternetExist = true;
         }
 
         if(doc != null) {
@@ -64,6 +65,9 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
 
         if(_isServerBroken) {
             Toast toast = Toast.makeText(_mContext, "Сервер недоступен!", Toast.LENGTH_SHORT);
+            toast.show();
+        } else if(_isInternetExist){
+            Toast toast = Toast.makeText(_mContext, "Отсутствует доступ к интернету!", Toast.LENGTH_SHORT);
             toast.show();
         }
     }
@@ -220,5 +224,6 @@ public class AbstractParser extends AsyncTask<String, Void, Void> implements IPa
     private List<List<Pair<String, String>>> _scheduleExams;
     private Context _mContext;
     private boolean _isServerBroken;
+    private boolean _isInternetExist;
     private DataBaseMapper _dataBaseMapper;
 }

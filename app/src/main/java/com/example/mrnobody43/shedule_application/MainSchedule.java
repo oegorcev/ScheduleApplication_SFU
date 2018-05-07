@@ -39,8 +39,7 @@ public class MainSchedule extends AppCompatActivity  {
         pb = findViewById(R.id.inflateProgressbar);
 
         _query = _dataBaseMapper.getCurruntQuery();
-        _curWeek = Integer.parseInt(_dataBaseMapper.getCurrentWeek());
-
+        Constants.addQuery(_query);
 
         boolean test = false;
 
@@ -119,7 +118,7 @@ public class MainSchedule extends AppCompatActivity  {
                 pagerAdapter.notifyDataSetChanged();
             }
 
-            pagerAdapter.set_showsWeek(_curWeek);
+            pagerAdapter.set_showsWeek(_curWeek % 2);
             pagerAdapter.set_CURRENT_STATE(Utilities.GetState(_query));
 
             switch (Utilities.GetState(_query))
@@ -154,6 +153,20 @@ public class MainSchedule extends AppCompatActivity  {
 
             setTitles();
             pb.setVisibility(View.GONE);
+
+            MenuItem item;
+
+            if(_curWeek % 2 == 0) {
+                item = _menu.findItem(R.id.upWeek);
+                item.setVisible(true);
+                item = _menu.findItem(R.id.botWeek);
+                item.setVisible(false);
+            } else {
+                item = _menu.findItem(R.id.botWeek);
+                item.setVisible(true);
+                item = _menu.findItem(R.id.upWeek);
+                item.setVisible(false);
+            }
         }
     }
 
@@ -181,18 +194,18 @@ public class MainSchedule extends AppCompatActivity  {
         item.setVisible(false);
 
         _curWeek = Integer.parseInt(_dataBaseMapper.getCurrentWeek());
-
         if(_curWeek % 2 == 0) {
-            item = menu.findItem(R.id.botWeek);
+            item = _menu.findItem(R.id.upWeek);
             item.setVisible(true);
-            item = menu.findItem(R.id.upWeek);
+            item = _menu.findItem(R.id.botWeek);
             item.setVisible(false);
         } else {
-            item = menu.findItem(R.id.botWeek);
+            item = _menu.findItem(R.id.botWeek);
             item.setVisible(true);
-            item = menu.findItem(R.id.upWeek);
+            item = _menu.findItem(R.id.upWeek);
             item.setVisible(false);
         }
+
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -210,6 +223,7 @@ public class MainSchedule extends AppCompatActivity  {
                 break;
             case R.id.examsSchedule:
                 intent = new Intent(MainSchedule.this, ExamsSchedule.class);
+                Constants.addQuery(_query);
                 startActivity(intent);
                 break;
             case R.id.options:
@@ -220,16 +234,12 @@ public class MainSchedule extends AppCompatActivity  {
                 item.setVisible(false);
                 _curWeek++;
                 _curWeek %= 2;
-                item = _menu.findItem(R.id.botWeek);
-                item.setVisible(true);
                 renderScheduleData();
                 break;
             case R.id.botWeek:
                 _curWeek++;
                 _curWeek %= 2;
                 item.setVisible(false);
-                item = _menu.findItem(R.id.upWeek);
-                item.setVisible(true);
                 renderScheduleData();
                 break;
             default:
@@ -242,6 +252,7 @@ public class MainSchedule extends AppCompatActivity  {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         _query = _dataBaseMapper.getCurruntQuery();
+        _curWeek = Integer.parseInt(_dataBaseMapper.getCurrentWeek());
         renderScheduleData();
     }
 

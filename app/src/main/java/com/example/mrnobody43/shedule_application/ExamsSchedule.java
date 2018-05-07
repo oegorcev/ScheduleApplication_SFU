@@ -163,9 +163,10 @@ public class ExamsSchedule extends AppCompatActivity {
 
     public void onBackPressed() {
         String newQuery = Constants.getLastQuery();
-        if(!newQuery.equals(Constants.EMPTY_STRING)) {
+        if(!newQuery.equals(Constants.EMPTY_STRING) && Constants.stackDepth > 0) {
             _dataBaseMapper.setNewQuery(newQuery);
             _query = newQuery;
+            Constants.stackDepth--;
             renderScheduleData();
         }
         else{
@@ -202,6 +203,7 @@ public class ExamsSchedule extends AppCompatActivity {
                 break;
             case R.id.mainSchedule:
                 intent = new Intent(ExamsSchedule.this, MainSchedule.class);
+                Constants.ClearExamsStack();
                 startActivity(intent);
                 break;
             case R.id.options:
@@ -224,6 +226,7 @@ public class ExamsSchedule extends AppCompatActivity {
         Constants.addQuery(_query);
         _query = child.getText().toString();
         _dataBaseMapper.setNewQuery(_query);
+        Constants.stackDepth++;
 
         renderScheduleData();
     }
@@ -236,6 +239,7 @@ public class ExamsSchedule extends AppCompatActivity {
         TextView child = (TextView)vwParentRow.getChildAt(2);
         _query = child.getText().toString();
         _dataBaseMapper.setNewQuery(_query);
+        Constants.stackDepth++;
 
         renderScheduleData();
     }
